@@ -1,0 +1,87 @@
+.gradient-custom-3 {
+  /* fallback for old browsers */
+  background: #84fab0;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+}
+
+.gradient-custom-4 {
+  /* fallback for old browsers */
+  background: #84fab0;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+}
+
+/* Login Screen CSS */
+#bgimg{
+  background: #84fab0;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  height: 63rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+#cardcolor{
+  background-color: bisque; 
+  height: 29rem;
+  width: 34rem;
+}
+
+#loginbutton{
+  background-color: brown;
+}
+
+#form{
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+/* Login Screen CSS */
+
+main{
+  min-height: 80vh; /*height of footer*/
+}
+
+.custom-search-bar { /*size of search bar*/
+  height: 20px; 
+  width: 300px;
+}
+
+.green-background { /*background of homescreen*/
+  background-color: #B2D8D8;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container { /*profile white container*/
+  width: 80%;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture { /*pfp size*/
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+h1 {
+  color: #333;
+}
+
+p {
+  color: #555;
+}
