@@ -5,11 +5,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import HomeScreen from "./screens/HomeScreen";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<HomeScreen />} exact />
         <Route path="/register" element={<RegisterPage />} exact />
         <Route path="/login" element={<LoginScreen />} exact /> 
         <Route path="/profile" element={<Profile />} exact />
