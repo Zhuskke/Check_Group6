@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Container } from 'react-bootstrap';
 
 const Profile = () => {
   const defaultProfilePicture =
@@ -23,21 +24,15 @@ const Profile = () => {
   return (
     <div>
       <Header />
-      <div className="green-background">
-        <div className="container">
-          <div className="profile-picture-container">
-            <img
-              src={profilePicture}
-              alt="Profile"
-              className="profile-picture"
-            />
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-          </div>
-          <p>Name</p>
-          <p>Info/Description</p>
-          <p>Questions | Answers</p>
-        </div>
-      </div>
+      <Container className="container" id='profile-container'>
+            <div className="profile-picture-container">
+                <img src={profilePicture} alt="Profile" className="profile-picture" /> 
+                {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
+                <p>Name</p>
+                <p>Info/Description</p>
+            </div>
+            <p>Questions  |  Answers</p>  
+        </Container>
       <Footer />
     </div>
   );

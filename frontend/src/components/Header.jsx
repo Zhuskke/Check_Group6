@@ -1,31 +1,42 @@
-import React from 'react'
-import {Navbar, Container, Nav, Form, FormControl} from 'react-bootstrap'
+import React from 'react';
+import { Navbar, Container, Nav, Form, FormControl } from 'react-bootstrap';
+import logo from '../images/logocheck.png';
 
 const Header = () => {
   const handleSearch = (event) => {
     event.preventDefault();
     alert('Search functionality will be implemented here!');
   };
+
   return (
-    <Navbar expand="lg" bg='white'collapseOnSelect className="p-3">
-      <Container>
-        <Navbar.Brand href="#home">Check</Navbar.Brand>
-        <Form inline onSubmit={handleSearch}>
-          <div className="search bar container">
-            <FormControl type="search" placeholder="Search" className="mr-sm-2" />
-          </div>
-        </Form>
+    <Navbar expand="lg" id='navbar' collapseOnSelect className="p-3">
+      <Container id='navbarbox'>
+        <Navbar.Brand href="/">
+          <img
+            src={logo}
+            height="50"
+            className='d-inline-block align-top'
+            alt="Logo"
+          />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#login">Login |</Nav.Link>
-            <Nav.Link href="#join">Join now |</Nav.Link>
-            <Nav.Link href="#askaquestion">Ask a Question</Nav.Link>
+            {/* Add an empty Nav.Link to push the search bar to the center */}
+            <Nav.Link></Nav.Link>
+            <Form inline onSubmit={handleSearch} className="d-flex align-items-center justify-content-center">
+              <FormControl type="search" placeholder="Search" className="mr-sm-2 mx-auto" id='searchbar'/>
+            </Form>
+          </Nav>
+          <Nav>
+            <Nav.Link href="#login">Login</Nav.Link>
+            <Nav.Link href="#join">Join now</Nav.Link>
+            <Nav.Link href="#ask-a-question">Ask a Question</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
