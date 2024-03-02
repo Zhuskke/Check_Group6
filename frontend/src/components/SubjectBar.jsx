@@ -1,5 +1,6 @@
-import React from 'react'
-import {Container, Row, Col} from 'react-bootstrap'
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import englishLogo from '../images/english.png';
 import mathLogo from '../images/math.png';
 import historyLogo from '../images/history.png';
@@ -12,40 +13,52 @@ const SubjectBar = () => {
     <Container id='subbar-container'>
       <Row>
         <Col>
-          <div className="subject">
-            <img src={englishLogo} alt="English" />
-            <span>English</span>
-          </div>
+          <Link to="/english">
+            <div className="subject">
+              <img src={englishLogo} alt="English" />
+              <span>English</span>
+            </div>
+          </Link>
         </Col>
         <Col>
-          <div className="subject">
-            <img src={mathLogo} alt="Math" />
-            <span>Math</span>
-          </div>
+          <Link to="/math">
+            <div className="subject">
+              <img src={mathLogo} alt="Math" />
+              <span>Math</span>
+            </div>
+          </Link>
         </Col>
         <Col>
-          <div className="subject">
-            <img src={historyLogo} alt="History" />
-            <span>History</span>
-          </div>
+          <Link to="/history">
+            <div className="subject">
+              <img src={historyLogo} alt="History" />
+              <span>History</span>
+            </div>
+          </Link>
         </Col>
         <Col>
-          <div className="subject">
-            <img src={scienceLogo} alt="Science" />
-            <span>Science</span>
-          </div>
+          <Link to="/science">
+            <div className="subject">
+              <img src={scienceLogo} alt="Science" />
+              <span>Science</span>
+            </div>
+          </Link>
         </Col>
         <Col>
-          <div className="subject">
-            <img src={physicsLogo} alt="Physics" />
-            <span>Physics</span>
-          </div>
+          <Link to="/physics">
+            <div className="subject">
+              <img src={physicsLogo} alt="Physics" />
+              <span>Physics</span>
+            </div>
+          </Link>
         </Col>
         <Col>
-          <div className="subject">
-            <img src={calculusLogo} alt="Calculus" />
-            <span>Calculus</span>
-          </div>
+          <Link to="/calculus">
+            <div className="subject">
+              <img src={calculusLogo} alt="Calculus" />
+              <span>Calculus</span>
+            </div>
+          </Link>
         </Col>
       </Row>
     </Container>

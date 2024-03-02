@@ -29,9 +29,8 @@ const Header = () => {
             </Form>
           </Nav>
           <Nav>
-            <Nav.Link href="login">Login</Nav.Link>
-            <Nav.Link href="register">Register</Nav.Link>
             <Nav.Link href="#ask-a-question">Ask a Question</Nav.Link>
+            <Nav.Link href="#logout">Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

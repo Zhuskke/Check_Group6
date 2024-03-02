@@ -3,6 +3,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBInput, MDBCheckbox, MDBContainer } fro
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
+import { useNavigate } from "react-router-dom"; 
 
 function LoginScreen() {
   const [username, setUsername] = useState("");
@@ -11,14 +12,23 @@ function LoginScreen() {
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
+
     // Dispatch login action with username and password
     dispatch(login(username, password));
+
+    // Check if login was successful before redirecting
+    if (!loading && !error && userInfo) {
+      // Redirect to the home screen
+      navigate("/home");
+    }
+
     // Clear input fields after form submission
-    setUsername(''); // Clear username field
-    setPassword(''); // Clear password field
+    setUsername('');
+    setPassword('');
   };
 
   return (
