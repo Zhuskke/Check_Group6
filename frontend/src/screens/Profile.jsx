@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
 import { Container, Button } from 'react-bootstrap';
@@ -12,6 +13,8 @@ const Profile = () => {
     const storedProfilePicture = localStorage.getItem(localStorageKey);
     return storedProfilePicture || defaultProfilePicture;
   });
+
+  const userData = useSelector(state => state.userLogin.userInfo);
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -55,10 +58,10 @@ const Profile = () => {
           <Button variant="primary" onClick={handleChooseFileClick}>
             Change Profile Picture
           </Button>
-          <p>Name</p>
-          <p>Info/Description</p>
+          <p>Name: {userData ? userData.username   : ''}</p>
+          <p>Info/Description: </p>
         </div>
-        <p>Questions | Answers</p>
+        <p>Questions | Answers: </p>
       </Container>
       <Footer />
     </div>

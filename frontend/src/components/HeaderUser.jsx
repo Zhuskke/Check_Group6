@@ -2,8 +2,17 @@ import React from 'react';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import logo from '../images/logocheck.png';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../actions/userActions';
 
-const Header = () => {
+const HeaderUser = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    // Dispatch the logout action
+    dispatch(logout());
+  };
+
   const handleSearch = (event) => {
     event.preventDefault();
     alert('Search functionality will be implemented here!');
@@ -23,17 +32,15 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            
             <Nav.Link></Nav.Link>
             <Form inline onSubmit={handleSearch} className="d-flex align-items-center justify-content-center">
               <FormControl type="search" placeholder="Search" className="mr-sm-2 mx-auto" id='searchbar'/>
             </Form>
           </Nav>
           <Nav>
-            
             <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-            <Nav.Link href="#ask-a-question">Ask a Question</Nav.Link>
-            <Nav.Link href="#logout">Logout</Nav.Link>
+            <Nav.Link as={Link} to="/ask-a-question">Ask a Question</Nav.Link>
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -41,4 +48,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderUser;

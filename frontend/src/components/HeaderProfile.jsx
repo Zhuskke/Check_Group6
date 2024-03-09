@@ -1,17 +1,19 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux'; // Import useDispatch
-import { logout } from '../actions/userActions'; // Import logout action
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useDispatch } from 'react-redux';
+import { logout } from '../actions/userActions';
 import logo from '../images/logocheck.png';
 
 const HeaderProfile = () => {
-  const dispatch = useDispatch(); // Get dispatch function
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Get navigate function
 
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch the logout action
+    dispatch(logout());
+    navigate('/'); // Redirect to the default home screen
   };
-
+  
   return (
     <Navbar expand="lg" id='navbar' collapseOnSelect className="p-3">
       <Container id='navbarbox'>
@@ -29,7 +31,7 @@ const HeaderProfile = () => {
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
-            <Nav.Link href="#ask-a-question">Ask a Question</Nav.Link>
+            <Nav.Link as={Link} to="/ask-a-question">Ask a Question</Nav.Link>
             <Button variant="outline-danger" onClick={handleLogout}>
               Logout
             </Button>
