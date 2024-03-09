@@ -7,7 +7,11 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, UserSerializerWithToken
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
-
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from .models import UserProfile
+from .serializers import UserProfileSerializer
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -49,3 +53,22 @@ def registerUser(request):
     except:
         message = {'detail': 'User with this email already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    
+   
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+    @action(detail=False, methods=['post'], url_path='upload-profile-picture')
+    def upload_profile_picture(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+
+        if 'profile_picture' in request.FILES:
+            user_profile.profile_picture = request.FILES['profile_picture']
+            user_profile.save()
+            serializer = self.get_serializer(user_profile)
+            return Response(serializer.data)
+        else:
+            return Response({'error': 'No profile picture provided.'}, status=400)

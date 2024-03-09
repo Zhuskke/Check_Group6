@@ -13,7 +13,7 @@ import HistoryScreen from './screens/HistoryScreen'
 import ScienceScreen from './screens/ScienceScreen'
 import PhysicsScreen from './screens/PhysicsScreen'
 import CalculusScreen from './screens/CalculusScreen'
-
+import HeaderProfile from "./components/HeaderProfile";
 function App() {
   return (
     <Router>

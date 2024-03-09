@@ -1,12 +1,15 @@
 import React from 'react';
-import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import logo from '../images/logocheck.png';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux'; // Import useDispatch
+import { logout } from '../actions/userActions'; // Import logout action
+import logo from '../images/logocheck.png';
 
-const Header = () => {
-  const handleSearch = (event) => {
-    event.preventDefault();
-    alert('Search functionality will be implemented here!');
+const HeaderProfile = () => {
+  const dispatch = useDispatch(); // Get dispatch function
+
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action
   };
 
   return (
@@ -23,17 +26,13 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            
-            <Nav.Link></Nav.Link>
-            <Form inline onSubmit={handleSearch} className="d-flex align-items-center justify-content-center">
-              <FormControl type="search" placeholder="Search" className="mr-sm-2 mx-auto" id='searchbar'/>
-            </Form>
           </Nav>
           <Nav>
-            
-            <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+            <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link href="#ask-a-question">Ask a Question</Nav.Link>
-            <Nav.Link href="#logout">Logout</Nav.Link>
+            <Button variant="outline-danger" onClick={handleLogout}>
+              Logout
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -41,4 +40,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderProfile;

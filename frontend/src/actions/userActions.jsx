@@ -3,7 +3,7 @@ import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_FAIL,
-    //USER_LOGOUT,
+    USER_LOGOUT,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
@@ -73,8 +73,8 @@ export const register = (username, email, password) => async (dispatch) => {
       });
     }
   };
-// export const logout = () => (dispatch) => {
-//     localStorage.removeItem('userInfo');
-//     dispatch({ type: USER_LOGOUT });
-// };
+export const logout = () => (dispatch) => {
+    localStorage.removeItem('userInfo');
+    dispatch({ type: USER_LOGOUT });
+};
 
