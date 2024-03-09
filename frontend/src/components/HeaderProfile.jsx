@@ -32,9 +32,7 @@ const HeaderProfile = () => {
           <Nav>
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link as={Link} to="/ask-a-question">Ask a Question</Nav.Link>
-            <Button variant="outline-danger" onClick={handleLogout}>
-              Logout
-            </Button>
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

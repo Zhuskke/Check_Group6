@@ -1,18 +1,18 @@
 import React from 'react';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import logo from '../images/logocheck.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
 
 const HeaderUser = () => {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    // Dispatch the logout action
-    dispatch(logout());
-  };
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); // Get navigate function
+  
+    const handleLogout = () => {
+      dispatch(logout());
+      navigate('/'); // Redirect to the default home screen
+    };
   const handleSearch = (event) => {
     event.preventDefault();
     alert('Search functionality will be implemented here!');
