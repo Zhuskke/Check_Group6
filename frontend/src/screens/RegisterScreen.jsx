@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MDBBtn, MDBContainer, MDBCard, MDBCardBody, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { register } from '../actions/userActions';
-import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
+import { useNavigate } from 'react-router-dom'; 
 import HeaderRegister from '../components/HeaderRegister';
 
-function RegisterPage() {
+function RegisterScreen() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/home');
+    }
+  }, [userInfo, navigate]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -22,22 +31,15 @@ function RegisterPage() {
       setMessage("Passwords are not identical!")
       return;
     }
-
-    // Dispatch register action and wait for it to complete
     await dispatch(register(username, email, password));
-
-    // Check if registration was successful
     const registrationSuccessful = true;
 
     if (registrationSuccessful) {
-      // Redirect to the HomeScreen using useNavigate
       navigate('/home');
     } else {
-      // Handle registration failure, if needed
       console.error("Registration failed");
     }
 
-    // Clear input fields after form submission
     setUsername('');
     setEmail('');
     setPassword('');
@@ -68,4 +70,4 @@ return (
   );
 }
 
-export default RegisterPage;
+export default RegisterScreen;

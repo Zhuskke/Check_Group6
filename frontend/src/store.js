@@ -1,11 +1,16 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {thunk} from 'redux-thunk'
-import { userLoginReducer } from './reducers/userReducers'
+import { userLoginReducer, userRegisterReducer, userFetchReducer } from './reducers/userReducers'
 import {combineReducers} from 'redux'
+import {askQuestionReducer, questionListReducer, questionDetailReducer} from './reducers/questionReducers'
 
 const reducer = combineReducers({
-    userLogin : userLoginReducer
-    
+    userLogin : userLoginReducer,
+    userRegister : userRegisterReducer,
+    questionAsk: askQuestionReducer,
+    questionList: questionListReducer,
+    userFetch: userFetchReducer,
+    questionDetail: questionDetailReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null

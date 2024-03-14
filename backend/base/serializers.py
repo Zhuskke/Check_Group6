@@ -3,7 +3,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import *  # Import your user model here, replace `.models` with the correct path to your user model
 from .serializers import *
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
@@ -40,3 +40,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['profile_picture']
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = '__all__'

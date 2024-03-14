@@ -7,6 +7,9 @@ import {
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
+    USER_FETCH_REQUEST,
+    USER_FETCH_SUCCESS,
+    USER_FETCH_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -80,3 +83,31 @@ export const logout = () => (dispatch) => {
     dispatch({ type: USER_LOGOUT });
 };
 
+
+export const fetchUser = (userId) => async (dispatch) => {
+    try {
+        dispatch({ type: USER_FETCH_REQUEST });
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const token = userInfo ? userInfo.access_token : null;
+
+        const config = token
+            ? {
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            : {};
+        const { data } = await axios.get(`/api/users/${userId}/`, config);
+        dispatch({
+            type: USER_FETCH_SUCCESS,
+            payload: { userId, username: data.username },
+        });
+    } catch (error) {
+        dispatch({
+            type: USER_FETCH_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
+    }
+};

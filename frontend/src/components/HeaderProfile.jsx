@@ -7,11 +7,11 @@ import logo from '../images/logocheck.png';
 
 const HeaderProfile = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Get navigate function
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/'); // Redirect to the default home screen
+    navigate('/');
   };
   
   return (

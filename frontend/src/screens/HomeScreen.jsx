@@ -6,18 +6,28 @@ import QuestionBox from '../components/QuestionBox'
 import SubjectBar from '../components/SubjectBar'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function HomeScreen() {
-  const [loading, setLoading] = useState(true); // Set loading to true initially
+  const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Simulate fetching data
-    setTimeout(() => {
-      setLoading(false); // Set loading to false after data is fetched (you may replace this with your actual data fetching logic)
-    }, 2000); // Simulate a 2-second delay
-  }, []); // Empty dependency array to ensure useEffect runs only once
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const navigate = useNavigate(); 
 
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/home');
+    }
+  }, [userInfo, navigate]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); 
+    }, 2000); 
+  }, []); 
   return (
     <><Header /><div>
       {loading ? (

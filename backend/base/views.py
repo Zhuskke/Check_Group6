@@ -6,12 +6,11 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from .serializers import UserSerializer, UserSerializerWithToken
 from django.contrib.auth.hashers import make_password
-from rest_framework import status
-from rest_framework import viewsets
+from rest_framework import status, viewsets, generics
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import UserProfile
-from .serializers import UserProfileSerializer
+from .models import *
+from .serializers import *
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -33,11 +32,13 @@ def getUserProfile (request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
-def getUsers(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+def getUser(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 def registerUser(request):
@@ -72,3 +73,21 @@ class UserProfileViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         else:
             return Response({'error': 'No profile picture provided.'}, status=400)
+
+class QuestionListCreate(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Associate the currently logged-in user with the question being created
+        serializer.save(user=self.request.user)
+
+@api_view(['GET'])
+def get_question_details(request, pk):
+    try:
+        question = Question.objects.get(pk=pk)
+        serializer = QuestionSerializer(question)
+        return Response(serializer.data)
+    except Question.DoesNotExist:
+        return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)

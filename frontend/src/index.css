@@ -258,3 +258,13 @@ html, body{
 		width: 95%;
 	}
 }
+
+
+#question-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.question-item {
+  margin-bottom: 20px;
+}

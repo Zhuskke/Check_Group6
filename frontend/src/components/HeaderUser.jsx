@@ -7,11 +7,11 @@ import { logout } from '../actions/userActions';
 
 const HeaderUser = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate(); // Get navigate function
+    const navigate = useNavigate();
   
     const handleLogout = () => {
       dispatch(logout());
-      navigate('/'); // Redirect to the default home screen
+      navigate('/');
     };
   const handleSearch = (event) => {
     event.preventDefault();
@@ -21,7 +21,7 @@ const HeaderUser = () => {
   return (
     <Navbar expand="lg" id='navbar' collapseOnSelect className="p-3">
       <Container id='navbarbox'>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/home">
           <img
             src={logo}
             height="50"

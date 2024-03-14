@@ -15,20 +15,18 @@ function LoginScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if login was successful before redirecting
-    if (!loading && !error && userInfo) {
+    // Check if user is already logged in
+    if (userInfo) {
       // Redirect to the home screen
       navigate("/home");
     }
-  }, [loading, error, userInfo, navigate]);
+  }, [userInfo, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // Dispatch login action with username and password
     dispatch(login(username, password));
 
-    // Clear input fields after form submission
     setUsername('');
     setPassword('');
   };
