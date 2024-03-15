@@ -4,18 +4,22 @@ import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
 import { Container, Button } from 'react-bootstrap';
 
-
 const Profile = () => {
   const defaultProfilePicture =
     "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg";
   const localStorageKey = "userProfilePicture";
 
-  const [profilePicture, setProfilePicture] = useState(() => {
-    const storedProfilePicture = localStorage.getItem(localStorageKey);
-    return storedProfilePicture || defaultProfilePicture;
-  });
-
   const userData = useSelector(state => state.userLogin.userInfo);
+  
+  // Use a useEffect hook to set profilePicture once userData is available
+  useEffect(() => {
+    if (userData) {
+      const storedProfilePicture = localStorage.getItem(`${localStorageKey}-${userData.id}`);
+      setProfilePicture(storedProfilePicture || defaultProfilePicture);
+    }
+  }, [userData]);
+
+  const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -23,7 +27,7 @@ const Profile = () => {
       reader.onload = (e) => {
         const newProfilePicture = e.target.result;
         setProfilePicture(newProfilePicture);
-        localStorage.setItem(localStorageKey, newProfilePicture);
+        localStorage.setItem(`${localStorageKey}-${userData.id}`, newProfilePicture);
       };
       reader.readAsDataURL(event.target.files[0]);
     }
