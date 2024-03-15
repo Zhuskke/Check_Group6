@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
+import HeaderRegister from "../components/HeaderRegister";
 
 function LoginScreen() {
   const [username, setUsername] = useState("");
@@ -32,6 +33,7 @@ function LoginScreen() {
   };
 
   return (
+    <><HeaderRegister />
     <MDBContainer fluid id='bgimg' className='d-flex align-items-center justify-content-center bg-image' style={{backgroundImage: 'url(https://assets.teenvogue.com/photos/5e6bffbbdee1770008c6d9bd/16:9/w_2560%2Cc_limit/GettyImages-577674005.jpg)'}}>
       <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
         <MDBCardBody className="px-5">
@@ -71,6 +73,7 @@ function LoginScreen() {
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>
+    </>
   );
 }
 

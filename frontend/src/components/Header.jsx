@@ -1,17 +1,29 @@
-import React from 'react';
-import { Navbar, Container, Nav, Form, FormControl } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import logo from '../images/logocheck.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../actions/userActions';
 
 const Header = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
+
   const handleSearch = (event) => {
     event.preventDefault();
-    alert('Search functionality will be implemented here!');
+    navigate(`/search?q=${searchTerm}`);
   };
 
   return (
     <Navbar expand="lg" id='navbar' collapseOnSelect className="p-3">
       <Container id='navbarbox'>
-        <Navbar.Brand href="/">
+        <Navbar.Brand as={Link} to="/">
           <img
             src={logo}
             height="50"
@@ -25,7 +37,8 @@ const Header = () => {
             {/* Add an empty Nav.Link to push the search bar to the center */}
             <Nav.Link></Nav.Link>
             <Form inline onSubmit={handleSearch} className="d-flex align-items-center justify-content-center">
-              <FormControl type="search" placeholder="Search" className="mr-sm-2 mx-auto" id='searchbar'/>
+              <FormControl type="search" placeholder="Search" className="mr-sm-2 mx-auto" id='searchbar' onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+              <Button variant="outline-success" type="submit">Search</Button>
             </Form>
           </Nav>
           <Nav>
