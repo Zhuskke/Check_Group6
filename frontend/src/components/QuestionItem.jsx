@@ -27,8 +27,8 @@ const QuestionItem = ({ question }) => {
     return (
         <div className='question-item'>
             <Link to={`/questions/${question.id}`} className="question-link">
-                <h3>{question.title}</h3>
-                <p>{question.content}</p>
+                {/* <h3>{question.title}</h3> */}
+                <h3>{question.content}</h3>
                 <p><strong>Posted By: </strong>{username}</p>
                 <p><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
             </Link>

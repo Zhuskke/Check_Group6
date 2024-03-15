@@ -12,6 +12,7 @@ import PhysicsScreen from './screens/PhysicsScreen'
 import CalculusScreen from './screens/CalculusScreen'
 import AskQuestionScreen from "./screens/AskQuestionScreen";
 import QuestionDetail from "./screens/QuestionDetailScreen";
+import SearchScreen from "./screens/SearchScreen";
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
         <Route path="/calculus" element={<CalculusScreen />} exact />
         <Route path="/ask-a-question" element={<AskQuestionScreen />} exact />
         <Route path="/questions/:id" element={<QuestionDetail />} />
+        <Route path="/search" element={<SearchScreen />} />
       </Routes>
     </Router>
     

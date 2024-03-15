@@ -31,7 +31,7 @@ const HeaderProfile = () => {
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
-            <Nav.Link as={Link} to="/ask-a-question">Ask a Question</Nav.Link>
+            <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>

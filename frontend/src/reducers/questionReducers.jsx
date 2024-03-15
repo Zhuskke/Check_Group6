@@ -8,7 +8,16 @@ import {
   QUESTION_DETAIL_REQUEST,
   QUESTION_DETAIL_SUCCESS,
   QUESTION_DETAIL_FAIL,
+  FETCH_SEARCH_RESULTS_REQUEST,
+  FETCH_SEARCH_RESULTS_SUCCESS,
+  FETCH_SEARCH_RESULTS_FAIL,
 } from "../constants/questionConstants";
+
+const initialState = {
+  loading: false,
+  results: [],
+  error: null,
+};
 
 export const askQuestionReducer = (state = {}, action) => {
   switch (action.type) {
@@ -45,6 +54,31 @@ export const questionListReducer = (state = { questions: [] }, action) => {
         return { loading: false, question: action.payload, error: null };
       case QUESTION_DETAIL_FAIL:
         return { loading: false, error: action.payload, question: {} };
+      default:
+        return state;
+    }
+  };
+
+  export const searchReducer = (state = initialState, action) => {
+    switch (action.type) {
+      case FETCH_SEARCH_RESULTS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+      case FETCH_SEARCH_RESULTS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          results: action.payload,
+        };
+      case FETCH_SEARCH_RESULTS_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
       default:
         return state;
     }

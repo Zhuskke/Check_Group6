@@ -17,6 +17,9 @@ urlpatterns = [
     path('', include(router.urls)),
     path('questions/', QuestionListCreate.as_view(), name='question-list-create'),
     path('questions/<int:pk>/', views.get_question_details, name='question-detail'),
+    path('search/', views.searchQuestions, name='search-questions'),
+
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

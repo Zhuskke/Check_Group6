@@ -11,6 +11,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
+from django.db.models import Q
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -91,3 +93,13 @@ def get_question_details(request, pk):
         return Response(serializer.data)
     except Question.DoesNotExist:
         return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['GET'])
+def searchQuestions(request):
+    search_query = request.GET.get('q')
+    if search_query:
+        questions = Question.objects.filter(content__icontains=search_query)
+        serializer = QuestionSerializer(questions, many=True)
+        return Response(serializer.data)
+    else:
+        return Response({'message': 'No search term provided'}, status=status.HTTP_400_BAD_REQUEST)

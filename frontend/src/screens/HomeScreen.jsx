@@ -42,7 +42,7 @@ function HomeScreen() {
                 <strong><h1 className="title">SAMPLE SLOGAN TEXT!</h1></strong>
                 <strong><h3 className="title-2">Sample Text Here :D</h3></strong>
               </div>
-              <QuestionBox />a
+              <QuestionBox />
             </div>
             <SubjectBar />
           </section>
