@@ -45,3 +45,12 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = '__all__'
+
+
+class UploadedImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UploadedImage
+        fields = ['id', 'image', 'uploaded_at']
+
+    def create(self, validated_data):
+        return UploadedImage.objects.create(**validated_data)

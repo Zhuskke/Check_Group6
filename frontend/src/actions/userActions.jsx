@@ -10,6 +10,9 @@ import {
     USER_FETCH_REQUEST,
     USER_FETCH_SUCCESS,
     USER_FETCH_FAIL,
+    USER_UPLOAD_IMAGE_REQUEST,
+    USER_UPLOAD_IMAGE_SUCCESS,
+    USER_UPLOAD_IMAGE_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -107,6 +110,36 @@ export const fetchUser = (userId) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: USER_FETCH_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
+    }
+};
+
+export const uploadImage = (image) => async (dispatch) => {
+    try {
+        dispatch({ type: USER_UPLOAD_IMAGE_REQUEST });
+        const formData = new FormData();
+        formData.append('image', image);
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const token = userInfo ? userInfo.token : null; // Ensure you're retrieving the token correctly
+        if (!token) {
+            throw new Error('No authentication token found');
+        }
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const response = await axios.post(`/api/users/upload-image/`, formData, config);
+        const imageUrl = response.data.imageUrl; // Assuming imageUrl is returned from the server
+        dispatch({ 
+            type: USER_UPLOAD_IMAGE_SUCCESS,
+            payload: imageUrl 
+        });
+    } catch (error) {
+        dispatch({
+            type: USER_UPLOAD_IMAGE_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message,
         });
     }

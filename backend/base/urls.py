@@ -18,7 +18,8 @@ urlpatterns = [
     path('questions/', QuestionListCreate.as_view(), name='question-list-create'),
     path('questions/<int:pk>/', views.get_question_details, name='question-detail'),
     path('search/', views.searchQuestions, name='search-questions'),
-
+    path('users/upload-image/', upload_image, name='upload-image'),
+    path('users/uploaded-images/', get_uploaded_images, name='get-uploaded-images'),
     
 ]
 

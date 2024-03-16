@@ -1,14 +1,17 @@
 import {
-USER_LOGIN_REQUEST,
-USER_LOGIN_SUCCESS,
-USER_LOGIN_FAIL,
-USER_LOGOUT, 
-USER_REGISTER_REQUEST,
-USER_REGISTER_SUCCESS,
-USER_REGISTER_FAIL, 
-USER_FETCH_REQUEST,
-USER_FETCH_SUCCESS,
-USER_FETCH_FAIL,
+    USER_LOGIN_REQUEST,
+    USER_LOGIN_SUCCESS,
+    USER_LOGIN_FAIL,
+    USER_LOGOUT, 
+    USER_REGISTER_REQUEST,
+    USER_REGISTER_SUCCESS,
+    USER_REGISTER_FAIL, 
+    USER_FETCH_REQUEST,
+    USER_FETCH_SUCCESS,
+    USER_FETCH_FAIL,
+    USER_UPLOAD_IMAGE_REQUEST,
+    USER_UPLOAD_IMAGE_SUCCESS,
+    USER_UPLOAD_IMAGE_FAIL,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -58,3 +61,15 @@ export const userRegisterReducer = (state = {}, action) => {
     }
 };
 
+export const userUploadImageReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_UPLOAD_IMAGE_REQUEST:
+            return { loading: true };
+        case USER_UPLOAD_IMAGE_SUCCESS:
+            return { loading: false, success: true };
+        case USER_UPLOAD_IMAGE_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+};
