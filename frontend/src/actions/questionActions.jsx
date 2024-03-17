@@ -99,7 +99,7 @@ export const fetchQuestionDetail = (questionId) => async (dispatch) => {
   try {
     dispatch({ type: QUESTION_DETAIL_REQUEST });
 
-    const { data } = await axios.get(`/api/questions/${questionId}`);
+    const { data } = await axios.get(`/api/questions/${questionId}/`);
 
     dispatch({
       type: QUESTION_DETAIL_SUCCESS,

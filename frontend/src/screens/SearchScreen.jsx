@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSearchResults } from '../actions/questionActions';
+import HeaderUser from '../components/HeaderUser';
 
 const SearchScreen = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const SearchScreen = () => {
   const { loading, error, results } = searchResults;
 
   return (
+    <><HeaderUser/>
     <div>
       <h2>Search Results for: {searchTerm}</h2>
       <div>
@@ -38,6 +40,7 @@ const SearchScreen = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

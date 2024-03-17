@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { fetchQuestionDetail } from '../actions/questionActions';
+import { fetchUser } from '../actions/userActions';
+import HeaderUser from '../components/HeaderUser';
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -14,30 +16,45 @@ const QuestionDetail = () => {
   }, [dispatch, id]);
 
   const questionDetails = useSelector((state) => state.questionDetail);
-  const { loading, error, question } = questionDetails;
+  const { loading: questionLoading, error: questionError, question } = questionDetails;
 
   // Retrieve user information from Redux store
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userFetch = useSelector((state) => state.userFetch);
+  const { loading: userLoading, error: userError, users } = userFetch;
+
+  useEffect(() => {
+    // Check if question is loaded and user data is not already fetched
+    if (question && question.user && !users[question.user]) {
+      console.log('Dispatching fetchUser with user ID:', question.user);
+      dispatch(fetchUser(question.user));
+    }
+  }, [dispatch, question, users]);
+
+  if (questionLoading || userLoading) {
+    return <Loader />;
+  }
+
+  if (questionError) {
+    return <Message variant='danger'>{questionError}</Message>;
+  }
+
+  // Handle 404 error
+  if (!question || !question.id) {
+    return <Message variant='danger'>Question not found</Message>;
+  }
+
+  const username = users[question.user] || '';
 
   return (
+    <><HeaderUser/>
     <div>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
-        <div>
-          <h2>{question.title}</h2>
-          <p>{question.content}</p>
-          <p><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
-          {/* Display other details of the question */}
-          {userInfo && (
-            <p><strong>Posted By:</strong> {userInfo.username}</p>
-          )}
-        </div>
-      )}
+      <h2>{question.title}</h2>
+      <p>{question.content}</p>
+      <p><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
+      {/* Display other details of the question */}
+      <p><strong>Posted By:</strong> {username}</p>
     </div>
+    </>
   );
 };
 
