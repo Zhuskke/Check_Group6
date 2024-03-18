@@ -26,7 +26,7 @@ function HomeScreen() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false); 
-    }, 2000); 
+    }, ); 
   }, []); 
   return (
     <><Header /><div>

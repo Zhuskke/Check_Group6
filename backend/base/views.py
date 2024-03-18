@@ -85,6 +85,12 @@ class QuestionListCreate(generics.ListCreateAPIView):
         # Associate the currently logged-in user with the question being created
         serializer.save(user=self.request.user)
 
+@api_view(['DELETE'])
+def delete_question(request, pk):
+    question = Question.objects.get(pk=pk)
+    question.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 @api_view(['GET'])
 def get_question_details(request, pk):
     try:
@@ -121,4 +127,10 @@ def upload_image(request):
 def get_uploaded_images(request):
     images = UploadedImage.objects.filter(user=request.user)
     serializer = UploadedImageSerializer(images, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_user_questions(request, user_id):
+    questions = Question.objects.filter(user=user_id)
+    serializer = QuestionSerializer(questions, many=True)
     return Response(serializer.data)

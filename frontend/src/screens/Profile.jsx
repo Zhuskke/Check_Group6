@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
 import { Container, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { fetchUserQuestions } from '../actions/questionActions'; // Import the action creator
 
 const Profile = () => {
   const defaultProfilePicture =
     "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg";
   const localStorageKey = "userProfilePicture";
+  
+  const dispatch = useDispatch(); // Initialize dispatch function
 
   const userData = useSelector(state => state.userLogin.userInfo);
-  
+  const userQuestionsState = useSelector(state => state.userQuestions); // Get user questions state from Redux store
+  const { loading, error, userQuestions } = userQuestionsState; // Destructure loading, error, and userQuestions from the state
+
+  useEffect(() => {
+    if (userData) {
+      // Dispatch action to fetch user's questions
+      dispatch(fetchUserQuestions(userData.id));
+    }
+  }, [userData, dispatch]);
+
   // Use a useEffect hook to set profilePicture once userData is available
   useEffect(() => {
     if (userData) {
@@ -63,10 +76,26 @@ const Profile = () => {
           <Button variant="primary" onClick={handleChooseFileClick}>
             Change Profile Picture
           </Button>
-          <p>Name: {userData ? userData.username   : ''}</p>
+          <p>Name: {userData ? userData.username : ''}</p>
           <p>Info/Description: </p>
         </div>
-        <p>Questions | Answers: </p>
+        <p>Questions: </p>
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : userQuestions ? (
+          <ul>
+            {userQuestions.map(question => (
+              <li key={question.id}>
+                <Link to={`/questions/${question.id}`}>{question.content}</Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No questions found.</p>
+        )}
+        <p>Answers: </p>
       </Container>
       <Footer />
     </div>

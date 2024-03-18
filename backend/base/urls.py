@@ -20,7 +20,7 @@ urlpatterns = [
     path('search/', views.searchQuestions, name='search-questions'),
     path('users/upload-image/', upload_image, name='upload-image'),
     path('users/uploaded-images/', get_uploaded_images, name='get-uploaded-images'),
-    
+    path('users/<int:user_id>/questions/', views.get_user_questions, name='user-questions'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

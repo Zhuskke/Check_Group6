@@ -11,6 +11,9 @@ import {
   FETCH_SEARCH_RESULTS_REQUEST,
   FETCH_SEARCH_RESULTS_SUCCESS,
   FETCH_SEARCH_RESULTS_FAIL,
+  USER_QUESTIONS_REQUEST,
+  USER_QUESTIONS_SUCCESS,
+  USER_QUESTIONS_FAIL,
 } from "../constants/questionConstants";
 
 const initialState = {
@@ -79,6 +82,19 @@ export const questionListReducer = (state = { questions: [] }, action) => {
           loading: false,
           error: action.payload,
         };
+      default:
+        return state;
+    }
+  };
+
+  export const userQuestionsReducer = (state = { userQuestions: [] }, action) => {
+    switch (action.type) {
+      case USER_QUESTIONS_REQUEST:
+        return { loading: true, userQuestions: [] };
+      case USER_QUESTIONS_SUCCESS:
+        return { loading: false, userQuestions: action.payload };
+      case USER_QUESTIONS_FAIL:
+        return { loading: false, error: action.payload };
       default:
         return state;
     }

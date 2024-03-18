@@ -12,6 +12,9 @@ import {
   FETCH_SEARCH_RESULTS_REQUEST,
   FETCH_SEARCH_RESULTS_SUCCESS,
   FETCH_SEARCH_RESULTS_FAIL,
+  USER_QUESTIONS_REQUEST,
+  USER_QUESTIONS_SUCCESS,
+  USER_QUESTIONS_FAIL,
 } from "../constants/questionConstants";
 
 export const askQuestion = (title, content) => async (dispatch, getState) => {
@@ -128,6 +131,27 @@ export const fetchSearchResults = (searchTerm) => async (dispatch) => {
     dispatch({
       type: FETCH_SEARCH_RESULTS_FAIL,
       payload: error.message,
+    });
+  }
+};
+
+export const fetchUserQuestions = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_QUESTIONS_REQUEST });
+
+    const { data } = await axios.get(`/api/users/${userId}/questions/`);
+
+    dispatch({
+      type: USER_QUESTIONS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_QUESTIONS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
