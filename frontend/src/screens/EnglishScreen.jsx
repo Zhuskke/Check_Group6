@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImage } from '../actions/userActions';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { uploadImageEnglish, getUploadedImagesEnglish } from '../actions/subjectActions';
+import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function EnglishScreen() {
-  const [uploadedImage, setUploadedImage] = useState(localStorage.getItem('uploadedImage') || null);
+  const [uploadedImageEnglish, setUploadedImageEnglish] = useState(localStorage.getItem('uploadedImageEnglish') || null);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
-  const { loading, error, userInfo } = useSelector((state) => state.userLogin);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const { loading: uploadLoading, error: uploadError, imageUrl } = useSelector((state) => state.uploadImage);
+  const { loading: getImagesLoading, error: getImagesError, images } = useSelector((state) => state.getUploadedImages);
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUploadedImage = localStorage.getItem('uploadedImage');
-    if (storedUploadedImage) {
-      setUploadedImage(storedUploadedImage);
+    dispatch(getUploadedImagesEnglish());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (imageUrl) {
+      setUploadedImageEnglish(imageUrl);
+      localStorage.setItem('uploadedImageEnglish', imageUrl);
     }
-  }, []);
+  }, [imageUrl]);
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -26,30 +32,22 @@ function EnglishScreen() {
       setImage(selectedImage);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImage(reader.result);
+        setUploadedImageEnglish(reader.result);
+        localStorage.setItem('uploadedImageEnglish', reader.result);
       };
       reader.readAsDataURL(selectedImage);
     }
   };
 
-  const handleUpload = async () => {
+  const handleUpload = () => {
     if (!userInfo || !image) return;
-
-    try {
-      dispatch(uploadImage(image));
-      localStorage.removeItem('uploadedImage'); // Clear stored image on upload
-      setImage(null);
-      navigate('/english'); // Redirect after successful upload
-    } catch (error) {
-      console.error('Failed to upload image:', error);
-    }
+    dispatch(uploadImageEnglish(image));
   };
 
   const handleSignUp = () => {
-    // Redirect to the register screen
     navigate('/register');
   };
-  
+
   return (
     <div>
       {userInfo ? <HeaderUser /> : <Header />}
@@ -63,10 +61,10 @@ function EnglishScreen() {
       {userInfo && (
         <div>
           <input type="file" onChange={handleImageChange} />
-          {uploadedImage && (
+          {uploadedImageEnglish && (
             <div>
               <p>Uploaded Image Preview:</p>
-              <img src={uploadedImage} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+              <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           )}
           <button onClick={handleUpload} disabled={!image}>
@@ -74,8 +72,8 @@ function EnglishScreen() {
           </button>
         </div>
       )}
-      {loading && <p>Uploading...</p>}
-      {error && <p>Error: {error}</p>}
+      {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
+      {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
       <Footer />
     </div>
   );

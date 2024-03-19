@@ -60,6 +60,11 @@ const Profile = () => {
     document.getElementById("profile-image-input").click();
   };
 
+  const handleRemoveProfilePicture = () => {
+    setProfilePicture(defaultProfilePicture);
+    localStorage.removeItem(`${localStorageKey}-${userData.id}`);
+  };
+
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
@@ -95,14 +100,17 @@ const Profile = () => {
           <Button variant="primary" onClick={handleChooseFileClick}>
             Change Profile Picture
           </Button>
+          <Button variant="danger" onClick={handleRemoveProfilePicture}>
+            Remove Profile Picture
+          </Button>
           <p>Name: {userData ? userData.username : ""}</p>
           <p>Description: {description}</p>
-            <Button
-              className="add-description-button"
-              onClick={() => setShowDescriptionModal(true)}
-            >
-              Edit Description
-            </Button>
+          <Button
+            className="add-description-button"
+            onClick={() => setShowDescriptionModal(true)}
+          >
+            Edit Description
+          </Button>
         </div>
         <p>Questions: </p>
         {loading ? (
@@ -125,7 +133,7 @@ const Profile = () => {
       <Footer />
 
       <Modal show={showDescriptionModal} onHide={handleCloseDescriptionModal}>
-        <Modal.Header >
+        <Modal.Header>
           <Modal.Title>Add Description</Modal.Title>
         </Modal.Header>
         <Modal.Body>

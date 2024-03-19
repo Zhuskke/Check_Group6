@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImage } from '../actions/userActions';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { uploadImageCalculus, getUploadedImagesCalculus } from '../actions/subjectActions';
+import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function CalculusScreen() {
-  const [uploadedImage, setUploadedImage] = useState(localStorage.getItem('uploadedImage') || null);
+  const [uploadedImageCalculus, setUploadedImageCalculus] = useState(localStorage.getItem('uploadedImageCalculus') || null);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
-  const { loading, error, userInfo } = useSelector((state) => state.userLogin);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const { loading: uploadLoading, error: uploadError, imageUrl } = useSelector((state) => state.uploadImage);
+  const { loading: getImagesLoading, error: getImagesError, images } = useSelector((state) => state.getUploadedImages);
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const uploadedImage = localStorage.getItem('uploadedImage');
-    console.log('Stored uploaded image:', uploadedImage);
-    if (uploadedImage) {
-      setUploadedImage(uploadedImage);
+    dispatch(getUploadedImagesCalculus());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (imageUrl) {
+      setUploadedImageCalculus(imageUrl);
+      localStorage.setItem('uploadedImageCalculus', imageUrl);
     }
-  }, []);
+  }, [imageUrl]);
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -27,32 +32,22 @@ function CalculusScreen() {
       setImage(selectedImage);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImage(reader.result);
+        setUploadedImageCalculus(reader.result);
+        localStorage.setItem('uploadedImageCalculus', reader.result);
       };
       reader.readAsDataURL(selectedImage);
     }
   };
 
   const handleUpload = () => {
-    if (userInfo && image) {
-      dispatch(uploadImage(image))
-        .then(() => {
-          localStorage.removeItem('uploadedImage'); // Remove uploaded image from localStorage
-          setImage(null);
-          // Redirect after successful upload
-          navigate('/english'); // Redirect to the home page or any other desired page
-        })
-        .catch((error) => {
-          console.error('Failed to upload image:', error);
-        });
-    }
+    if (!userInfo || !image) return;
+    dispatch(uploadImageCalculus(image));
   };
 
   const handleSignUp = () => {
-    // Redirect to the register screen
     navigate('/register');
   };
-  
+
   return (
     <div>
       {userInfo ? <HeaderUser /> : <Header />}
@@ -62,14 +57,14 @@ function CalculusScreen() {
           <button onClick={handleSignUp}>Sign up</button>
         </div>
       )}
-      <h1>English</h1>
+      <h1>Calculus</h1>
       {userInfo && (
         <div>
           <input type="file" onChange={handleImageChange} />
-          {uploadedImage && (
+          {uploadedImageCalculus && (
             <div>
               <p>Uploaded Image Preview:</p>
-              <img src={uploadedImage} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+              <img src={uploadedImageCalculus} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           )}
           <button onClick={handleUpload} disabled={!image}>
@@ -77,8 +72,8 @@ function CalculusScreen() {
           </button>
         </div>
       )}
-      {loading && <p>Uploading...</p>}
-      {error && <p>Error: {error}</p>}
+      {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
+      {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
       <Footer />
     </div>
   );

@@ -1,48 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImage } from '../actions/userActions'; // Assuming you have this action
-import HeaderUser from '../components/HeaderUser'; // Importing the HeaderUser component
-import Header from '../components/Header'; // Importing the Header component for guests
+import { uploadImageMath, getUploadedImagesMath } from '../actions/subjectActions';
+import { useNavigate } from 'react-router-dom';
+import HeaderUser from '../components/HeaderUser';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function MathScreen() {
+  const [uploadedImageMath, setUploadedImageMath] = useState(localStorage.getItem('uploadedImageMath') || null);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
-  const { loading, error, userInfo } = useSelector((state) => state.userLogin);
+  const { loading: uploadLoading, error: uploadError, imageUrl } = useSelector((state) => state.uploadImage);
+  const { loading: getImagesLoading, error: getImagesError, images } = useSelector((state) => state.getUploadedImages);
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getUploadedImagesMath());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (imageUrl) {
+      setUploadedImageMath(imageUrl);
+      localStorage.setItem('uploadedImageMath', imageUrl);
+    }
+  }, [imageUrl]);
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
-    setImage(selectedImage);
+    if (selectedImage) {
+      setImage(selectedImage);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUploadedImageMath(reader.result);
+        localStorage.setItem('uploadedImageMath', reader.result);
+      };
+      reader.readAsDataURL(selectedImage);
+    }
   };
 
   const handleUpload = () => {
-    if (image) {
-      dispatch(uploadImage(userInfo.userId, image));
-      // You may want to reset the image state after upload
-      setImage(null);
-    } else {
-      // Handle error if no image selected
-      console.error('No image selected.');
-    }
+    if (!userInfo || !image) return;
+    dispatch(uploadImageMath(image));
+  };
+
+  const handleSignUp = () => {
+    navigate('/register');
   };
 
   return (
     <div>
-      {/* Conditionally render HeaderUser if user is logged in, otherwise render Header */}
       {userInfo ? <HeaderUser /> : <Header />}
-      {/* Display message for guests */}
       {!userInfo && (
         <div>
           <p>You are viewing as a guest. Sign up for a better study experience.</p>
-          {/* Add a link or button for sign up */}
-          <button onClick={() => console.log('Redirect to sign up page')}>Sign up</button>
+          <button onClick={handleSignUp}>Sign up</button>
         </div>
       )}
       <h1>Math</h1>
-      <input type="file" onChange={handleImageChange} />
-      <button onClick={handleUpload}>Upload Image</button>
-      {loading && <p>Uploading...</p>}
-      {error && <p>Error: {error}</p>}
+      {userInfo && (
+        <div>
+          <input type="file" onChange={handleImageChange} />
+          {uploadedImageMath && (
+            <div>
+              <p>Uploaded Image Preview:</p>
+              <img src={uploadedImageMath} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+            </div>
+          )}
+          <button onClick={handleUpload} disabled={!image}>
+            Upload Image
+          </button>
+        </div>
+      )}
+      {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
+      {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
       <Footer />
     </div>
   );

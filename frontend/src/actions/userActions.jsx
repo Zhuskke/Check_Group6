@@ -10,9 +10,15 @@ import {
     USER_FETCH_REQUEST,
     USER_FETCH_SUCCESS,
     USER_FETCH_FAIL,
-    USER_UPLOAD_IMAGE_REQUEST,
-    USER_UPLOAD_IMAGE_SUCCESS,
-    USER_UPLOAD_IMAGE_FAIL,
+    UPLOAD_IMAGE_REQUEST,
+    UPLOAD_IMAGE_SUCCESS,
+    UPLOAD_IMAGE_FAIL,
+    GET_UPLOADED_IMAGES_REQUEST,
+    GET_UPLOADED_IMAGES_SUCCESS,
+    GET_UPLOADED_IMAGES_FAIL,
+    UPDATE_USER_DESCRIPTION_REQUEST,
+    UPDATE_USER_DESCRIPTION_SUCCESS,
+    UPDATE_USER_DESCRIPTION_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -115,32 +121,90 @@ export const fetchUser = (userId) => async (dispatch) => {
     }
 };
 
-export const uploadImage = (image) => async (dispatch) => {
+export const uploadImage = (image) => async (dispatch, getState) => {
     try {
-        dispatch({ type: USER_UPLOAD_IMAGE_REQUEST });
-        const formData = new FormData();
-        formData.append('image', image);
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        const token = userInfo ? userInfo.token : null; 
-        if (!token) {
-            throw new Error('No authentication token found');
-        }
-        const config = {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${token}`,
-            },
-        };
-        const response = await axios.post(`/api/users/upload-image/`, formData, config);
-        const imageUrl = response.data.imageUrl; 
-        dispatch({ 
-            type: USER_UPLOAD_IMAGE_SUCCESS,
-            payload: imageUrl 
-        });
+      dispatch({ type: UPLOAD_IMAGE_REQUEST });
+  
+      const formData = new FormData();
+      formData.append('image', image);
+  
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${getState().userLogin.userInfo.token}`,
+        },
+      };
+  
+      const { data } = await axios.post('/api/users/upload-image/', formData, config);
+  
+      dispatch({ type: UPLOAD_IMAGE_SUCCESS, payload: data.imageUrl });
     } catch (error) {
-        dispatch({
-            type: USER_UPLOAD_IMAGE_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
-        });
+      dispatch({
+        type: UPLOAD_IMAGE_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
     }
-};
+  };
+  
+  export const getUploadedImages = () => async (dispatch, getState) => {
+    try {
+      dispatch({ type: GET_UPLOADED_IMAGES_REQUEST });
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getState().userLogin.userInfo.token}`,
+        },
+      };
+  
+      const { data } = await axios.get('/api/users/uploaded-images/', config);
+  
+      dispatch({ type: GET_UPLOADED_IMAGES_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: GET_UPLOADED_IMAGES_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+
+  export const updateUserDescription = (description) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: UPDATE_USER_DESCRIPTION_REQUEST });
+  
+      const {
+        userLogin: { userInfo }
+      } = getState();
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`
+        }
+      };
+  
+      const { data } = await axios.post(
+        '/api/users/update-description/',
+        { description },
+        config
+      );
+  
+      dispatch({
+        type: UPDATE_USER_DESCRIPTION_SUCCESS,
+        payload: data.success
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_USER_DESCRIPTION_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message
+      });
+    }
+  };
