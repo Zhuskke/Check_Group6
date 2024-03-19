@@ -4,6 +4,7 @@ import { MDBBtn, MDBContainer, MDBCard, MDBCardBody, MDBInput, MDBCheckbox } fro
 import { register } from '../actions/userActions';
 import { useNavigate } from 'react-router-dom'; 
 import HeaderRegister from '../components/HeaderRegister';
+import { Link } from 'react-router-dom';
 
 function RegisterScreen() {
   const [username, setUsername] = useState('');
@@ -61,6 +62,7 @@ return (
             <div className='d-flex flex-row justify-content-center mb-4'>
               <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I agree all statements in Terms of service' />
             </div>
+            <Link to="/login" className="nav-link">Already have an account?</Link>
             <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' type='submit'>Register</MDBBtn>
           </form>
         </MDBCardBody>

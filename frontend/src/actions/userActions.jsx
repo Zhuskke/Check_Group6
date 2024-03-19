@@ -60,7 +60,7 @@ export const register = (username, email, password) => async (dispatch) => {
 
         dispatch({
             type: USER_REGISTER_SUCCESS,
-            payload: data, // Dispatch the user data upon successful registration
+            payload: data, 
         });
 
         dispatch({
@@ -121,7 +121,7 @@ export const uploadImage = (image) => async (dispatch) => {
         const formData = new FormData();
         formData.append('image', image);
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        const token = userInfo ? userInfo.token : null; // Ensure you're retrieving the token correctly
+        const token = userInfo ? userInfo.token : null; 
         if (!token) {
             throw new Error('No authentication token found');
         }
@@ -132,7 +132,7 @@ export const uploadImage = (image) => async (dispatch) => {
             },
         };
         const response = await axios.post(`/api/users/upload-image/`, formData, config);
-        const imageUrl = response.data.imageUrl; // Assuming imageUrl is returned from the server
+        const imageUrl = response.data.imageUrl; 
         dispatch({ 
             type: USER_UPLOAD_IMAGE_SUCCESS,
             payload: imageUrl 

@@ -1,38 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
-import { Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import { fetchUserQuestions } from '../actions/questionActions'; // Import the action creator
+import { Container, Button, Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { fetchUserQuestions } from "../actions/questionActions";
 
 const Profile = () => {
   const defaultProfilePicture =
     "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg";
   const localStorageKey = "userProfilePicture";
-  
-  const dispatch = useDispatch(); // Initialize dispatch function
+  const localStorageDescriptionKey = "userDescription";
 
-  const userData = useSelector(state => state.userLogin.userInfo);
-  const userQuestionsState = useSelector(state => state.userQuestions); // Get user questions state from Redux store
-  const { loading, error, userQuestions } = userQuestionsState; // Destructure loading, error, and userQuestions from the state
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userLogin.userInfo);
+  const userQuestionsState = useSelector((state) => state.userQuestions);
+  const { loading, error, userQuestions } = userQuestionsState;
 
   useEffect(() => {
     if (userData) {
-      // Dispatch action to fetch user's questions
       dispatch(fetchUserQuestions(userData.id));
     }
   }, [userData, dispatch]);
 
-  // Use a useEffect hook to set profilePicture once userData is available
   useEffect(() => {
     if (userData) {
-      const storedProfilePicture = localStorage.getItem(`${localStorageKey}-${userData.id}`);
+      const storedProfilePicture = localStorage.getItem(
+        `${localStorageKey}-${userData.id}`
+      );
       setProfilePicture(storedProfilePicture || defaultProfilePicture);
     }
   }, [userData]);
 
   const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
+  const [description, setDescription] = useState("");
+  const [showDescriptionModal, setShowDescriptionModal] = useState(false);
+
+  useEffect(() => {
+    const storedDescription = localStorage.getItem(localStorageDescriptionKey);
+    setDescription(storedDescription || "");
+  }, []);
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -40,7 +47,10 @@ const Profile = () => {
       reader.onload = (e) => {
         const newProfilePicture = e.target.result;
         setProfilePicture(newProfilePicture);
-        localStorage.setItem(`${localStorageKey}-${userData.id}`, newProfilePicture);
+        localStorage.setItem(
+          `${localStorageKey}-${userData.id}`,
+          newProfilePicture
+        );
       };
       reader.readAsDataURL(event.target.files[0]);
     }
@@ -50,9 +60,18 @@ const Profile = () => {
     document.getElementById("profile-image-input").click();
   };
 
-  useEffect(() => {
-    // No cleanup needed for now
-  }, []);
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleCloseDescriptionModal = () => {
+    setShowDescriptionModal(false);
+  };
+
+  const handleSaveDescription = () => {
+    localStorage.setItem(localStorageDescriptionKey, description);
+    setShowDescriptionModal(false);
+  };
 
   return (
     <div>
@@ -76,8 +95,14 @@ const Profile = () => {
           <Button variant="primary" onClick={handleChooseFileClick}>
             Change Profile Picture
           </Button>
-          <p>Name: {userData ? userData.username : ''}</p>
-          <p>Info/Description: </p>
+          <p>Name: {userData ? userData.username : ""}</p>
+          <p>Description: {description}</p>
+            <Button
+              className="add-description-button"
+              onClick={() => setShowDescriptionModal(true)}
+            >
+              Edit Description
+            </Button>
         </div>
         <p>Questions: </p>
         {loading ? (
@@ -86,7 +111,7 @@ const Profile = () => {
           <p>{error}</p>
         ) : userQuestions ? (
           <ul>
-            {userQuestions.map(question => (
+            {userQuestions.map((question) => (
               <li key={question.id}>
                 <Link to={`/questions/${question.id}`}>{question.content}</Link>
               </li>
@@ -98,6 +123,28 @@ const Profile = () => {
         <p>Answers: </p>
       </Container>
       <Footer />
+
+      <Modal show={showDescriptionModal} onHide={handleCloseDescriptionModal}>
+        <Modal.Header >
+          <Modal.Title>Add Description</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <textarea
+            value={description}
+            onChange={handleDescriptionChange}
+            placeholder="Write your description here..."
+            className="description-textarea"
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDescriptionModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSaveDescription}>
+            Save Description
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

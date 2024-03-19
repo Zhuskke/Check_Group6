@@ -7,7 +7,7 @@ function Footer() {
       <Container id="footer" className="d-flex align-items-end" style={{ overflow: 'hidden'}}>
         <Row>
           <Col className="footerText py-3" id="footer-text">
-            Copyright &copy; 2023. Check Learning Platform. All
+            Copyright &copy; 2024. Check Learning Platform. All
             Rights Reserved.
           </Col>
         </Row>
