@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { askQuestion } from "../actions/questionActions";
-import HeaderQuestion from "../components/HeaderQuestion"
+import HeaderQuestion from "../components/HeaderQuestion";
 
 const AskQuestionScreen = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [pointsSpent, setPointsSpent] = useState(10); // Default points spent
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -16,14 +17,14 @@ const AskQuestionScreen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(askQuestion(title, content));
+    dispatch(askQuestion(title, content, pointsSpent)); 
     setTitle("");
     setContent("");
   };
 
   return (
     <div>
-    <HeaderQuestion/>
+      <HeaderQuestion />
       {error && <p>Error: {error}</p>}
       {success && <p>Question posted successfully!</p>}
       <form className="question-container" onSubmit={handleSubmit}>
@@ -32,8 +33,15 @@ const AskQuestionScreen = () => {
           onChange={(e) => setContent(e.target.value)}
           required
           placeholder="Type your question here..."
-          id='question-field'
+          id="question-field"
         />
+        <select value={pointsSpent} onChange={(e) => setPointsSpent(parseInt(e.target.value))}>
+          <option value={10}>10 points</option>
+          <option value={20}>20 points</option>
+          <option value={30}>30 points</option>
+          <option value={40}>40 points</option>
+          <option value={50}>50 points</option>
+        </select>
         <input id="submit-btn" type="submit" disabled={loading} value="Submit" />
       </form>
     </div>
@@ -41,10 +49,3 @@ const AskQuestionScreen = () => {
 };
 
 export default AskQuestionScreen;
-
-// <div>
-// <form className="question-container" onSubmit={handleSubmit}>
-//   <textarea value={content} onChange={(e) => setContent(e.target.value)} required placeholder="Type your question here..." />
-//   <input type="submit" disabled={loading} value="Submit"/>
-// </form>
-// </div>

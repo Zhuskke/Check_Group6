@@ -15,9 +15,11 @@ import {
   USER_QUESTIONS_REQUEST,
   USER_QUESTIONS_SUCCESS,
   USER_QUESTIONS_FAIL,
+  UPDATE_USER_POINTS,
+  POINTS_REQUIRED_TO_POST,
 } from "../constants/questionConstants";
 
-export const askQuestion = (title, content) => async (dispatch, getState) => {
+export const askQuestion = (title, content, points_spent) => async (dispatch, getState) => {
   try {
     dispatch({ type: ASK_QUESTION_REQUEST });
     
@@ -46,8 +48,8 @@ export const askQuestion = (title, content) => async (dispatch, getState) => {
     
     const { data } = await axios.post(
       "/api/questions/",
-      { title, content },
-      postDataConfig // Use postDataConfig for POST request
+      { title, content, points_spent }, // Include points_spent
+      postDataConfig
     );
     
     dispatch({
@@ -64,6 +66,8 @@ export const askQuestion = (title, content) => async (dispatch, getState) => {
     });
   }
 };
+
+
 
 export const listQuestions = () => async (dispatch) => {
   try {

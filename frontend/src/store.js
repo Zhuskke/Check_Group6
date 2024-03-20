@@ -32,6 +32,8 @@ import {
   getUploadedImagesCalculusReducer,
 } from "./reducers/subjectReducers";
 
+import {userPointsReducer} from './reducers/pointsReducers';
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -56,6 +58,7 @@ const reducer = combineReducers({
   uploadImage: uploadImageReducer,
   getUploadedImages: getUploadedImagesReducer,
   userDescriptionUpdate: userDescriptionUpdateReducer,
+  userPoints: userPointsReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

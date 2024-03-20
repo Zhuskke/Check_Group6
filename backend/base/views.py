@@ -6,12 +6,13 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from .serializers import UserSerializer, UserSerializerWithToken
 from django.contrib.auth.hashers import make_password
-from rest_framework import status, viewsets, generics
+from rest_framework import status, viewsets, generics, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
 from django.db.models import Q
+from rest_framework.views import APIView
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -47,17 +48,18 @@ def registerUser(request):
     data = request.data
     try:
         user = User.objects.create(
-            username = data['username'],
-            email = data['email'],
-            password = make_password(data['password'])
+            username=data['username'],
+            email=data['email'],
+            password=make_password(data['password'])
         )
+        UserProfile.objects.create(user=user)
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
         message = {'detail': 'User with this email already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
     
-   
+
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
@@ -76,14 +78,23 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         else:
             return Response({'error': 'No profile picture provided.'}, status=400)
 
+from rest_framework.exceptions import PermissionDenied
+
 class QuestionListCreate(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        # Associate the currently logged-in user with the question being created
-        serializer.save(user=self.request.user)
+        user = self.request.user
+        points_spent = int(self.request.data.get('points_spent', 0))
+        profile = UserProfile.objects.get(user=user)
+        if profile.points >= points_spent:
+            serializer.save(user=user, points_spent=points_spent)
+            profile.points -= points_spent
+            profile.save()
+        else:
+            raise serializers.ValidationError("Insufficient points")
 
 @api_view(['DELETE'])
 def delete_question(request, pk):
@@ -134,3 +145,11 @@ def get_user_questions(request, user_id):
     serializer = QuestionSerializer(questions, many=True)
     return Response(serializer.data)
 
+
+class UserPointsView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+        points = user_profile.points
+        return Response({'points': points})

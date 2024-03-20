@@ -1,13 +1,17 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'; // Import useSelector
 import { logout } from '../actions/userActions';
 import logo from '../images/logocheck.png';
 
 const HeaderProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Retrieve user points from Redux store
+  const userPoints = useSelector((state) => state.userPoints);
+  const { points } = userPoints;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -30,6 +34,7 @@ const HeaderProfile = () => {
           <Nav className="me-auto">
           </Nav>
           <Nav>
+            <Nav.Link>{`Points: ${points}`}</Nav.Link>
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
