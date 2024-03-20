@@ -122,6 +122,8 @@ def searchQuestions(request):
     else:
         return Response({'message': 'No search term provided'}, status=status.HTTP_400_BAD_REQUEST)
 
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def upload_image(request):

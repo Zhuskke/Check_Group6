@@ -27,9 +27,14 @@ const HeaderUser = () => {
   };
 
   const handleSearch = (event) => {
-      event.preventDefault();
-      navigate(`/search?q=${searchTerm}`);
-  };
+    event.preventDefault();
+    if (searchTerm.trim() !== '') {
+        navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
+    } else {
+        // Handle empty search term
+        console.log("Please enter a search term");
+    }
+};
 
 
     return (
