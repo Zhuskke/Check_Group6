@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SubjectBar from '../components/SubjectBar';
 
 function MathScreen() {
   const [uploadedImageMath, setUploadedImageMath] = useState(localStorage.getItem('uploadedImageMath') || null);
@@ -57,6 +58,7 @@ function MathScreen() {
           <button onClick={handleSignUp}>Sign up</button>
         </div>
       )}
+      <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
       <h1>Math</h1>
       {userInfo && (
         <div>

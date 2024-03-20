@@ -185,10 +185,10 @@ html, body{
   }
 
   .subject {
-    font-size: 1.2em; /* adjust the font size of the text */
+    font-size: 1.2em; /* subject bar adjust the font size of the text */
   }
 
-  .subject img { /*makes the subject images same size */
+  .subject img { /*makes the subject bar images same size */
     width: auto; 
     height: 2em; 
     margin-right: 5px; 

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SubjectBar from '../components/SubjectBar';
 
 function ScienceScreen() {
   const [uploadedImageScience, setUploadedImageScience] = useState(localStorage.getItem('uploadedImageScience') || null);
@@ -57,6 +58,7 @@ function ScienceScreen() {
           <button onClick={handleSignUp}>Sign up</button>
         </div>
       )}
+      <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
       <h1>Science</h1>
       {userInfo && (
         <div>

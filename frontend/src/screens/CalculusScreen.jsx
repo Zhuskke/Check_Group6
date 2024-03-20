@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SubjectBar from '../components/SubjectBar';
+import Worksheet from '../components/Worksheet';
 
 function CalculusScreen() {
   const [uploadedImageCalculus, setUploadedImageCalculus] = useState(localStorage.getItem('uploadedImageCalculus') || null);
@@ -57,6 +59,7 @@ function CalculusScreen() {
           <button onClick={handleSignUp}>Sign up</button>
         </div>
       )}
+      <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
       <h1>Calculus</h1>
       {userInfo && (
         <div>
@@ -74,6 +77,7 @@ function CalculusScreen() {
       )}
       {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
       {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
+      <Worksheet /> {/*try only to see*/}
       <Footer />
     </div>
   );
