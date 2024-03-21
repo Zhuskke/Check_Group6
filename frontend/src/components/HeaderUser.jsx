@@ -4,12 +4,9 @@ import logo from '../images/logocheck.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/userActions';
-<<<<<<< Updated upstream
 import { getUserPoints } from '../actions/pointsActions';
-=======
 import '../designs/Navbar.css'
 
->>>>>>> Stashed changes
 
 const HeaderUser = () => {
   const [searchTerm, setSearchTerm] = useState('');

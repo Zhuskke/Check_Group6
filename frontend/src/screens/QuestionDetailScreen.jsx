@@ -65,19 +65,6 @@ const QuestionDetail = () => {
   const username = users[question.user] || '';
 
   return (
-<<<<<<< Updated upstream
-    <>
-      <HeaderUser />
-      <div>
-        <h2>{question.title}</h2>
-        <p>{question.content}</p>
-        <p><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
-        {/* Display other details of the question */}
-        <p><strong>Posted By:</strong> {username}</p>
-        {/* Show delete button only if the logged-in user is the author */}
-       <button onClick={() => deleteHandler(question.id)}>Delete</button>
-      </div>
-=======
     <><HeaderUser/>
     <div id='questiondetailbg'>
     <div id='questiondetail-container'>
@@ -109,7 +96,7 @@ const QuestionDetail = () => {
       </div>
     </div>
     </div>
->>>>>>> Stashed changes
+    <button onClick={() => deleteHandler(question.id)}>Delete</button>
     </>
   );
 };

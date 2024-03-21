@@ -2,16 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
-<<<<<<< Updated upstream
 import { Container, Button, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { fetchUserQuestions } from "../actions/questionActions";
-=======
-import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { fetchUserQuestions } from '../actions/questionActions'; // Import the action creator
 import '../designs/Profile.css'
->>>>>>> Stashed changes
 
 const Profile = () => {
   const defaultProfilePicture =

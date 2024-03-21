@@ -5,11 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
 import { useNavigate } from "react-router-dom";
 import HeaderRegister from "../components/HeaderRegister";
-<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
-=======
 import '../designs/LoginScreen.css'
->>>>>>> Stashed changes
 
 function LoginScreen() {
   const [username, setUsername] = useState("");
