@@ -15,7 +15,7 @@ import {
   questionDetailReducer,
   searchReducer,
   userQuestionsReducer,
-
+  deleteQuestionReducer,
 } from "./reducers/questionReducers";
 import {
   uploadImageEnglishReducer,
@@ -59,6 +59,7 @@ const reducer = combineReducers({
   getUploadedImages: getUploadedImagesReducer,
   userDescriptionUpdate: userDescriptionUpdateReducer,
   userPoints: userPointsReducer,
+  deleteQuestion: deleteQuestionReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

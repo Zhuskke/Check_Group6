@@ -155,3 +155,12 @@ class UserPointsView(APIView):
         user_profile = UserProfile.objects.get(user=request.user)
         points = user_profile.points
         return Response({'points': points})
+    
+@api_view(['DELETE'])
+def delete_question(request, pk):
+    try:
+        question = Question.objects.get(pk=pk)
+        question.delete()
+        return Response({'message': 'Question deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    except Question.DoesNotExist:
+        return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)

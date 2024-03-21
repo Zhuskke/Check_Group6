@@ -14,6 +14,9 @@ import {
   USER_QUESTIONS_REQUEST,
   USER_QUESTIONS_SUCCESS,
   USER_QUESTIONS_FAIL,
+  DELETE_QUESTION_REQUEST,
+  DELETE_QUESTION_SUCCESS,
+  DELETE_QUESTION_FAIL,
 } from "../constants/questionConstants";
 
 const initialState = {
@@ -94,6 +97,19 @@ export const questionListReducer = (state = { questions: [] }, action) => {
       case USER_QUESTIONS_SUCCESS:
         return { loading: false, userQuestions: action.payload };
       case USER_QUESTIONS_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  export const deleteQuestionReducer = (state = {}, action) => {
+    switch (action.type) {
+      case DELETE_QUESTION_REQUEST:
+        return { loading: true };
+      case DELETE_QUESTION_SUCCESS:
+        return { loading: false, success: true };
+      case DELETE_QUESTION_FAIL:
         return { loading: false, error: action.payload };
       default:
         return state;

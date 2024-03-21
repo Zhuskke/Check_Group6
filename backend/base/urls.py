@@ -22,6 +22,7 @@ urlpatterns = [
     path('users/uploaded-images/', get_uploaded_images, name='get-uploaded-images'),
     path('users/<int:user_id>/questions/', views.get_user_questions, name='user-questions'),
     path('user-points/', views.UserPointsView.as_view(), name='user-points'),
+    path('delete-question/<int:pk>/', views.delete_question, name='delete-question'),
     # path('users/update-description/', views.update_user_description, name='update-user-description'),
 ]
 

@@ -15,6 +15,9 @@ import {
   USER_QUESTIONS_REQUEST,
   USER_QUESTIONS_SUCCESS,
   USER_QUESTIONS_FAIL,
+  DELETE_QUESTION_REQUEST,
+  DELETE_QUESTION_SUCCESS,
+  DELETE_QUESTION_FAIL,
   UPDATE_USER_POINTS,
   POINTS_REQUIRED_TO_POST,
 } from "../constants/questionConstants";
@@ -152,6 +155,33 @@ export const fetchUserQuestions = (userId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_QUESTIONS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const deleteQuestion = (questionId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: DELETE_QUESTION_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/delete-question/${questionId}/`, config);
+
+    dispatch({ type: DELETE_QUESTION_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: DELETE_QUESTION_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
