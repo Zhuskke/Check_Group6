@@ -1,0 +1,25 @@
+#bgimg{
+    background: #84fab0;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    height: 63rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  #cardcolor{
+    background-color: bisque; 
+    height: 29rem;
+    width: 34rem;
+  }
+  
+  #loginbutton{
+    background-color: brown;
+  }
+  
+  #form{
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }

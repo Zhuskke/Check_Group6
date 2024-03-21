@@ -1,0 +1,43 @@
+#section-1{
+    background-color: #B2D8D8;
+    height: 60rem;
+  }
+  
+  #slogan-container { /*background of homescreen*/
+    min-height: 70vh;
+    padding-right: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .title { /* the title of homescreen */
+    padding-left: 12rem;
+    font-size: 8.75rem;
+    margin-right: 1.875rem;
+    font-family: 'Russo One', sans-serif;
+      font-weight: 500; 
+  }
+  
+  .title-2 { /* the title of homescreen */
+    padding-left: 12rem;
+    font-size: 1.875rem;
+    margin-right: 1.875rem;
+    font-family: 'Russo One', sans-serif;
+      font-weight: 200;
+  }
+
+  p {
+    color: #555;
+  }
+
+  .subject {
+    font-size: 1.2em; /* adjust the font size of the text */
+  }
+
+  .subject img { /*makes the subject images same size */
+    width: auto; 
+    height: 2em; 
+    margin-right: 5px; 
+  }
+  

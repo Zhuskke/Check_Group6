@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { useDispatch, useSelector } from 'react-redux'; // Import useSelector
 import { logout } from '../actions/userActions';
 import logo from '../images/logocheck.png';
+import '../designs/Navbar.css'
+
 
 const HeaderProfile = () => {
   const dispatch = useDispatch();

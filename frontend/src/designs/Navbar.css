@@ -1,0 +1,25 @@
+#navbar{
+    background-color: #B2D8D8;
+  }
+  
+  #searchbar{
+    width: 45rem;
+    background-color: #B2D8D8;
+    font-style: black;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  #navbarbox{
+    background-color: white;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  
+    -webkit-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
+    -moz-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
+    box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
+  }

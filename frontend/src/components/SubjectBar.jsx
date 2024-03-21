@@ -7,6 +7,7 @@ import historyLogo from '../images/history.png';
 import scienceLogo from '../images/science.png';
 import physicsLogo from '../images/physics.png';
 import calculusLogo from '../images/calculus.png';
+import '../designs/Subjectbar.css'
 
 const SubjectBar = () => {
   return (

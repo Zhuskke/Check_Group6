@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navbar, Container, Nav, Form, FormControl } from 'react-bootstrap';
 import logo from '../images/logocheck.png';
+import '../designs/Navbar.css'
+
 
 const HeaderRegister = () => {
   const handleSearch = (event) => {

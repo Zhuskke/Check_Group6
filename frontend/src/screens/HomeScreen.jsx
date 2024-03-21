@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import '../designs/HomeScreen.css'
 
 function HomeScreen() {
   const [loading, setLoading] = useState(true); 

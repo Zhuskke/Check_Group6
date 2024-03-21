@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import '../designs/Questionbox.css'
 
 function QuestionBox() {
   return (

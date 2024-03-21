@@ -4,6 +4,7 @@ import logo from '../images/logocheck.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
+import '../designs/Navbar.css'
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');

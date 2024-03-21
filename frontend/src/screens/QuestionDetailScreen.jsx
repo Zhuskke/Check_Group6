@@ -6,6 +6,8 @@ import Message from '../components/Message';
 import { fetchQuestionDetail, deleteQuestion  } from '../actions/questionActions';
 import { fetchUser } from '../actions/userActions';
 import HeaderUser from '../components/HeaderUser';
+import Footer from '../components/Footer'
+import '../designs/QuestionDetail.css'
 
 
 const QuestionDetail = () => {
@@ -63,6 +65,7 @@ const QuestionDetail = () => {
   const username = users[question.user] || '';
 
   return (
+<<<<<<< Updated upstream
     <>
       <HeaderUser />
       <div>
@@ -74,6 +77,39 @@ const QuestionDetail = () => {
         {/* Show delete button only if the logged-in user is the author */}
        <button onClick={() => deleteHandler(question.id)}>Delete</button>
       </div>
+=======
+    <><HeaderUser/>
+    <div id='questiondetailbg'>
+    <div id='questiondetail-container'>
+      <div className="profile-picture-container">
+
+          <label htmlFor="profile-image-input">
+            <img
+              src={'https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg'}
+              alt="Profile"
+              className="questiondetail-profile-picture"
+            />
+          </label>
+
+          <div>
+          <p id='questiondetail-info'><strong>Posted By:</strong> {username}</p>
+          <p id='questiondetail-info'><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
+          </div>
+
+      </div>
+      <div className='line'></div>
+
+      <h2>{question.title}</h2>
+      <h3 id='questiondetail-content'><strong><p>{question.content}</p></strong></h3>
+      {/* Display other details of the question */}
+      <div className='line'></div>
+
+      <div>
+        <input id='answer-area' placeholder='Answer Question?'></input>
+      </div>
+    </div>
+    </div>
+>>>>>>> Stashed changes
     </>
   );
 };
