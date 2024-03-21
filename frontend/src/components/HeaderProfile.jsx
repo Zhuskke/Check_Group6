@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { useDispatch, useSelector } from 'react-redux'; // Import useSelector
 import { logout } from '../actions/userActions';
 import logo from '../images/logocheck.png';
 import '../designs/Navbar.css'
+import { getUserPoints } from '../actions/pointsActions';
 
 
 const HeaderProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // Retrieve user points from Redux store
   const userPoints = useSelector((state) => state.userPoints);
   const { points } = userPoints;
+
+  useEffect(() => {
+    dispatch(getUserPoints());
+  }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(logout());

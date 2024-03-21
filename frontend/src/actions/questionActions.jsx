@@ -18,8 +18,6 @@ import {
   DELETE_QUESTION_REQUEST,
   DELETE_QUESTION_SUCCESS,
   DELETE_QUESTION_FAIL,
-  UPDATE_USER_POINTS,
-  POINTS_REQUIRED_TO_POST,
 } from "../constants/questionConstants";
 
 export const askQuestion = (title, content, points_spent) => async (dispatch, getState) => {
