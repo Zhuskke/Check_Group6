@@ -23,7 +23,8 @@ urlpatterns = [
     path('users/<int:user_id>/questions/', views.get_user_questions, name='user-questions'),
     path('user-points/', views.UserPointsView.as_view(), name='user-points'),
     path('delete-question/<int:pk>/', views.delete_question, name='delete-question'),
-    # path('users/update-description/', views.update_user_description, name='update-user-description'),
+    path('user-description/', views.get_user_description, name='get-user-description'),
+    path('update-description/', views.update_user_description, name='update-user-description'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

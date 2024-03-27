@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
 import { Container, Button, Modal } from "react-bootstrap";
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import { fetchUserQuestions } from '../actions/questionActions'; // Import the action creator
+import { Link } from 'react-router-dom';
+import { fetchUserQuestions } from '../actions/questionActions';
+import { updateUserDescription, fetchUserDescription } from '../actions/userActions'; // Import the updateUserDescription action
 import '../designs/Profile.css'
 
 const Profile = () => {
@@ -17,30 +18,23 @@ const Profile = () => {
   const userData = useSelector((state) => state.userLogin.userInfo);
   const userQuestionsState = useSelector((state) => state.userQuestions);
   const { loading, error, userQuestions } = userQuestionsState;
+  const userDescriptionState = useSelector((state) => state.userDescription); // Get user description from Redux state
+  const { description: userDescription } = userDescriptionState;
+  
+  const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
+  const [description, setDescription] = useState(""); // Description state for local use
+  const [showDescriptionModal, setShowDescriptionModal] = useState(false);
 
   useEffect(() => {
     if (userData) {
       dispatch(fetchUserQuestions(userData.id));
+      dispatch(fetchUserDescription());
     }
   }, [userData, dispatch]);
 
-  useEffect(() => {
-    if (userData) {
-      const storedProfilePicture = localStorage.getItem(
-        `${localStorageKey}-${userData.id}`
-      );
-      setProfilePicture(storedProfilePicture || defaultProfilePicture);
-    }
-  }, [userData]);
-
-  const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
-  const [description, setDescription] = useState("");
-  const [showDescriptionModal, setShowDescriptionModal] = useState(false);
-
-  useEffect(() => {
-    const storedDescription = localStorage.getItem(localStorageDescriptionKey);
-    setDescription(storedDescription || "");
-  }, []);
+useEffect(() => {
+  setDescription(userDescription || ""); // Update 'description' state with user description
+}, [userDescription]);
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -70,12 +64,18 @@ const Profile = () => {
     setDescription(event.target.value);
   };
 
+  const handleEditDescription = () => {
+    setShowDescriptionModal(true);
+  };
+
   const handleCloseDescriptionModal = () => {
     setShowDescriptionModal(false);
   };
 
-  const handleSaveDescription = () => {
-    localStorage.setItem(localStorageDescriptionKey, description);
+  const handleSaveDescription = async () => {
+    await dispatch(updateUserDescription(description)); // Dispatch action to update user description
+    localStorage.setItem(localStorageDescriptionKey, description); // Set local storage after updating Redux store
+    dispatch(fetchUserDescription()); // Fetch the updated description from the server
     setShowDescriptionModal(false);
   };
 
@@ -107,8 +107,8 @@ const Profile = () => {
           <p>Name: {userData ? userData.username : ""}</p>
           <p>Description: {description}</p>
           <Button
-            className="add-description-button"
-            onClick={() => setShowDescriptionModal(true)}
+            className="edit-description-button"
+            onClick={handleEditDescription}
           >
             Edit Description
           </Button>

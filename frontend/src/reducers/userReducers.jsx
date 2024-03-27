@@ -18,6 +18,9 @@ import {
     UPDATE_USER_DESCRIPTION_REQUEST,
     UPDATE_USER_DESCRIPTION_SUCCESS,
     UPDATE_USER_DESCRIPTION_FAIL,
+    FETCH_USER_DESCRIPTION_REQUEST,
+    FETCH_USER_DESCRIPTION_SUCCESS,
+    FETCH_USER_DESCRIPTION_FAIL,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -93,16 +96,18 @@ export const uploadImageReducer = (state = { loading: false, error: null, imageU
     }
   };
 
-  export const userDescriptionUpdateReducer = (state = {}, action) => {
+  export const userDescriptionReducer = (state = { loading: false, description: '', error: null }, action) => {
     switch (action.type) {
+      case FETCH_USER_DESCRIPTION_REQUEST:
       case UPDATE_USER_DESCRIPTION_REQUEST:
-        return { loading: true };
+        return { ...state, loading: true, error: null };
+      case FETCH_USER_DESCRIPTION_SUCCESS:
       case UPDATE_USER_DESCRIPTION_SUCCESS:
-        return { loading: false, success: action.payload };
+        return { ...state, loading: false, description: action.payload, error: null };
+      case FETCH_USER_DESCRIPTION_FAIL:
       case UPDATE_USER_DESCRIPTION_FAIL:
-        return { loading: false, error: action.payload };
+        return { ...state, loading: false, error: action.payload };
       default:
         return state;
     }
   };
-  

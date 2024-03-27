@@ -19,6 +19,9 @@ import {
     UPDATE_USER_DESCRIPTION_REQUEST,
     UPDATE_USER_DESCRIPTION_SUCCESS,
     UPDATE_USER_DESCRIPTION_FAIL,
+    FETCH_USER_DESCRIPTION_REQUEST,
+    FETCH_USER_DESCRIPTION_SUCCESS,
+    FETCH_USER_DESCRIPTION_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -89,6 +92,7 @@ export const register = (username, email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('userDescription');
     dispatch({ type: USER_LOGOUT });
 };
 
@@ -173,38 +177,45 @@ export const uploadImage = (image) => async (dispatch, getState) => {
     }
   };
 
+  export const fetchUserDescription = () => async (dispatch, getState) => {
+    try {
+      dispatch({ type: FETCH_USER_DESCRIPTION_REQUEST });
+  
+      const userInfo = getState().userLogin.userInfo;
+      const token = userInfo ? userInfo.token : null;
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+  
+      const { data } = await axios.get('/api/user-description/', config);
+  
+      dispatch({ type: FETCH_USER_DESCRIPTION_SUCCESS, payload: data.description });
+    } catch (error) {
+      dispatch({ type: FETCH_USER_DESCRIPTION_FAIL, payload: error.message });
+    }
+  };
+  
   export const updateUserDescription = (description) => async (dispatch, getState) => {
     try {
       dispatch({ type: UPDATE_USER_DESCRIPTION_REQUEST });
   
-      const {
-        userLogin: { userInfo }
-      } = getState();
+      const userInfo = getState().userLogin.userInfo;
+      const token = userInfo ? userInfo.token : null;
   
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`
+          Authorization: `Bearer ${token}`
         }
       };
   
-      const { data } = await axios.post(
-        '/api/users/update-description/',
-        { description },
-        config
-      );
+      const { data } = await axios.put('/api/update-description/', { description }, config);
   
-      dispatch({
-        type: UPDATE_USER_DESCRIPTION_SUCCESS,
-        payload: data.success
-      });
+      dispatch({ type: UPDATE_USER_DESCRIPTION_SUCCESS, payload: data.description });
     } catch (error) {
-      dispatch({
-        type: UPDATE_USER_DESCRIPTION_FAIL,
-        payload:
-          error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message
-      });
+      dispatch({ type: UPDATE_USER_DESCRIPTION_FAIL, payload: error.message });
     }
   };

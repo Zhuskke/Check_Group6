@@ -39,7 +39,7 @@ class UserSerializerWithToken(UserSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['profile_picture']
+        fields = '__all__'
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:

@@ -5,6 +5,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='default_profile_picture.jpg')
     points = models.IntegerField(default=100)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.description
 
 
 class Question(models.Model):

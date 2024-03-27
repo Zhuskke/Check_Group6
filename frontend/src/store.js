@@ -6,7 +6,7 @@ import {
   userFetchReducer,
   uploadImageReducer,
   getUploadedImagesReducer,
-  userDescriptionUpdateReducer,
+  userDescriptionReducer,
 } from "./reducers/userReducers";
 import { combineReducers } from "redux";
 import {
@@ -57,9 +57,9 @@ const reducer = combineReducers({
   getUploadedImagesCalculus: getUploadedImagesCalculusReducer,
   uploadImage: uploadImageReducer,
   getUploadedImages: getUploadedImagesReducer,
-  userDescriptionUpdate: userDescriptionUpdateReducer,
   userPoints: userPointsReducer,
   deleteQuestion: deleteQuestionReducer,
+  userDescription: userDescriptionReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

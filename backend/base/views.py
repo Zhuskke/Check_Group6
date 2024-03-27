@@ -169,3 +169,19 @@ def delete_question(request, pk):
         return Response({'message': 'Question deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
     except Question.DoesNotExist:
         return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_description(request):
+    user_profile = request.user.userprofile
+    description = user_profile.description
+    return Response({'description': description})
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_user_description(request):
+    user_profile = request.user.userprofile
+    new_description = request.data.get('description', '')
+    user_profile.description = new_description
+    user_profile.save()
+    return Response({'message': 'Description updated successfully'})
