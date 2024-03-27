@@ -95,6 +95,11 @@ class QuestionListCreate(generics.ListCreateAPIView):
             profile.save()
         else:
             raise serializers.ValidationError("Insufficient points")
+        
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
 @api_view(['DELETE'])
 def delete_question(request, pk):
@@ -106,7 +111,7 @@ def delete_question(request, pk):
 def get_question_details(request, pk):
     try:
         question = Question.objects.get(pk=pk)
-        serializer = QuestionSerializer(question)
+        serializer = QuestionSerializer(question, context={'request': request})
         return Response(serializer.data)
     except Question.DoesNotExist:
         return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)

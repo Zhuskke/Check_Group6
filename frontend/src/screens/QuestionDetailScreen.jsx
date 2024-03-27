@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { fetchQuestionDetail, deleteQuestion  } from '../actions/questionActions';
+import { fetchQuestionDetail, deleteQuestion } from '../actions/questionActions';
 import { fetchUser } from '../actions/userActions';
 import HeaderUser from '../components/HeaderUser';
-import Footer from '../components/Footer'
-import '../designs/QuestionDetail.css'
-
+import Footer from '../components/Footer';
+import '../designs/QuestionDetail.css';
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -25,6 +24,10 @@ const QuestionDetail = () => {
   // Retrieve user information from Redux store
   const userFetch = useSelector((state) => state.userFetch);
   const { loading: userLoading, error: userError, users } = userFetch;
+
+  // Retrieve current user information from Redux store
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     // Check if question is loaded and user data is not already fetched
@@ -64,39 +67,39 @@ const QuestionDetail = () => {
 
   const username = users[question.user] || '';
 
+  // Conditionally render delete button based on ownership
+  const showDeleteButton = userInfo && question.user === userInfo.id;
+
   return (
-    <><HeaderUser/>
-    <div id='questiondetailbg'>
-    <div id='questiondetail-container'>
-      <div className="profile-picture-container">
-
-          <label htmlFor="profile-image-input">
-            <img
-              src={'https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg'}
-              alt="Profile"
-              className="questiondetail-profile-picture"
-            />
-          </label>
-
-          <div>
-          <p id='questiondetail-info'><strong>Posted By:</strong> {username}</p>
-          <p id='questiondetail-info'><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
+    <>
+      <HeaderUser />
+      <div id='questiondetailbg'>
+        <div id='questiondetail-container'>
+          <div className="profile-picture-container">
+            <label htmlFor="profile-image-input">
+              <img
+                src={'https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg'}
+                alt="Profile"
+                className="questiondetail-profile-picture"
+              />
+            </label>
+            <div>
+              <p id='questiondetail-info'><strong>Posted By:</strong> {username}</p>
+              <p id='questiondetail-info'><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
+            </div>
           </div>
-
+          <div className='line'></div>
+          <h2>{question.title}</h2>
+          <h3 id='questiondetail-content'><strong><p>{question.content}</p></strong></h3>
+          {/* Display other details of the question */}
+          <div className='line'></div>
+          <div>
+            <input id='answer-area' placeholder='Answer Question?'></input>
+          </div>
+        </div>
       </div>
-      <div className='line'></div>
-
-      <h2>{question.title}</h2>
-      <h3 id='questiondetail-content'><strong><p>{question.content}</p></strong></h3>
-      {/* Display other details of the question */}
-      <div className='line'></div>
-
-      <div>
-        <input id='answer-area' placeholder='Answer Question?'></input>
-      </div>
-    </div>
-    </div>
-    <button onClick={() => deleteHandler(question.id)}>Delete</button>
+      {showDeleteButton && <button onClick={() => deleteHandler(question.id)}>Delete</button>}
+      <Footer />
     </>
   );
 };

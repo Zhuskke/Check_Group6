@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { askQuestion } from "../actions/questionActions";
 import HeaderQuestion from "../components/HeaderQuestion";
 
 const AskQuestionScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize useNavigate
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [pointsSpent, setPointsSpent] = useState(10); // Default points spent
@@ -21,6 +23,14 @@ const AskQuestionScreen = () => {
     setTitle("");
     setContent("");
   };
+
+  // Redirect to home screen after successful question submission
+  useEffect(() => {
+    if (success) {
+      navigate("/home"); // Redirect to home screen
+      window.location.reload(); // Reload the window
+    }
+  }, [success, navigate]);
 
   return (
     <div>

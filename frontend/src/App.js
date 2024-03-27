@@ -13,6 +13,8 @@ import CalculusScreen from './screens/CalculusScreen'
 import AskQuestionScreen from "./screens/AskQuestionScreen";
 import QuestionDetail from "./screens/QuestionDetailScreen";
 import SearchScreen from "./screens/SearchScreen";
+import SubscriptionChoiceScreen from "./screens/SubscriptionChoice";
+import OrderScreen from "./screens/OrderScreen";
 function App() {
   return (
     <Router>
@@ -31,6 +33,8 @@ function App() {
         <Route path="/ask-a-question" element={<AskQuestionScreen />} exact />
         <Route path="/questions/:id" element={<QuestionDetail />} />
         <Route path="/search" element={<SearchScreen />} />
+        <Route path="/subscription" element={<SubscriptionChoiceScreen />} />
+        <Route path="/order" element={<OrderScreen />} />
       </Routes>
     </Router>
     

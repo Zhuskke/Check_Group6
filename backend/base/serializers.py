@@ -46,6 +46,9 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = '__all__'
 
+    def get_belongs_to_current_user(self, obj):
+        request = self.context.get('request')
+        return request and obj.user == request.user
 
 class UploadedImageSerializer(serializers.ModelSerializer):
     class Meta:

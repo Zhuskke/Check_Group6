@@ -4,7 +4,7 @@ import logo from '../images/logocheck.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
-import '../designs/Navbar.css'
+import '../designs/Navbar.css';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,9 +42,10 @@ const Header = () => {
               <Button variant="outline-success" type="submit">Search</Button>
             </Form>
           </Nav>
-          <Nav>
+          <Nav className="mr-auto"> {/* Aligns login link and button to the left */}
+            <Button variant="primary" as={Link} to="/subscription">Join now</Button> {/* New button */}
             <Nav.Link href="login">Login</Nav.Link>
-            <Nav.Link href="register">Register</Nav.Link>
+            <Nav.Link href="register">Register</Nav.Link> {/* Login link */}
           </Nav>
         </Navbar.Collapse>
       </Container>
