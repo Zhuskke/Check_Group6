@@ -1,0 +1,28 @@
+.subject-container {
+    position: absolute;
+    background-color: white;
+    padding: 2rem;
+    margin-left: 5rem;
+    align-items: center;
+    justify-content: center;
+    width: 55rem;
+    height: 20rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+.upload-button {
+    background-color: #acb5b5;
+    color: black;
+    border: none;
+    padding: 0.3rem 0.5rem; /*first rem is height, second rem is length */
+    border-radius: 2rem; 
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.upload-button:hover { /*color of button when u hover the cursor */
+    background-color: #656c6c;
+}

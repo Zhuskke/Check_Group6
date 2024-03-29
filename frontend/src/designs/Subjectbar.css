@@ -9,6 +9,7 @@
     border-top-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    margin-bottom: 0.2rem;
   
     -webkit-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
     -moz-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);

@@ -1,8 +1,16 @@
 #footer-text{
-    padding-left: 2rem;
-  }
+  padding-left: 2rem;
+
+}
 
 #footerbg{
   background-color: white;
 }
 
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+}

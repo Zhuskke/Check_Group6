@@ -6,6 +6,8 @@ import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SubjectBar from '../components/SubjectBar';
+import Worksheet from '../components/Worksheet';
+import '../designs/Subject.css'
 
 function HistoryScreen() {
   const [uploadedImageHistory, setUploadedImageHistory] = useState(localStorage.getItem('uploadedImageHistory') || null);
@@ -59,6 +61,7 @@ function HistoryScreen() {
         </div>
       )}
       <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
+      <div className="subject-container">
       <h1>History</h1>
       {userInfo && (
         <div>
@@ -69,14 +72,16 @@ function HistoryScreen() {
               <img src={uploadedImageHistory} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           )}
-          <button onClick={handleUpload} disabled={!image}>
+          <button className="upload-button" onClick={handleUpload} disabled={!image}>
             Upload Image
           </button>
         </div>
       )}
       {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
       {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
-      <Footer />
+      </div>
+      {userInfo && <Worksheet subject = "History"/>}
+      <div className="footer-container"><Footer /></div>
     </div>
   );
 }

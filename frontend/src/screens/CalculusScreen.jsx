@@ -1,3 +1,4 @@
+// CalculusScreen component
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImageCalculus, getUploadedImagesCalculus } from '../actions/subjectActions';
@@ -7,6 +8,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SubjectBar from '../components/SubjectBar';
 import Worksheet from '../components/Worksheet';
+import '../designs/Subject.css'
 
 function CalculusScreen() {
   const [uploadedImageCalculus, setUploadedImageCalculus] = useState(localStorage.getItem('uploadedImageCalculus') || null);
@@ -60,26 +62,29 @@ function CalculusScreen() {
         </div>
       )}
       <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
-      <h1>Calculus</h1>
-      {userInfo && (
-        <div>
-          <input type="file" onChange={handleImageChange} />
-          {uploadedImageCalculus && (
-            <div>
-              <p>Uploaded Image Preview:</p>
-              <img src={uploadedImageCalculus} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
-            </div>
-          )}
-          <button onClick={handleUpload} disabled={!image}>
-            Upload Image
-          </button>
-        </div>
-      )}
-      {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
-      {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
-      <Worksheet /> {/*try only to see*/}
-      <Footer />
+      <div className="subject-container">
+        <h1>Calculus</h1>
+        {userInfo && (
+          <div>
+            <input type="file" onChange={handleImageChange} />
+            {uploadedImageCalculus && (
+              <div>
+                <p>Uploaded Image Preview:</p>
+                <img src={uploadedImageCalculus} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+              </div>
+            )}
+            <button className="upload-button" onClick={handleUpload} disabled={!image}>
+              Upload Image
+            </button>
+          </div>
+        )}
+        {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
+        {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
+      </div>
+      {userInfo && <Worksheet subject = "Calculus"/>}
+      <div className="footer-container"><Footer /></div>
     </div>
+  
   );
 }
 
