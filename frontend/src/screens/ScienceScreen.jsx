@@ -6,6 +6,8 @@ import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SubjectBar from '../components/SubjectBar';
+import Worksheet from '../components/Worksheet';
+import '../designs/Subject.css'
 
 function ScienceScreen() {
   const [uploadedImageScience, setUploadedImageScience] = useState(localStorage.getItem('uploadedImageScience') || null);
@@ -59,6 +61,7 @@ function ScienceScreen() {
         </div>
       )}
       <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
+      <div className="subject-container">
       <h1>Science</h1>
       {userInfo && (
         <div>
@@ -69,14 +72,16 @@ function ScienceScreen() {
               <img src={uploadedImageScience} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           )}
-          <button onClick={handleUpload} disabled={!image}>
+          <button className="upload-button" onClick={handleUpload} disabled={!image}>
             Upload Image
           </button>
         </div>
       )}
       {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
       {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
-      <Footer />
+      </div>
+      {userInfo && <Worksheet subject = "Science"/>}
+      <div className="footer-container"><Footer /></div>
     </div>
   );
 }

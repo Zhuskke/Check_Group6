@@ -6,6 +6,8 @@ import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SubjectBar from '../components/SubjectBar';
+import Worksheet from '../components/Worksheet';
+import '../designs/Subject.css'
 
 function PhysicsScreen() {
   const [uploadedImagePhysics, setUploadedImagePhysics] = useState(localStorage.getItem('uploadedImagePhysics') || null);
@@ -59,6 +61,7 @@ function PhysicsScreen() {
         </div>
       )}
       <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
+      <div className="subject-container">
       <h1>Physics</h1>
       {userInfo && (
         <div>
@@ -69,14 +72,16 @@ function PhysicsScreen() {
               <img src={uploadedImagePhysics} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           )}
-          <button onClick={handleUpload} disabled={!image}>
+          <button className="upload-button" onClick={handleUpload} disabled={!image}>
             Upload Image
           </button>
         </div>
       )}
       {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
       {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
-      <Footer />
+      </div>
+      {userInfo && <Worksheet subject = "Physics"/>}
+      <div className="footer-container"><Footer /></div>
     </div>
   );
 }

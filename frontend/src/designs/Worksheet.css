@@ -1,0 +1,54 @@
+.worksheet-container {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-15.4%); 
+    background-color: white;
+    padding: 2rem;
+    width: 30rem;
+    height: 20rem;
+    border-radius: 1rem;
+    margin-right: 5rem;
+  }
+
+.worksheet-title { /* Subject worksheet fontszszs ex. Calculus Worksheets */
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+  
+
+.worksheet-content {
+    width: 20rem;
+    margin-right: 7rem; 
+}
+
+
+.worksheet-list { /*if removed the pdf list will have bullet list */
+    list-style-type: none;
+    padding: 0;
+}
+
+.worksheet-item {
+    margin-bottom: 2rem; /*margin between pdfs */
+}
+
+.worksheet-name { /* name of pdf files ex. Differentiation Worksheet */
+    margin-right: 1rem; 
+    font-weight: bold;
+    color: black;
+    font-size: 1rem;
+}
+
+.worksheet-button {
+    background-color: #70bbbb;
+    color: black;
+    border: none;
+    padding: 0.3rem 0.5rem; /*first rem is height, second rem is length */
+    border-radius: 2rem; 
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.worksheet-button:hover { /*color of button when u hover the cursor */
+    background-color: #4d9797;
+}
