@@ -10,13 +10,13 @@ const Worksheet = ({ subject }) => {
       // Add more Calculus worksheets as needed
     ],
     Physics: [
-      { name: 'Physics Worksheet 1', url: '/path/to/physics_worksheet1.pdf' },
-      { name: 'Physics Worksheet 2', url: '/path/to/physics_worksheet2.pdf' },
+      { name: 'Acceleration Worksheet', url: '/pdfs/Physics/Acceleration Worksheet.pdf' },
+      { name: 'Torque Worksheet', url: '/pdfs/Physics/Torque Worksheet.pdf' },
       // Add more Physics worksheets as needed
     ],
     Math: [
-      { name: 'Mathematics Worksheet 1', url: '/path/to/mathematics_worksheet1.pdf' },
-      { name: 'Mathematics Worksheet 2', url: '/path/to/mathematics_worksheet2.pdf' },
+      { name: 'Algebra Worksheet', url: '/pdfs/Math/Algebra Worksheet.pdf' },
+      { name: 'Trigonometry Worksheet', url: '/pdfs/Math/Trigonometry Worksheet.pdf' },
       // Add more Mathematics worksheets as needed
     ],
     English: [
@@ -25,8 +25,8 @@ const Worksheet = ({ subject }) => {
       // Add more English worksheets as needed
     ],
     Science: [
-      { name: 'Science Worksheet 1', url: '/path/to/science_worksheet1.pdf' },
-      { name: 'Science Worksheet 2', url: '/path/to/science_worksheet2.pdf' },
+      { name: 'Animal Cell Worksheet', url: '/pdfs/Science/Animal Cell Worksheet.pdf' },
+      { name: 'Chemistry Worksheet', url: '/pdfs/Science/Chemistry Worksheet.pdf' },
       // Add more Science worksheets as needed
     ],
     History: [
