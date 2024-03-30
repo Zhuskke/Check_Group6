@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Question)
 admin.site.register(UploadedImage)
 admin.site.register(UserProfile)
+admin.site.register(TopUpPackage)

@@ -32,7 +32,12 @@ import {
   getUploadedImagesCalculusReducer,
 } from "./reducers/subjectReducers";
 
-import {userPointsReducer} from './reducers/pointsReducers';
+import {
+  userPointsReducer,
+  topUpPackagesReducer,
+  purchasePointsReducer,
+  packageReducer,
+} from "./reducers/pointsReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -60,6 +65,9 @@ const reducer = combineReducers({
   userPoints: userPointsReducer,
   deleteQuestion: deleteQuestionReducer,
   userDescription: userDescriptionReducer,
+  topUpPackages: topUpPackagesReducer,
+  purchasePoints: purchasePointsReducer,
+  package: packageReducer
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

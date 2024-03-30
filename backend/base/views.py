@@ -13,6 +13,7 @@ from .models import *
 from .serializers import *
 from django.db.models import Q
 from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -192,3 +193,33 @@ def update_user_description(request):
     user_profile.description = new_description
     user_profile.save()
     return Response({'message': 'Description updated successfully'})
+
+@api_view(['GET'])
+def get_top_up_packages(request):
+    packages = TopUpPackage.objects.all()
+    serializer = TopUpPackageSerializer(packages, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def purchase_points(request, package_id):  # Accept 'package_id' as an argument
+    if package_id:
+        try:
+            package = TopUpPackage.objects.get(pk=package_id)
+            user_profile = request.user.userprofile
+            user_profile.points += package.points
+            user_profile.save()
+            return Response({'message': 'Points added successfully'})
+        except TopUpPackage.DoesNotExist:
+            return Response({'error': 'Point package not found'}, status=404)
+    else:
+        return Response({'error': 'Package ID not provided'}, status=400)
+
+@api_view(['GET'])
+def package_detail(request, package_id):
+    try:
+        package = TopUpPackage.objects.get(id=package_id)
+        serializer = TopUpPackageSerializer(package)
+        return Response(serializer.data)
+    except TopUpPackage.DoesNotExist:
+        return Response({'error': 'Package not found'}, status=404)

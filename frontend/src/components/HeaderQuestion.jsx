@@ -39,7 +39,7 @@ const HeaderProfile = () => {
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link>{`Points: ${points}`}</Nav.Link>
+            <Nav.Link as={Link} to="/topup">{`Points: ${points}`}</Nav.Link>
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>

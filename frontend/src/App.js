@@ -15,6 +15,8 @@ import QuestionDetail from "./screens/QuestionDetailScreen";
 import SearchScreen from "./screens/SearchScreen";
 import SubscriptionChoiceScreen from "./screens/SubscriptionChoice";
 import OrderScreen from "./screens/OrderScreen";
+import TopUpScreen from "./screens/TopUpScreen";
+import PaymentScreen from "./screens/PaymentScreen";
 function App() {
   return (
     <Router>
@@ -35,6 +37,8 @@ function App() {
         <Route path="/search" element={<SearchScreen />} />
         <Route path="/subscription" element={<SubscriptionChoiceScreen />} />
         <Route path="/order" element={<OrderScreen />} />
+        <Route path="/topup" element={<TopUpScreen />} />
+        <Route path="/payment" element={<PaymentScreen />} />
       </Routes>
     </Router>
     

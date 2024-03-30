@@ -25,6 +25,7 @@ urlpatterns = [
     path('delete-question/<int:pk>/', views.delete_question, name='delete-question'),
     path('user-description/', views.get_user_description, name='get-user-description'),
     path('update-description/', views.update_user_description, name='update-user-description'),
+    path('top-up-packages/', views.get_top_up_packages, name='top-up'),
+    path('purchase-points/<int:package_id>/', views.purchase_points, name='purchase-points'),
+    path('package-details/<int:package_id>/', views.package_detail, name='package-detail'),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

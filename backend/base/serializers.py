@@ -64,3 +64,8 @@ class UploadedImageSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return UploadedImage.objects.create(**validated_data)
+
+class TopUpPackageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TopUpPackage
+        fields = '__all__'

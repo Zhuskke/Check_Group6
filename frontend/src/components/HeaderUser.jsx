@@ -60,7 +60,7 @@ const HeaderUser = () => {
                         </Form>
                     </Nav>
                     <Nav>
-                        <Nav.Link>{`Points: ${points}`}</Nav.Link>
+                        <Nav.Link as={Link} to="/topup">{`Points: ${points}`}</Nav.Link>
                         <Button variant="primary" as={Link} to="/subscription">Join now</Button> {/* New button */}
                         <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                         <Nav.Link as={Link} to="/ask-a-question">Ask a Question</Nav.Link>
