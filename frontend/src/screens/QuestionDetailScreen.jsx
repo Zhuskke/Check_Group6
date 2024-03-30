@@ -21,18 +21,14 @@ const QuestionDetail = () => {
   const questionDetails = useSelector((state) => state.questionDetail);
   const { loading: questionLoading, error: questionError, question } = questionDetails;
 
-  // Retrieve user information from Redux store
   const userFetch = useSelector((state) => state.userFetch);
   const { loading: userLoading, error: userError, users } = userFetch;
 
-  // Retrieve current user information from Redux store
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    // Check if question is loaded and user data is not already fetched
     if (question && question.user && !users[question.user]) {
-      console.log('Dispatching fetchUser with user ID:', question.user);
       dispatch(fetchUser(question.user));
     }
   }, [dispatch, question, users]);
@@ -44,10 +40,7 @@ const QuestionDetail = () => {
           navigate('/'); // Redirect to home page after successful deletion
         })
         .catch((error) => {
-          // Handle error if deletion fails
           console.error('Error deleting question:', error);
-          // Optionally, display a message to the user about the error
-          // For example: dispatch({ type: 'SHOW_DELETE_ERROR_MESSAGE', payload: error.message });
         });
     }
   };
@@ -60,14 +53,11 @@ const QuestionDetail = () => {
     return <Message variant='danger'>{questionError}</Message>;
   }
 
-  // Handle 404 error
   if (!question || !question.id) {
     return <Message variant='danger'>Question not found</Message>;
   }
 
   const username = users[question.user] || '';
-
-  // Conditionally render delete button based on ownership
   const showDeleteButton = userInfo && question.user === userInfo.id;
 
   return (
@@ -91,7 +81,11 @@ const QuestionDetail = () => {
           <div className='line'></div>
           <h2>{question.title}</h2>
           <h3 id='questiondetail-content'><strong><p>{question.content}</p></strong></h3>
-          {/* Display other details of the question */}
+          {question.attachment && ( // Display the image directly
+            <div className="attachment-container">
+              <img src={question.attachment} alt="Attachment" className="questiondetail-attachment" />
+            </div>
+          )}
           <div className='line'></div>
           <div>
             <input id='answer-area' placeholder='Answer Question?'></input>

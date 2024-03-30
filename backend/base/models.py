@@ -8,7 +8,10 @@ class UserProfile(models.Model):
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.description
+        if self.description:
+            return f"{self.user.username} - {self.description}"
+        else:
+            return f"{self.user.username} - No description provided"
 
 
 class Question(models.Model):
@@ -16,7 +19,8 @@ class Question(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     points_spent = models.IntegerField(default=0)
-
+    attachment = models.FileField(upload_to='uploaded_images/', null=True, blank=True)
+    
     def __str__(self):
         return self.content
 

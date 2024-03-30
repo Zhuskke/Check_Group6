@@ -20,7 +20,7 @@ import {
   DELETE_QUESTION_FAIL,
 } from "../constants/questionConstants";
 
-export const askQuestion = (title, content, points_spent) => async (dispatch, getState) => {
+export const askQuestion = (formData) => async (dispatch, getState) => {
   try {
     dispatch({ type: ASK_QUESTION_REQUEST });
     
@@ -33,25 +33,12 @@ export const askQuestion = (title, content, points_spent) => async (dispatch, ge
     const config = token
       ? {
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       : {};
-      
-    const postDataConfig = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
     
-    const { data } = await axios.post(
-      "/api/questions/",
-      { title, content, points_spent }, // Include points_spent
-      postDataConfig
-    );
+    const { data } = await axios.post("/api/questions/", formData, config);
     
     dispatch({
       type: ASK_QUESTION_SUCCESS,
@@ -67,6 +54,7 @@ export const askQuestion = (title, content, points_spent) => async (dispatch, ge
     });
   }
 };
+
 
 
 

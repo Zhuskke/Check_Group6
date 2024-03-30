@@ -52,7 +52,13 @@ def registerUser(request):
             email=data['email'],
             password=make_password(data['password'])
         )
+        # Create UserProfile instance
         UserProfile.objects.create(user=user)
+        
+        # Create Question instance if question data is provided
+        if 'question' in data:
+            Question.objects.create(user=user, content=data['question'])
+        
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
@@ -88,9 +94,10 @@ class QuestionListCreate(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         user = self.request.user
         points_spent = int(self.request.data.get('points_spent', 0))
+        attachment = self.request.data.get('attachment', None)
         profile = UserProfile.objects.get(user=user)
         if profile.points >= points_spent:
-            serializer.save(user=user, points_spent=points_spent)
+            serializer.save(user=user, points_spent=points_spent, attachment=attachment)
             profile.points -= points_spent
             profile.save()
         else:

@@ -27,14 +27,20 @@ class UserSerializer(serializers.ModelSerializer):
     
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
+    question = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', '_id', 'email', 'username', 'name', 'isAdmin', 'token']
+        fields = ['id', '_id', 'email', 'username', 'name', 'isAdmin', 'token', 'question']
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
+    def get_question(self, obj):  # Implement this method to retrieve user's question
+        question = Question.objects.filter(user=obj).last()  # Assuming you want to retrieve the last question created by the user
+        if question:
+            return question.content
+        return None
     
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +48,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class QuestionSerializer(serializers.ModelSerializer):
+    attachment = serializers.FileField(required=False)
     class Meta:
         model = Question
         fields = '__all__'

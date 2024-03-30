@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate, useLocation } from "react-router-dom";
 import { askQuestion } from "../actions/questionActions";
 import HeaderQuestion from "../components/HeaderQuestion";
 
 const AskQuestionScreen = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [pointsSpent, setPointsSpent] = useState(10); // Default points spent
+  const [pointsSpent, setPointsSpent] = useState(10);
+  const [attachment, setAttachment] = useState(null); // State for attachment
+
+  const location = useLocation(); // Initialize useLocation hook
+  const question = location.state ? location.state.question : ''; // Extract question from location state
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -19,16 +23,44 @@ const AskQuestionScreen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(askQuestion(title, content, pointsSpent)); 
+  
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('points_spent', pointsSpent);
+    
+    // Conditionally append attachment if it exists
+    if (attachment) {
+      formData.append('attachment', attachment);
+    }
+  
+    // Dispatch askQuestion action with FormData
+    dispatch(askQuestion(formData));
+    
+    // Reset form fields
     setTitle("");
     setContent("");
+    setAttachment(null);
+  };
+  
+
+  // Handle file input change
+  const handleFileChange = (e) => {
+    setAttachment(e.target.files[0]);
   };
 
-  // Redirect to home screen after successful question submission
+  useEffect(() => {
+    // Set content to question when component mounts if question is provided
+    if (question) {
+      setContent(question);
+    }
+  }, [question]); // Run the effect whenever question changes
+
   useEffect(() => {
     if (success) {
-      navigate("/home"); // Redirect to home screen
-      window.location.reload(); // Reload the window
+      navigate("/home");
+      window.location.reload();
     }
   }, [success, navigate]);
 
@@ -38,6 +70,7 @@ const AskQuestionScreen = () => {
       {error && <p>Error: {error}</p>}
       {success && <p>Question posted successfully!</p>}
       <form className="question-container" onSubmit={handleSubmit}>
+        {/* Display the received question in the textarea */}
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -52,6 +85,8 @@ const AskQuestionScreen = () => {
           <option value={40}>40 points</option>
           <option value={50}>50 points</option>
         </select>
+        {/* File input field for attachment */}
+        <input type="file" onChange={handleFileChange} />
         <input id="submit-btn" type="submit" disabled={loading} value="Submit" />
       </form>
     </div>

@@ -28,9 +28,9 @@ const initialState = {
 export const askQuestionReducer = (state = {}, action) => {
   switch (action.type) {
     case ASK_QUESTION_REQUEST:
-      return { loading: true };
+      return { loading: true, error: null };
     case ASK_QUESTION_SUCCESS:
-      return { loading: false, success: true, question: action.payload };
+      return { loading: false, success: true, question: action.payload, error: null};
     case ASK_QUESTION_FAIL:
       return { loading: false, error: action.payload };
     default:
