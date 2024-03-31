@@ -56,19 +56,12 @@ function Header({ scrollToSpecificHeight }) {
             {/* Add an empty Nav.Link to push the search bar to the center */}
             <Nav.Link></Nav.Link>
           </Nav>
-<<<<<<< Updated upstream
-          <Nav className="mr-auto"> {/* Aligns login link and button to the left */}
-            <Button variant="primary" as={Link} to="/subscription">Join now</Button> {/* New button */}
-            <Nav.Link href="login">Login</Nav.Link>
-            <Nav.Link href="register">Register</Nav.Link> {/* Login link */}
-=======
           <Nav>
             <Nav.Link href="login" role='button' id='headerbutton'>Login </Nav.Link>
             <div className='headerline'></div>
             <Nav.Link href="register" role='button' id='headerbutton'>Register</Nav.Link>
             <div className='headerline'></div>
-            <Nav.Link href="/" role='button' id='headerbuttonq'>Join Now!</Nav.Link>
->>>>>>> Stashed changes
+            <Nav.Link href="subscription" role='button' id='headerbuttonq'>Join Now!</Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>

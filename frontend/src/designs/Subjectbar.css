@@ -10,15 +10,9 @@
     border-top-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-<<<<<<< Updated upstream
-    margin-bottom: 0.2rem;
-  
-    -webkit-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
-=======
     margin-top: .5rem;
 
     /* -webkit-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
->>>>>>> Stashed changes
     -moz-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
     box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85); */
   }

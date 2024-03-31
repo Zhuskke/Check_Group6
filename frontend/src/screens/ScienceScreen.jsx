@@ -6,12 +6,8 @@ import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SubjectBar from '../components/SubjectBar';
-<<<<<<< Updated upstream
 import Worksheet from '../components/Worksheet';
-import '../designs/Subject.css'
-=======
 import '../designs/SubjectScreen.css'
->>>>>>> Stashed changes
 
 function EnglishScreen() {
   const [uploadedImageEnglish, setUploadedImageEnglish] = useState(localStorage.getItem('uploadedImageEnglish') || null);
@@ -57,58 +53,48 @@ function EnglishScreen() {
 
   return (
     <><div>
-      {userInfo ? <HeaderUser /> : <Header />}
-      <div style={{ paddingTop: '10px', paddingBottom: '5rem', backgroundColor: '#B2D8D8' }}> <SubjectBar /> </div>
+    {userInfo ? <HeaderUser /> : <Header />}
+    <div style={{ paddingTop: '10px', paddingBottom: '5rem', backgroundColor: '#B2D8D8' }}> <SubjectBar /> </div>
 
-      {!userInfo && (
-        <div id='subjectscreen-containerbg'>
-          <div id='subjectscreen-container'>
-            <p id='subjectscreentext'>You are viewing as a guest :c Sign up for a better study experience!</p>
-            <button onClick={handleSignUp} id='subjectscreenbtn'>Sign up Now!</button>
-          </div>
+    {!userInfo && (
+      <div id='subjectscreen-containerbg'>
+        <div id='subjectscreen-container'>
+          <p id='subjectscreentext'>You are viewing as a guest :c Sign up for a better study experience!</p>
+          <button onClick={handleSignUp} id='subjectscreenbtn'>Sign up Now!</button>
         </div>
-      )}
-<<<<<<< Updated upstream
-      <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
-      <div className="subject-container">
-      <h1>Science</h1>
-=======
-
-            <div id='subjectscreen-image'>
-            </div>
-
-            <div id='subjectscreen-image2'>
-            </div>
-
-            <div id='subjectscreen-image3'>
-            </div>
-
->>>>>>> Stashed changes
-      {userInfo && (
-        <div>
-          <input type="file" onChange={handleImageChange} />
-          {uploadedImageEnglish && (
-            <div>
-              <p>Uploaded Image Preview:</p>
-              <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
-            </div>
-          )}
-          <button className="upload-button" onClick={handleUpload} disabled={!image}>
-            Upload Image
-          </button>
-        </div>
-      )}
-      {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
-      {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
-<<<<<<< Updated upstream
       </div>
-      {userInfo && <Worksheet subject = "Science"/>}
-      <div className="footer-container"><Footer /></div>
-=======
->>>>>>> Stashed changes
-    </div>
-    <Footer /></>
-  );
+    )}
+
+          <div id='subjectscreen-image'>
+          </div>
+
+          <div id='subjectscreen-image2'>
+          </div>
+
+          <div id='subjectscreen-image3'>
+          </div>
+
+    {userInfo && (
+      <div>
+        <input type="file" onChange={handleImageChange} />
+        {uploadedImageEnglish && (
+          <div>
+            <p>Uploaded Image Preview:</p>
+            <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+          </div>
+        )}
+        <button onClick={handleUpload} disabled={!image}>
+          Upload Image
+        </button>
+      </div>
+    )}
+    {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
+    {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
+  </div>
+  {userInfo && <Worksheet subject = "Science"/>}
+  <Footer /></>
+);
 }
+
 
 export default EnglishScreen;

@@ -7,12 +7,8 @@ import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SubjectBar from '../components/SubjectBar';
-<<<<<<< Updated upstream
 import Worksheet from '../components/Worksheet';
-import '../designs/Subject.css'
-=======
 import '../designs/SubjectScreen.css'
->>>>>>> Stashed changes
 
 function EnglishScreen() {
   const [uploadedImageEnglish, setUploadedImageEnglish] = useState(localStorage.getItem('uploadedImageEnglish') || null);
@@ -69,32 +65,6 @@ function EnglishScreen() {
           </div>
         </div>
       )}
-<<<<<<< Updated upstream
-      <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
-      <div className="subject-container">
-        <h1>Calculus</h1>
-        {userInfo && (
-          <div>
-            <input type="file" onChange={handleImageChange} />
-            {uploadedImageCalculus && (
-              <div>
-                <p>Uploaded Image Preview:</p>
-                <img src={uploadedImageCalculus} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
-              </div>
-            )}
-            <button className="upload-button" onClick={handleUpload} disabled={!image}>
-              Upload Image
-            </button>
-          </div>
-        )}
-        {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
-        {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
-      </div>
-      {userInfo && <Worksheet subject = "Calculus"/>}
-      <div className="footer-container"><Footer /></div>
-    </div>
-  
-=======
 
             <div id='subjectscreen-image'>
             </div>
@@ -122,8 +92,8 @@ function EnglishScreen() {
       {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
       {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
     </div>
+    {userInfo && <Worksheet subject = "Calculus"/>}
     <Footer /></>
->>>>>>> Stashed changes
   );
 }
 

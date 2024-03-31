@@ -43,14 +43,6 @@ function HomeScreen() {
       ) : (
         <Row>
           <section id='section-1'>
-<<<<<<< Updated upstream
-            <div id='slogan-container'>
-              <div className="main-content">
-                <strong><h1 className="title">`SAMPLE SLOGAN TEXT!`</h1></strong>
-                <strong><h3 className="title-2">Sample Text Here :D</h3></strong>
-              </div>
-              <QuestionBox />
-=======
 
 
             <div className="main-content">
@@ -69,7 +61,6 @@ function HomeScreen() {
 
             <div>
             <GuestQuestionBox />
->>>>>>> Stashed changes
             </div>
 
             <SubjectBar />

@@ -1,6 +1,6 @@
 #subjectscreen-containerbg{
-    background-color: #B2D8D8;
-    height: 43.4rem;
+    background-color: #B2D8D8 !important;
+    height: 43.4rem !important;
 }
 
 #subjectscreen-container{
