@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
 import '../designs/Navbar.css';
 
-const Header = () => {
+function Header({ scrollToSpecificHeight }) {
+
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,15 +22,32 @@ const Header = () => {
     navigate(`/search?q=${searchTerm}`);
   };
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+  
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <Navbar expand="lg" id='navbar' collapseOnSelect className="p-3">
-      <Container id='navbarbox'>
+    <Navbar expand="lg" id='navbar' collapseOnSelect className={isScrolled ? 'navbar circular' : 'navbar p-3'}>
         <Navbar.Brand as={Link} to="/">
           <img
             src={logo}
             height="50"
             className='d-inline-block align-top'
             alt="Logo"
+            id='logo'
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,18 +55,22 @@ const Header = () => {
           <Nav className="me-auto">
             {/* Add an empty Nav.Link to push the search bar to the center */}
             <Nav.Link></Nav.Link>
-            <Form inline onSubmit={handleSearch} className="d-flex align-items-center justify-content-center">
-              <FormControl type="search" placeholder="Search" className="mr-sm-2 mx-auto" id='searchbar' onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
-              <Button variant="outline-success" type="submit">Search</Button>
-            </Form>
           </Nav>
+<<<<<<< Updated upstream
           <Nav className="mr-auto"> {/* Aligns login link and button to the left */}
             <Button variant="primary" as={Link} to="/subscription">Join now</Button> {/* New button */}
             <Nav.Link href="login">Login</Nav.Link>
             <Nav.Link href="register">Register</Nav.Link> {/* Login link */}
+=======
+          <Nav>
+            <Nav.Link href="login" role='button' id='headerbutton'>Login </Nav.Link>
+            <div className='headerline'></div>
+            <Nav.Link href="register" role='button' id='headerbutton'>Register</Nav.Link>
+            <div className='headerline'></div>
+            <Nav.Link href="/" role='button' id='headerbuttonq'>Join Now!</Nav.Link>
+>>>>>>> Stashed changes
           </Nav>
         </Navbar.Collapse>
-      </Container>
     </Navbar>
   );
 };

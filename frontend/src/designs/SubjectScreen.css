@@ -1,0 +1,79 @@
+#subjectscreen-containerbg{
+    background-color: #B2D8D8;
+    height: 43.4rem;
+}
+
+#subjectscreen-container{
+    height: 30rem;
+    padding-top: 4rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
+    width: 75rem;
+    background-color: rgba(255, 255, 255, 0.534);
+    border-radius: 2rem;
+    margin-left: 20.5rem;
+}
+
+#subjectscreenbtn{
+    width: 15rem;
+    height: 3rem;
+    border: hidden;
+    border-radius: 3rem;
+    background-color: rgba(0, 0, 0, 0.87);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+#subjectscreenbtn:hover{
+    width: 15rem;
+    height: 3rem;
+    border: hidden;
+    border-radius: 3rem;
+    background-color: #B2D8D8;
+    color: black;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+#subjectscreentext{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 4rem;  
+}
+
+#subjectscreen-image{
+    background-image: url(https://images.vexels.com/media/users/3/287060/isolated/preview/bb3c667866a08af269b17a637f1c458a-cute-cat-with-backpack.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 34.6rem;
+    left: 84.5rem;
+    width: 17rem;
+    height: 17rem;
+    background-size: contain;
+}
+
+#subjectscreen-image2{
+    background-image: url(https://i.pinimg.com/originals/77/4a/f3/774af3e7e03be56202364401780a446e.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 34.6rem;
+    left: 73.5rem;
+    width: 17rem;
+    height: 17rem;
+    background-size: contain;
+}
+
+#subjectscreen-image3{
+    background-image: url(https://images.vexels.com/media/users/3/286297/isolated/preview/e24b4a76ad6dcf7f9cb607c236e8a1bb-cute-cat-reading-with-pencil-on-its-ear.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 34.6rem;
+    left: 62.5rem;
+    width: 17rem;
+    height: 17rem;
+    background-size: contain;
+}

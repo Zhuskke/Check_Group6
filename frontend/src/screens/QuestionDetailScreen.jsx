@@ -90,7 +90,21 @@ const QuestionDetail = () => {
           <div>
             <input id='answer-area' placeholder='Answer Question?'></input>
           </div>
+<<<<<<< Updated upstream
         </div>
+=======
+
+      </div>
+      <div className='line'></div>
+
+      <h2>{question.title}</h2>
+      <h3 id='questiondetail-content'><strong><p>{question.content}</p></strong></h3>
+      {/* Display other details of the question */}
+      <div className='detailline'></div>
+
+      <div>
+        <input id='answer-area' placeholder='Answer Question?'></input>
+>>>>>>> Stashed changes
       </div>
       {showDeleteButton && <button onClick={() => deleteHandler(question.id)}>Delete</button>}
       <Footer />

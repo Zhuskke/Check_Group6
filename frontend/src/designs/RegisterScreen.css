@@ -1,0 +1,84 @@
+#registersection1{
+    background-color:  #B2D8D8;
+    background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5236376f-305d-42da-8e2d-48455360a090/df934b2-eabefe2e-eb44-4544-af3c-f2ba4f3ba4d4.png/v1/fill/w_1280,h_720/background_wallpaper_4k_8k___minimalist_landscape_by_jorgehardt_df934b2-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvNTIzNjM3NmYtMzA1ZC00MmRhLThlMmQtNDg0NTUzNjBhMDkwXC9kZjkzNGIyLWVhYmVmZTJlLWViNDQtNDU0NC1hZjNjLWYyYmE0ZjNiYTRkNC5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.Cp1sPxtj8TPh_Z0-MAjYvHwwr33k2mn7eS3_uRNjg58);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+}
+
+#registersection2{
+    height: 100vh;
+    width: 52.5rem;
+    position: fixed;
+    left: 65rem;
+    padding-top: 10rem;
+}
+
+#register-container{
+    width: 38rem;
+    height: 48rem;
+    padding: 1.5rem;
+    position: absolute;
+    top: 6rem;
+    left: 7rem;
+    color: black;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.945);
+}
+
+#register-text, #form{
+    color: black;
+    font-weight: bold;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+#register-login{
+    padding-bottom: 1rem;
+}
+
+#register-login:hover{
+    color: #B2D8D8;
+}
+
+#register-button{
+    color: black;
+    font-weight: bold;
+    border-radius: 2rem;
+    background-color: #B2D8D8;
+}
+
+#register-button:hover{
+    color: white;
+    background-color: black;
+}
+
+#registerslogan { 
+    margin-top: 20rem;
+    font-size: 7rem;
+    margin-right: 1.875rem;
+    font-family: 'Russo One', sans-serif;
+    font-weight: 500; 
+    width: 79rem;
+    position: absolute;
+    left: -4.5rem !important;
+    color: rgba(101, 187, 181, 0.795) ;
+  }
+
+#registerslogan2{ 
+    margin-top: 37.2rem;
+    font-size: 2.5rem;
+    margin-right: 1.875rem;
+    font-family: 'Russo One', sans-serif;
+    width: 80rem;
+    position: absolute;
+    left: -4.5rem;
+    color: rgba(101, 187, 181, 0.795) ;
+}

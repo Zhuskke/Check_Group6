@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImageMath, getUploadedImagesMath } from '../actions/subjectActions';
+import { uploadImageEnglish, getUploadedImagesEnglish } from '../actions/subjectActions';
 import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SubjectBar from '../components/SubjectBar';
+<<<<<<< Updated upstream
 import Worksheet from '../components/Worksheet';
 import '../designs/Subject.css'
+=======
+import '../designs/SubjectScreen.css'
+>>>>>>> Stashed changes
 
-function MathScreen() {
-  const [uploadedImageMath, setUploadedImageMath] = useState(localStorage.getItem('uploadedImageMath') || null);
+function EnglishScreen() {
+  const [uploadedImageEnglish, setUploadedImageEnglish] = useState(localStorage.getItem('uploadedImageEnglish') || null);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
   const { loading: uploadLoading, error: uploadError, imageUrl } = useSelector((state) => state.uploadImage);
@@ -19,13 +23,13 @@ function MathScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getUploadedImagesMath());
+    dispatch(getUploadedImagesEnglish());
   }, [dispatch]);
 
   useEffect(() => {
     if (imageUrl) {
-      setUploadedImageMath(imageUrl);
-      localStorage.setItem('uploadedImageMath', imageUrl);
+      setUploadedImageEnglish(imageUrl);
+      localStorage.setItem('uploadedImageEnglish', imageUrl);
     }
   }, [imageUrl]);
 
@@ -35,8 +39,8 @@ function MathScreen() {
       setImage(selectedImage);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImageMath(reader.result);
-        localStorage.setItem('uploadedImageMath', reader.result);
+        setUploadedImageEnglish(reader.result);
+        localStorage.setItem('uploadedImageEnglish', reader.result);
       };
       reader.readAsDataURL(selectedImage);
     }
@@ -44,7 +48,7 @@ function MathScreen() {
 
   const handleUpload = () => {
     if (!userInfo || !image) return;
-    dispatch(uploadImageMath(image));
+    dispatch(uploadImageEnglish(image));
   };
 
   const handleSignUp = () => {
@@ -52,24 +56,41 @@ function MathScreen() {
   };
 
   return (
-    <div>
+    <><div>
       {userInfo ? <HeaderUser /> : <Header />}
+      <div style={{ paddingTop: '10px', paddingBottom: '5rem', backgroundColor: '#B2D8D8' }}> <SubjectBar /> </div>
+
       {!userInfo && (
-        <div>
-          <p>You are viewing as a guest. Sign up for a better study experience.</p>
-          <button onClick={handleSignUp}>Sign up</button>
+        <div id='subjectscreen-containerbg'>
+          <div id='subjectscreen-container'>
+            <p id='subjectscreentext'>You are viewing as a guest :c Sign up for a better study experience!</p>
+            <button onClick={handleSignUp} id='subjectscreenbtn'>Sign up Now!</button>
+          </div>
         </div>
       )}
+<<<<<<< Updated upstream
       <div style={{ paddingTop: '20px', paddingBottom: '20px', backgroundColor: '#B2D8D8'}}> <SubjectBar /> </div>
       <div className="subject-container">
       <h1>Math</h1>
+=======
+
+            <div id='subjectscreen-image'>
+            </div>
+
+            <div id='subjectscreen-image2'>
+            </div>
+
+            <div id='subjectscreen-image3'>
+            </div>
+
+>>>>>>> Stashed changes
       {userInfo && (
         <div>
           <input type="file" onChange={handleImageChange} />
-          {uploadedImageMath && (
+          {uploadedImageEnglish && (
             <div>
               <p>Uploaded Image Preview:</p>
-              <img src={uploadedImageMath} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+              <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           )}
           <button className="upload-button" onClick={handleUpload} disabled={!image}>
@@ -79,11 +100,15 @@ function MathScreen() {
       )}
       {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
       {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
+<<<<<<< Updated upstream
       </div>
       {userInfo && <Worksheet subject = "Math"/>}
       <div className="footer-container"><Footer /></div>
+=======
+>>>>>>> Stashed changes
     </div>
+    <Footer /></>
   );
 }
 
-export default MathScreen;
+export default EnglishScreen;

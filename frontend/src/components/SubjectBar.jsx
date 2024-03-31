@@ -11,6 +11,7 @@ import '../designs/Subjectbar.css'
 
 const SubjectBar = () => {
   return (
+    <div id='subjectbarbg'>
     <Container id='subbar-container'>
       <Row>
         <Col>
@@ -63,6 +64,7 @@ const SubjectBar = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 
