@@ -94,7 +94,6 @@ export const getPackageDetails = (packageId) => async (dispatch) => {
 
     const { data } = await axios.get(`/api/package-details/${packageId}/`);
     
-    // Extract points and price from the data object
     const { points, price } = data;
 
     dispatch({

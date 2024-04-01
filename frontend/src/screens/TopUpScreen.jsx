@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTopUpPackages } from "../actions/pointsActions";
+import HeaderUser from "../components/HeaderUser";
 
 const TopUpScreen = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -20,6 +21,7 @@ const TopUpScreen = () => {
 
   return (
     <div>
+      <HeaderUser />
       <h2>Top Up Points</h2>
       <ul>
         {packages.map((topUpPackage) => (
@@ -32,6 +34,7 @@ const TopUpScreen = () => {
         ))}
       </ul>
     </div>
+    
   );
 };
 
