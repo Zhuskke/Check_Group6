@@ -1,3 +1,4 @@
+// AskQuestionScreen.jsx
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,8 +8,7 @@ import HeaderQuestion from "../components/HeaderQuestion";
 const AskQuestionScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
   const [pointsSpent, setPointsSpent] = useState(10);
   const [attachment, setAttachment] = useState(null); // State for attachment
 
@@ -26,7 +26,6 @@ const AskQuestionScreen = () => {
   
     // Create FormData object
     const formData = new FormData();
-    formData.append('title', title);
     formData.append('content', content);
     formData.append('points_spent', pointsSpent);
     
@@ -39,7 +38,6 @@ const AskQuestionScreen = () => {
     dispatch(askQuestion(formData));
     
     // Reset form fields
-    setTitle("");
     setContent("");
     setAttachment(null);
   };
