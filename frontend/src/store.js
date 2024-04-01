@@ -7,6 +7,8 @@ import {
   uploadImageReducer,
   getUploadedImagesReducer,
   userDescriptionReducer,
+  getProfileImageReducer,
+  uploadProfileImageReducer
 } from "./reducers/userReducers";
 import { combineReducers } from "redux";
 import {
@@ -67,7 +69,9 @@ const reducer = combineReducers({
   userDescription: userDescriptionReducer,
   topUpPackages: topUpPackagesReducer,
   purchasePoints: purchasePointsReducer,
-  package: packageReducer
+  package: packageReducer,
+  getProfileImage: getProfileImageReducer,
+  uploadProfileImage: uploadProfileImageReducer
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

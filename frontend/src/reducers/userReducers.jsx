@@ -21,6 +21,12 @@ import {
     FETCH_USER_DESCRIPTION_REQUEST,
     FETCH_USER_DESCRIPTION_SUCCESS,
     FETCH_USER_DESCRIPTION_FAIL,
+    UPLOAD_PROFILE_IMAGE_REQUEST,
+    UPLOAD_PROFILE_IMAGE_SUCCESS,
+    UPLOAD_PROFILE_IMAGE_FAIL,
+    GET_PROFILE_IMAGE_REQUEST,
+    GET_PROFILE_IMAGE_SUCCESS,
+    GET_PROFILE_IMAGE_FAIL
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -111,3 +117,29 @@ export const uploadImageReducer = (state = { loading: false, error: null, imageU
         return state;
     }
   };
+
+  export const getProfileImageReducer = (state = { loading: false, error: null, profileImageUrl: '' }, action) => {
+    switch (action.type) {
+        case GET_PROFILE_IMAGE_REQUEST:
+            return { loading: true, error: null, profileImageUrl: '' };
+        case GET_PROFILE_IMAGE_SUCCESS:
+            return { loading: false, error: null, profileImageUrl: action.payload };
+        case GET_PROFILE_IMAGE_FAIL:
+            return { loading: false, error: action.payload, profileImageUrl: '' };
+        default:
+            return state;
+    }
+};
+
+export const uploadProfileImageReducer = (state = { loading: false, error: null, message: '' }, action) => {
+    switch (action.type) {
+        case UPLOAD_PROFILE_IMAGE_REQUEST:
+            return { loading: true, error: null, message: '' };
+        case UPLOAD_PROFILE_IMAGE_SUCCESS:
+            return { loading: false, error: null, message: action.payload };
+        case UPLOAD_PROFILE_IMAGE_FAIL:
+            return { loading: false, error: action.payload, message: '' };
+        default:
+            return state;
+    }
+};

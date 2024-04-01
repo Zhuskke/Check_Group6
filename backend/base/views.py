@@ -14,6 +14,10 @@ from .serializers import *
 from django.db.models import Q
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.parsers import MultiPartParser, FormParser
+from django.conf import settings
+from django.templatetags.static import static
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -72,6 +76,7 @@ def registerUser(request):
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+    parser_classes = [MultiPartParser, FormParser]  # Add parsers for handling file uploads
 
     @action(detail=False, methods=['post'], url_path='upload-profile-picture')
     def upload_profile_picture(self, request):
@@ -85,7 +90,34 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         else:
             return Response({'error': 'No profile picture provided.'}, status=400)
 
-from rest_framework.exceptions import PermissionDenied
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_profile_image(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        if user_profile.profile_picture:
+            profile_picture_url = user_profile.profile_picture.url
+            return Response({'profile_picture_url': profile_picture_url})
+        else:
+            # Construct URL for default profile picture
+            default_profile_picture_url = request.build_absolute_uri(settings.MEDIA_URL + 'default_profile_picture.jpg')
+            return Response({'profile_picture_url': default_profile_picture_url})
+    except UserProfile.DoesNotExist:
+        return Response({'error': 'User profile not found'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update_profile_image(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    if 'profile_picture' in request.FILES:
+        user_profile.profile_picture = request.FILES['profile_picture']
+        user_profile.save()
+        return Response({'message': 'Profile picture updated successfully'})
+    else:
+        user_profile.profile_picture.delete()
+        return Response({'message': 'Profile picture removed successfully'})
+
+        
 
 class QuestionListCreate(generics.ListCreateAPIView):
     queryset = Question.objects.all()

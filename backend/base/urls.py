@@ -15,6 +15,8 @@ urlpatterns = [
     path('users/<int:user_id>/', views.getUser, name='users'),
     path('users/register/', views.registerUser, name='register'),
     path('', include(router.urls)),
+    path('profile-image/', views.get_profile_image, name='get-profile-image'),
+    path('update-profile-image/', views.update_profile_image, name='update-profile-image'),
     path('questions/', QuestionListCreate.as_view(), name='question-list-create'),
     path('questions/<int:pk>/', views.get_question_details, name='question-detail'),
     path('search', views.searchQuestions, name='search-questions'),

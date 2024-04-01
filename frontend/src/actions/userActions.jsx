@@ -23,6 +23,12 @@ import {
     FETCH_USER_DESCRIPTION_REQUEST,
     FETCH_USER_DESCRIPTION_SUCCESS,
     FETCH_USER_DESCRIPTION_FAIL,
+    UPLOAD_PROFILE_IMAGE_REQUEST,
+    UPLOAD_PROFILE_IMAGE_SUCCESS,
+    UPLOAD_PROFILE_IMAGE_FAIL,
+    GET_PROFILE_IMAGE_REQUEST,
+    GET_PROFILE_IMAGE_SUCCESS,
+    GET_PROFILE_IMAGE_FAIL
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -223,3 +229,60 @@ export const uploadImage = (image) => async (dispatch, getState) => {
       dispatch({ type: UPDATE_USER_DESCRIPTION_FAIL, payload: error.message });
     }
   };
+
+  export const getProfileImage = () => async (dispatch, getState) => {
+    try {
+      dispatch({ type: GET_PROFILE_IMAGE_REQUEST });
+  
+      const token = getState().userLogin.userInfo.token;
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+  
+      const { data } = await axios.get('/api/profile-image/', config); // Update API endpoint
+  
+      dispatch({ type: GET_PROFILE_IMAGE_SUCCESS, payload: data.profile_picture_url });
+    } catch (error) {
+      dispatch({
+        type: GET_PROFILE_IMAGE_FAIL,
+        payload: error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+      });
+    }
+  };
+  
+  export const uploadProfileImage = (image) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: UPLOAD_PROFILE_IMAGE_REQUEST });
+  
+      const formData = new FormData();
+      if (image) {
+        formData.append('profile_picture', image);
+      }
+  
+      const token = getState().userLogin.userInfo.token;
+  
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+  
+      const { data } = await axios.post('api/update-profile-image/', formData, config);
+  
+      dispatch({ type: UPLOAD_PROFILE_IMAGE_SUCCESS, payload: data.message });
+    } catch (error) {
+      dispatch({
+        type: UPLOAD_PROFILE_IMAGE_FAIL,
+        payload: error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+      });
+    }
+  };
+  
