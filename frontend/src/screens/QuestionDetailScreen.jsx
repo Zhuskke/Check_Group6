@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import { fetchQuestionDetail, deleteQuestion } from '../actions/questionActions';
-import { fetchUser } from '../actions/userActions';
-import HeaderUser from '../components/HeaderUser';
-import Footer from '../components/Footer';
-import '../designs/QuestionDetail.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import {
+  fetchQuestionDetail,
+  deleteQuestion,
+} from "../actions/questionActions";
+import { fetchUser } from "../actions/userActions";
+import HeaderUser from "../components/HeaderUser";
+import Footer from "../components/Footer";
+import "../designs/QuestionDetail.css";
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -19,7 +22,11 @@ const QuestionDetail = () => {
   }, [dispatch, id]);
 
   const questionDetails = useSelector((state) => state.questionDetail);
-  const { loading: questionLoading, error: questionError, question } = questionDetails;
+  const {
+    loading: questionLoading,
+    error: questionError,
+    question,
+  } = questionDetails;
 
   const userFetch = useSelector((state) => state.userFetch);
   const { loading: userLoading, error: userError, users } = userFetch;
@@ -34,13 +41,13 @@ const QuestionDetail = () => {
   }, [dispatch, question, users]);
 
   const deleteHandler = (questionId) => {
-    if (window.confirm('Are you sure you want to delete this question?')) {
+    if (window.confirm("Are you sure you want to delete this question?")) {
       dispatch(deleteQuestion(questionId))
         .then(() => {
-          navigate('/');
+          navigate("/");
         })
         .catch((error) => {
-          console.error('Error deleting question:', error);
+          console.error("Error deleting question:", error);
         });
     }
   };
@@ -50,51 +57,74 @@ const QuestionDetail = () => {
   }
 
   if (questionError) {
-    return <Message variant='danger'>{questionError}</Message>;
+    return <Message variant="danger">{questionError}</Message>;
   }
 
   if (!question || !question.id) {
-    return <Message variant='danger'>Question not found</Message>;
+    return <Message variant="danger">Question not found</Message>;
   }
 
-  const username = users[question.user] || '';
+  const username = users[question.user] || "";
   const showDeleteButton = userInfo && question.user === userInfo.id;
 
   return (
     <>
       <HeaderUser />
-      <div id='questiondetailbg'>
-        <div id='questiondetail-container'>
-          <Link to={`/profile/${question.user}`}> {/* Wrap entire profile picture container */}
+      <div id="questiondetailbg">
+        <div id="questiondetail-container">
+          <Link
+            to={
+              userInfo && question.user === userInfo.id
+                ? `/profile`
+                : `/profile/${question.user}`
+            }
+          >
             <div className="profile-picture-container">
               <label htmlFor="profile-image-input">
                 <img
-                  src={'https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg'}
+                  src={
+                    "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
+                  }
                   alt="Profile"
                   className="questiondetail-profile-picture"
                 />
               </label>
               <div>
-                <p id='questiondetail-info'><strong>Posted By:</strong> {username}</p>
+                <p id="questiondetail-info">
+                  <strong>Posted By:</strong> {username}
+                </p>
               </div>
             </div>
           </Link>
-          <p id='questiondetail-info'><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
-          <div className='line'></div>
+          <p id="questiondetail-info">
+            <strong>Created At: </strong>
+            {new Date(question.created_at).toLocaleString()}
+          </p>
+          <div className="line"></div>
           <h2>{question.title}</h2>
-          <h3 id='questiondetail-content'><strong><p>{question.content}</p></strong></h3>
+          <h3 id="questiondetail-content">
+            <strong>
+              <p>{question.content}</p>
+            </strong>
+          </h3>
           {question.attachment && (
             <div className="attachment-container">
-              <img src={question.attachment} alt="Attachment" className="questiondetail-attachment" />
+              <img
+                src={question.attachment}
+                alt="Attachment"
+                className="questiondetail-attachment"
+              />
             </div>
           )}
-          <div className='line'></div>
+          <div className="line"></div>
           <div>
-            <input id='answer-area' placeholder='Answer Question?' />
+            <input id="answer-area" placeholder="Answer Question?" />
           </div>
         </div>
       </div>
-      {showDeleteButton && <button onClick={() => deleteHandler(question.id)}>Delete</button>}
+      {showDeleteButton && (
+        <button onClick={() => deleteHandler(question.id)}>Delete</button>
+      )}
       <Footer />
     </>
   );
