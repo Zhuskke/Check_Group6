@@ -17,6 +17,7 @@ import SubscriptionChoiceScreen from "./screens/SubscriptionChoice";
 import OrderScreen from "./screens/OrderScreen";
 import TopUpScreen from "./screens/TopUpScreen";
 import PaymentScreen from "./screens/PaymentScreen";
+import VisitProfile from "./screens/VisitProfile";
 function App() {
   return (
     <Router>
@@ -25,7 +26,7 @@ function App() {
         <Route path="/home" element={<HomeScreenUser />} exact />
         <Route path="/register" element={<RegisterScreen />} exact />
         <Route path="/login" element={<LoginScreen />} exact /> 
-        <Route path="/profile" element={<Profile />} exact /> 
+        <Route path="/profile" element={<Profile />} exact />   
         <Route path="/english" element={<EnglishScreen />} exact />
         <Route path="/math" element={<MathScreen />} exact />
         <Route path="/history" element={<HistoryScreen />} exact />
@@ -39,6 +40,7 @@ function App() {
         <Route path="/order" element={<OrderScreen />} />
         <Route path="/topup" element={<TopUpScreen />} />
         <Route path="/payment" element={<PaymentScreen />} />
+        <Route path="/profile/:id" element={<VisitProfile />} />
       </Routes>
     </Router>
     

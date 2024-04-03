@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { fetchQuestionDetail, deleteQuestion } from '../actions/questionActions';
@@ -37,7 +37,7 @@ const QuestionDetail = () => {
     if (window.confirm('Are you sure you want to delete this question?')) {
       dispatch(deleteQuestion(questionId))
         .then(() => {
-          navigate('/'); // Redirect to home page after successful deletion
+          navigate('/');
         })
         .catch((error) => {
           console.error('Error deleting question:', error);
@@ -65,30 +65,32 @@ const QuestionDetail = () => {
       <HeaderUser />
       <div id='questiondetailbg'>
         <div id='questiondetail-container'>
-          <div className="profile-picture-container">
-            <label htmlFor="profile-image-input">
-              <img
-                src={'https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg'}
-                alt="Profile"
-                className="questiondetail-profile-picture"
-              />
-            </label>
-            <div>
-              <p id='questiondetail-info'><strong>Posted By:</strong> {username}</p>
-              <p id='questiondetail-info'><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
+          <Link to={`/profile/${question.user}`}> {/* Wrap entire profile picture container */}
+            <div className="profile-picture-container">
+              <label htmlFor="profile-image-input">
+                <img
+                  src={'https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg'}
+                  alt="Profile"
+                  className="questiondetail-profile-picture"
+                />
+              </label>
+              <div>
+                <p id='questiondetail-info'><strong>Posted By:</strong> {username}</p>
+              </div>
             </div>
-          </div>
+          </Link>
+          <p id='questiondetail-info'><strong>Created At: </strong>{new Date(question.created_at).toLocaleString()}</p>
           <div className='line'></div>
           <h2>{question.title}</h2>
           <h3 id='questiondetail-content'><strong><p>{question.content}</p></strong></h3>
-          {question.attachment && ( // Display the image directly
+          {question.attachment && (
             <div className="attachment-container">
               <img src={question.attachment} alt="Attachment" className="questiondetail-attachment" />
             </div>
           )}
           <div className='line'></div>
           <div>
-            <input id='answer-area' placeholder='Answer Question?'></input>
+            <input id='answer-area' placeholder='Answer Question?' />
           </div>
         </div>
       </div>

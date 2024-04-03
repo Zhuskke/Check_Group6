@@ -1,7 +1,7 @@
 // CalculusScreen component
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImageEnglish, getUploadedImagesEnglish } from '../actions/subjectActions';
+import { uploadImageCalculus, getUploadedImagesCalculus } from '../actions/subjectActions';
 import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
@@ -10,8 +10,8 @@ import SubjectBar from '../components/SubjectBar';
 import Worksheet from '../components/Worksheet';
 import '../designs/SubjectScreen.css'
 
-function EnglishScreen() {
-  const [uploadedImageEnglish, setUploadedImageEnglish] = useState(localStorage.getItem('uploadedImageEnglish') || null);
+function CalculusScreen() {
+  const [uploadedImageCalculus, setUploadedImageCalculus] = useState(localStorage.getItem('uploadedImageCalculus') || null);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
   const { loading: uploadLoading, error: uploadError, imageUrl } = useSelector((state) => state.uploadImage);
@@ -20,13 +20,13 @@ function EnglishScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getUploadedImagesEnglish());
+    dispatch(getUploadedImagesCalculus());
   }, [dispatch]);
 
   useEffect(() => {
     if (imageUrl) {
-      setUploadedImageEnglish(imageUrl);
-      localStorage.setItem('uploadedImageEnglish', imageUrl);
+      setUploadedImageCalculus(imageUrl);
+      localStorage.setItem('uploadedImageCalculus', imageUrl);
     }
   }, [imageUrl]);
 
@@ -36,8 +36,8 @@ function EnglishScreen() {
       setImage(selectedImage);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImageEnglish(reader.result);
-        localStorage.setItem('uploadedImageEnglish', reader.result);
+        setUploadedImageCalculus(reader.result);
+        localStorage.setItem('uploadedImageCalculus', reader.result);
       };
       reader.readAsDataURL(selectedImage);
     }
@@ -45,7 +45,7 @@ function EnglishScreen() {
 
   const handleUpload = () => {
     if (!userInfo || !image) return;
-    dispatch(uploadImageEnglish(image));
+    dispatch(uploadImageCalculus(image));
   };
 
   const handleSignUp = () => {
@@ -78,10 +78,10 @@ function EnglishScreen() {
       {userInfo && (
         <div>
           <input type="file" onChange={handleImageChange} />
-          {uploadedImageEnglish && (
+          {uploadedImageCalculus && (
             <div>
               <p>Uploaded Image Preview:</p>
-              <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+              <img src={uploadedImageCalculus} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           )}
           <button onClick={handleUpload} disabled={!image}>
@@ -97,4 +97,4 @@ function EnglishScreen() {
   );
 }
 
-export default EnglishScreen;
+export default CalculusScreen;

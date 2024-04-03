@@ -2,7 +2,6 @@ import React from 'react';
 import '../designs/Worksheet.css'
 
 const Worksheet = ({ subject }) => {
-  // Define worksheet data for each subject
   const worksheetData = {
     Calculus: [
       { name: 'Differentiation Worksheet', url: '/pdfs/Calculus/Differentiation Worksheet.pdf' },

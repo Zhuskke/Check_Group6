@@ -26,7 +26,10 @@ import {
     UPLOAD_PROFILE_IMAGE_FAIL,
     GET_PROFILE_IMAGE_REQUEST,
     GET_PROFILE_IMAGE_SUCCESS,
-    GET_PROFILE_IMAGE_FAIL
+    GET_PROFILE_IMAGE_FAIL,
+    USER_PROFILE_REQUEST,
+    USER_PROFILE_SUCCESS,
+    USER_PROFILE_FAIL,
 } from '../constants/userConstants'
 
 export const userLoginReducer = (state = {}, action) => {
@@ -142,4 +145,17 @@ export const uploadProfileImageReducer = (state = { loading: false, error: null,
         default:
             return state;
     }
+};
+
+export const userProfileReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case USER_PROFILE_REQUEST:
+      return { loading: true };
+    case USER_PROFILE_SUCCESS:
+      return { loading: false, user: action.payload };
+    case USER_PROFILE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
 };

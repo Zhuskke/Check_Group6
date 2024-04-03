@@ -28,7 +28,10 @@ import {
     UPLOAD_PROFILE_IMAGE_FAIL,
     GET_PROFILE_IMAGE_REQUEST,
     GET_PROFILE_IMAGE_SUCCESS,
-    GET_PROFILE_IMAGE_FAIL
+    GET_PROFILE_IMAGE_FAIL,
+    USER_PROFILE_REQUEST,
+    USER_PROFILE_SUCCESS,
+    USER_PROFILE_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -273,7 +276,7 @@ export const uploadImage = (image) => async (dispatch, getState) => {
         },
       };
   
-      const { data } = await axios.post('api/update-profile-image/', formData, config);
+      const { data } = await axios.post('/api/update-profile-image/', formData, config);
   
       dispatch({ type: UPLOAD_PROFILE_IMAGE_SUCCESS, payload: data.message });
     } catch (error) {
@@ -286,3 +289,20 @@ export const uploadImage = (image) => async (dispatch, getState) => {
     }
   };
   
+  export const fetchUserProfile = (userId) => async (dispatch) => {
+    try {
+        dispatch({ type: USER_PROFILE_REQUEST });
+
+        const { data } = await axios.get(`/api/users/${userId}/profile/`);
+
+        dispatch({
+            type: USER_PROFILE_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: USER_PROFILE_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
+        });
+    }
+};

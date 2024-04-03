@@ -18,6 +18,8 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.conf import settings
 from django.templatetags.static import static
+from django.urls import reverse
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -34,10 +36,16 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 @api_view(['GET'])
-def getUserProfile (request):
-    user = request.user
+def getUserProfile(request):
+    user_id = request.query_params.get('user_id')
+    if user_id:
+        user = get_object_or_404(User, id=user_id)
+    else:
+        user = request.user
+    
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getUser(request, user_id):
@@ -71,6 +79,18 @@ def registerUser(request):
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
     
 
+@api_view(['GET'])
+def get_other_user_profile(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+        serializer = UserSerializer(user)
+        user_profile = UserProfile.objects.get(user=user)
+        profile_data = serializer.data
+        profile_data['profile_picture_url'] = user_profile.profile_picture.url if user_profile.profile_picture else None
+        profile_data['description'] = user_profile.description
+        return Response(profile_data)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
@@ -99,7 +119,6 @@ def get_profile_image(request):
             profile_picture_url = user_profile.profile_picture.url
             return Response({'profile_picture_url': profile_picture_url})
         else:
-            # Construct URL for default profile picture
             default_profile_picture_url = request.build_absolute_uri(settings.MEDIA_URL + 'default_profile_picture.jpg')
             return Response({'profile_picture_url': default_profile_picture_url})
     except UserProfile.DoesNotExist:
@@ -152,9 +171,14 @@ def get_question_details(request, pk):
     try:
         question = Question.objects.get(pk=pk)
         serializer = QuestionSerializer(question, context={'request': request})
-        return Response(serializer.data)
+        
+        serializer_data = serializer.data
+        serializer_data['user_profile_link'] = request.build_absolute_uri(reverse('user-profile') + f'?user_id={question.user.id}')
+        
+        return Response(serializer_data)
     except Question.DoesNotExist:
         return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
+
 
     
 @api_view(['GET'])

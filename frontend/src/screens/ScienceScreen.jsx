@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImageEnglish, getUploadedImagesEnglish } from '../actions/subjectActions';
+import { uploadImageScience, getUploadedImagesScience } from '../actions/subjectActions';
 import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
@@ -9,8 +9,8 @@ import SubjectBar from '../components/SubjectBar';
 import Worksheet from '../components/Worksheet';
 import '../designs/SubjectScreen.css'
 
-function EnglishScreen() {
-  const [uploadedImageEnglish, setUploadedImageEnglish] = useState(localStorage.getItem('uploadedImageEnglish') || null);
+function ScienceScreen() {
+  const [uploadedImageScience, setUploadedImageScience] = useState(localStorage.getItem('uploadedImageScience') || null);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
   const { loading: uploadLoading, error: uploadError, imageUrl } = useSelector((state) => state.uploadImage);
@@ -19,13 +19,13 @@ function EnglishScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getUploadedImagesEnglish());
+    dispatch(getUploadedImagesScience());
   }, [dispatch]);
 
   useEffect(() => {
     if (imageUrl) {
-      setUploadedImageEnglish(imageUrl);
-      localStorage.setItem('uploadedImageEnglish', imageUrl);
+      setUploadedImageScience(imageUrl);
+      localStorage.setItem('uploadedImageScience', imageUrl);
     }
   }, [imageUrl]);
 
@@ -35,8 +35,8 @@ function EnglishScreen() {
       setImage(selectedImage);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImageEnglish(reader.result);
-        localStorage.setItem('uploadedImageEnglish', reader.result);
+        setUploadedImageScience(reader.result);
+        localStorage.setItem('uploadedImageScience', reader.result);
       };
       reader.readAsDataURL(selectedImage);
     }
@@ -44,7 +44,7 @@ function EnglishScreen() {
 
   const handleUpload = () => {
     if (!userInfo || !image) return;
-    dispatch(uploadImageEnglish(image));
+    dispatch(uploadImageScience(image));
   };
 
   const handleSignUp = () => {
@@ -77,10 +77,10 @@ function EnglishScreen() {
     {userInfo && (
       <div>
         <input type="file" onChange={handleImageChange} />
-        {uploadedImageEnglish && (
+        {uploadedImageScience && (
           <div>
             <p>Uploaded Image Preview:</p>
-            <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+            <img src={uploadedImageScience} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
           </div>
         )}
         <button onClick={handleUpload} disabled={!image}>
@@ -97,4 +97,4 @@ function EnglishScreen() {
 }
 
 
-export default EnglishScreen;
+export default ScienceScreen;

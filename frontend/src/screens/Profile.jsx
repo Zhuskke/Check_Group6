@@ -4,6 +4,7 @@ import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
 import { Container, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+// import { fetchUser } from "../actions/userActions";
 import { fetchUserQuestions } from "../actions/questionActions";
 import {
   updateUserDescription,
@@ -38,7 +39,7 @@ const Profile = () => {
       dispatch(getProfileImage())
         .catch((error) =>
           console.error("Error fetching profile image:", error)
-        ); // Add error handling
+        );
     }
   }, [userData, dispatch]);
 
@@ -47,25 +48,22 @@ const Profile = () => {
   }, [userDescription]);
 
   useEffect(() => {
-    console.log("Profile Picture URL:", profilePictureUrl);
     if (profilePictureUrl && profilePictureUrl !== "") {
       setProfilePicture(profilePictureUrl);
     }
   }, [profilePictureUrl]);
 
-const handleImageChange = (event) => {
-  const image = event.target.files[0];
-  dispatch(uploadProfileImage(image))
-    .then(() => {
-      // Refresh user profile data
-      dispatch(fetchUserDescription());
-      dispatch(getProfileImage());
-    })
-    .catch(error =>
-      console.error("Error uploading profile picture:", error)
-    );
-};
-
+  const handleImageChange = (event) => {
+    const image = event.target.files[0];
+    dispatch(uploadProfileImage(image))
+      .then(() => {
+        dispatch(fetchUserDescription());
+        dispatch(getProfileImage());
+      })
+      .catch(error =>
+        console.error("Error uploading profile picture:", error)
+      );
+  };
 
   const handleChooseFileClick = () => {
     document.getElementById("profile-image-input").click();
@@ -76,7 +74,6 @@ const handleImageChange = (event) => {
     dispatch(uploadProfileImage(null))
       .then(() => {
         localStorage.removeItem(`${localStorageKey}-${userData.id}`);
-        // Refresh user profile data
         dispatch(fetchUserDescription());
         dispatch(getProfileImage());
       })
@@ -84,8 +81,6 @@ const handleImageChange = (event) => {
         console.error("Error removing profile picture:", error)
       );
   };
-  
-  
 
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
