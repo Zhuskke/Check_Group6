@@ -279,3 +279,12 @@ def package_detail(request, package_id):
         return Response(serializer.data)
     except TopUpPackage.DoesNotExist:
         return Response({'error': 'Package not found'}, status=404)
+    
+@api_view(['POST'])
+def create_comment(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user, question=question)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

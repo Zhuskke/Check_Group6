@@ -69,3 +69,12 @@ class TopUpPackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = TopUpPackage
         fields = '__all__'
+        
+class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    question = serializers.PrimaryKeyRelatedField(read_only=True)
+    content = serializers.CharField(max_length=255)  
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'user', 'question', 'content', 'created_at']

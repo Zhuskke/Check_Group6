@@ -31,4 +31,5 @@ urlpatterns = [
     path('top-up-packages/', views.get_top_up_packages, name='top-up'),
     path('purchase-points/<int:package_id>/', views.purchase_points, name='purchase-points'),
     path('package-details/<int:package_id>/', views.package_detail, name='package-detail'),
+    path('comments/<int:question_id>/', views.create_comment, name='comment-create'),
 ]

@@ -42,6 +42,11 @@
     packageReducer,
   } from "./reducers/pointsReducers";
 
+  import {
+    createCommentReducer,
+   
+  } from "./reducers/commentReducers";
+
   const reducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
@@ -74,6 +79,7 @@
     getProfileImage: getProfileImageReducer,
     uploadProfileImage: uploadProfileImageReducer,
     userProfile: userProfileReducer,
+    createComment: createCommentReducer,
   });
 
   const userInfoFromStorage = localStorage.getItem("userInfo")
