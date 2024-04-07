@@ -8,6 +8,7 @@ import SubjectBar from '../components/SubjectBar';
 import HeaderUser from '../components/HeaderUser';
 import Footer from '../components/Footer';
 import { listQuestions } from '../actions/questionActions';
+import '../designs/HomescreenUser.css'
 
 function HomeScreenUser() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function HomeScreenUser() {
   return (
     <>
       <HeaderUser />
-      <div className='container'>
+      <section id='homeusersection'>
         {loading ? (
           <Loader />
         ) : error ? (
@@ -35,7 +36,7 @@ function HomeScreenUser() {
           </div>
         )}
         <SubjectBar />
-      </div>
+      </section>
       <Footer />
     </>
   );

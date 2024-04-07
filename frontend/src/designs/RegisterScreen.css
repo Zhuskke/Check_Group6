@@ -49,15 +49,26 @@
 }
 
 #register-button{
-    color: black;
-    font-weight: bold;
-    border-radius: 2rem;
-    background-color: #B2D8D8;
+    color: black !important;
+    font-weight: bold !important;
+    border-radius: 2rem !important;
+    background-color: #B2D8D8 !important;
+    height: 3rem !important;
+    width: 100% !important;
 }
 
 #register-button:hover{
-    color: white;
-    background-color: black;
+    color: white !important;
+    background-color: black !important;
+    height: 3rem !important;
+    width: 100% !important;
+}
+
+#register-button:active{
+    color: white !important;
+    background-color: black !important;
+    height: 3rem !important;
+    width: 100% !important;
 }
 
 #registerslogan { 
