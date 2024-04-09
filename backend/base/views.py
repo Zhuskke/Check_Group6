@@ -59,12 +59,10 @@ def getUser(request, user_id):
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
-    try:
-        user = User.objects.create(
-            username=data['username'],
-            email=data['email'],
-            password=make_password(data['password'])
-        )
+    serializer = UserRegistrationSerializer(data=data)  # Use UserRegistrationSerializer for registration
+
+    if serializer.is_valid():
+        user = serializer.save()
         # Create UserProfile instance
         UserProfile.objects.create(user=user)
         
@@ -72,11 +70,9 @@ def registerUser(request):
         if 'question' in data:
             Question.objects.create(user=user, content=data['question'])
         
-        serializer = UserSerializerWithToken(user, many=False)
-        return Response(serializer.data)
-    except:
-        message = {'detail': 'User with this email already exists'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        user_serializer = UserSerializerWithToken(user, many=False)
+        return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
 @api_view(['GET'])
@@ -279,7 +275,6 @@ def package_detail(request, package_id):
         return Response(serializer.data)
     except TopUpPackage.DoesNotExist:
         return Response({'error': 'Package not found'}, status=404)
-    
 
 class AdminUserListCreateAPIView(generics.ListCreateAPIView):
     queryset = User.objects.all()
@@ -288,5 +283,13 @@ class AdminUserListCreateAPIView(generics.ListCreateAPIView):
 
 class AdminUserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserUpdateSerializer  # Use UserUpdateSerializer for user updates
     permission_classes = [IsAdminUser]
+@api_view(['POST'])
+def create_comment(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user, question=question)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

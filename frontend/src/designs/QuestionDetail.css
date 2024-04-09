@@ -63,3 +63,9 @@
     border-color: #B2D8D8;
     outline: none;
 }
+
+.questiondetail-attachment{
+    overflow: auto;
+    max-width: 100%;
+    max-height: 100%;
+}

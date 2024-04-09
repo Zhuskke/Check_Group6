@@ -33,4 +33,5 @@ urlpatterns = [
     path('package-details/<int:package_id>/', views.package_detail, name='package-detail'),
     path('admin/users/', views.AdminUserListCreateAPIView.as_view(), name='admin-user-list-create'),
     path('admin/users/<int:pk>/', views.AdminUserRetrieveUpdateDestroyAPIView.as_view(), name='admin-user-detail'),
+    path('comments/<int:question_id>/', views.create_comment, name='comment-create'),
 ]
