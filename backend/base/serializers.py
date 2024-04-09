@@ -9,9 +9,15 @@ class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
+    points = serializers.IntegerField(source='userprofile.points')
+    is_active = serializers.BooleanField()
+    is_superuser = serializers.BooleanField()
+    is_staff = serializers.BooleanField()
+    password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
-        fields = ['id', '_id', 'email', 'username', 'isAdmin', 'name']
+        fields = '__all__'
 
     def get__id(self, obj):
         return obj.id
@@ -24,6 +30,32 @@ class UserSerializer(serializers.ModelSerializer):
         if name == '':
             name = obj.email
         return name
+
+    def update(self, instance, validated_data):
+        instance.username = validated_data.get('username', instance.username)
+        instance.email = validated_data.get('email', instance.email)
+        instance.is_active = validated_data.get('is_active', instance.is_active)
+        instance.is_staff = validated_data.get('is_staff', instance.is_staff)
+        instance.is_superuser = validated_data.get('is_superuser', instance.is_superuser)
+
+        # Update password if provided
+        password = validated_data.get('password')
+        if password:
+            instance.set_password(password)
+
+        # Save the updated user instance
+        instance.save()
+
+        # Update UserProfile fields if present
+        user_profile_data = validated_data.get('userprofile', {})
+        if user_profile_data:
+            user_profile = instance.userprofile
+            user_profile.points = user_profile_data.get('points', user_profile.points)
+            user_profile.save()
+
+        return instance
+
+
     
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)

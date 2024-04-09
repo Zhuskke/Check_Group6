@@ -279,3 +279,14 @@ def package_detail(request, package_id):
         return Response(serializer.data)
     except TopUpPackage.DoesNotExist:
         return Response({'error': 'Package not found'}, status=404)
+    
+
+class AdminUserListCreateAPIView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+
+class AdminUserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]

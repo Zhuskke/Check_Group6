@@ -42,6 +42,11 @@
     packageReducer,
   } from "./reducers/pointsReducers";
 
+  import {
+    userListReducer,
+    userDetailsReducer,
+  } from './reducers/adminReducers';
+
   const reducer = combineReducers({
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
@@ -74,6 +79,8 @@
     getProfileImage: getProfileImageReducer,
     uploadProfileImage: uploadProfileImageReducer,
     userProfile: userProfileReducer,
+    userList: userListReducer,
+    userDetails : userDetailsReducer
   });
 
   const userInfoFromStorage = localStorage.getItem("userInfo")

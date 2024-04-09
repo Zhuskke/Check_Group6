@@ -84,3 +84,29 @@ html, body{
 .modal-body {
   padding: 20px; /* Adjust padding as needed */
 }
+
+
+.admin-users-container {
+  padding: 20px;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.user-actions button {
+  margin-left: 10px;
+}

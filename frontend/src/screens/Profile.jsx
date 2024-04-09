@@ -4,7 +4,6 @@ import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
 import { Container, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-// import { fetchUser } from "../actions/userActions";
 import { fetchUserQuestions } from "../actions/questionActions";
 import {
   updateUserDescription,
