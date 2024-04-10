@@ -1,9 +1,12 @@
-// AskQuestionScreen.jsx
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { askQuestion } from "../actions/questionActions";
 import HeaderQuestion from "../components/HeaderQuestion";
+import Footer from '../components/Footer';
+import { BsFillSendCheckFill } from "react-icons/bs";
+import { TbPhoto } from "react-icons/tb";
+import '../designs/AskQuestion.css';
 
 const AskQuestionScreen = () => {
   const dispatch = useDispatch();
@@ -63,31 +66,71 @@ const AskQuestionScreen = () => {
   }, [success, navigate]);
 
   return (
-    <div>
-      <HeaderQuestion />
+    <><HeaderQuestion />
+
+      <section id="askquestionsection1">
+      <strong><h1 className="title" id="askquestionslogan">You have the questions, We have the answers!</h1></strong>
+      <strong><h3 className="title-2" id="askquestionslogan2">Hehehehe Check Hehehehe</h3></strong>
+      </section>
+
+    <section id="askquestionsection2">
       {error && <p>Error: {error}</p>}
       {success && <p>Question posted successfully!</p>}
-      <form className="question-container" onSubmit={handleSubmit}>
-        {/* Display the received question in the textarea */}
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-          placeholder="Type your question here..."
-          id="question-field"
-        />
-        <select value={pointsSpent} onChange={(e) => setPointsSpent(parseInt(e.target.value))}>
-          <option value={10}>10 points</option>
-          <option value={20}>20 points</option>
-          <option value={30}>30 points</option>
-          <option value={40}>40 points</option>
-          <option value={50}>50 points</option>
-        </select>
-        {/* File input field for attachment */}
-        <input type="file" onChange={handleFileChange} />
-        <input id="submit-btn" type="submit" disabled={loading} value="Submit" />
-      </form>
-    </div>
+      <div id="askquestion">
+        <form className="question-container" onSubmit={handleSubmit}>
+          {/* Display the received question in the textarea */}
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+            placeholder="Type your question here..."
+            id="question-field"
+          />
+          <select
+            id="questionpoints"
+            value={pointsSpent}
+            onChange={(e) => setPointsSpent(parseInt(e.target.value))}
+            className="custom-select"
+          >
+            <option id="pointsoption" value={10}>10 points</option>
+            <option id="pointsoption" value={20}>20 points</option>
+            <option id="pointsoption" value={30}>30 points</option>
+            <option id="pointsoption" value={40}>40 points</option>
+            <option id="pointsoption" value={50}>50 points</option>
+          </select>
+          {/* File input field for attachment */}
+          <div>
+          <input
+            type="file"
+            id="file-input"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+          <div id="questionbtn-container" onClick={() => document.getElementById('file-input').click()}>
+            <TbPhoto id="askquestionbtn1" />
+          </div>
+          </div>
+
+          <div className='askquestionline'></div>
+          <div>
+
+          <button id="submit-btn-container" type="submit" disabled={loading} value="Submit">
+          <BsFillSendCheckFill id="askquestionbtn2" />
+          </button>
+          </div>
+        </form>
+      </div>
+
+              <div id='askqimage1'>
+              </div>
+
+              <div id='askqimage2'>
+              </div>
+
+    </section>
+    <Footer />
+    </>
   );
 };
 

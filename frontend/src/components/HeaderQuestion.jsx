@@ -104,7 +104,7 @@ React.useEffect(() => {
           <Nav>
             <Nav.Link as={Link} to="/topup" role='button' id='headeruserbtn'>{`Points: ${points}`}</Nav.Link>
             <div className='headeruserline'></div>
-            <Nav.Link as={Link} to="/ask-a-question" role='button' id='headeruserbtn'>Ask a Question</Nav.Link>
+            <Nav.Link as={Link} to="/" role='button' id='headeruserbtn'>Home</Nav.Link>
             <div className='headeruserline'></div>
             <NavDropdown title={<img src={profilePicture} id='dropdownimage' />} id="headerdropdown" className="header-dropdown">
               <NavDropdown.Item as={Link} to="/profile" id='dropdownitem'>Profile</NavDropdown.Item>

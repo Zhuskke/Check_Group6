@@ -62,10 +62,8 @@ function HistoryScreen() {
           <p id='subjectscreentext'>You are viewing as a guest :c Sign up for a better study experience!</p>
           <button onClick={handleSignUp} id='subjectscreenbtn'>Sign up Now!</button>
         </div>
-      </div>
-    )}
 
-          <div id='subjectscreen-image'>
+        <div id='subjectscreen-image'>
           </div>
 
           <div id='subjectscreen-image2'>
@@ -73,6 +71,9 @@ function HistoryScreen() {
 
           <div id='subjectscreen-image3'>
           </div>
+
+      </div>
+    )}
 
     {userInfo && (
       <div>

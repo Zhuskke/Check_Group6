@@ -4,6 +4,8 @@ import { purchasePoints, getPackageDetails } from "../actions/pointsActions";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import HeaderUser from "../components/HeaderUser";
+import Footer from "../components/Footer";
+import '../designs/Paymentscreen.css';
 
 
 const PaymentScreen = () => {
@@ -71,13 +73,15 @@ const PaymentScreen = () => {
   };
 
   return (
-    <div>
-      <HeaderUser />
-      <h2>Payment Screen</h2>
+    <>
+    <HeaderUser />
+    <div id="paymentcontainerbg">
+    <div id="paymentcontainer">
+    <p id='paymenttitle'>You are paying for:</p>
       {packageDetails ? (
         <div>
-          <p>Points: {packageDetails.points}</p>
-          <p>Amount: ${packageDetails.price}</p>
+          <p id="paymenttext">Points: {packageDetails.points}</p>
+          <p id="paymenttext">Amount: ${packageDetails.price}</p>
         </div>
       ) : (
         <p>Loading package details...</p>
@@ -89,14 +93,27 @@ const PaymentScreen = () => {
           currency: "USD",
         }}
       >
+        <div id="paypalbtn">
         <PayPalButtons
-          style={{ layout: "horizontal" }}
+          style={{ layout: "horizontal"}}
           createOrder={createOrderHandler}
           onApprove={onApproveHandler}
           onSuccess={successPaymentHandler}
         />
+        </div>
       </PayPalScriptProvider>
+
+          <div id='paymentimg'>
+          </div>
+
+          <div id='paymentimg2'>
+          </div>
+
+
     </div>
+    </div>
+    <Footer />
+    </>
   );
 };
 

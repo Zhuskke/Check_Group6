@@ -1,0 +1,88 @@
+#topupcontainer {
+    height: 59.53rem;
+    background-color: #b2d8d8;
+    padding-top: 5rem;
+}
+
+#topuptitle {
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.listcontainer {
+    height: 20rem;
+    width: 20rem;
+    padding-top: 1rem;
+    background-color: rgba(255, 255, 255, 0.541);
+    color: black;
+    border-radius: 2rem;
+    margin: 2rem;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: larger;
+    transition: 0.2s ease-in-out;
+}
+
+.listcontainer:hover{
+    height: 20rem;
+    width: 20rem;
+    padding-top: 1rem;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border-radius: 2rem;
+    margin: 2rem;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: larger;
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+}
+
+
+#topupicon{
+    margin-top: 1.5rem;
+    padding-top: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    width: 11rem;
+    height: 11rem;
+}
+
+#topupimg{
+    background-image: url(https://images.vexels.com/media/users/3/289096/isolated/preview/58ef6141f73a0cc959038cbe876864ef-cat-circus-character.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 36rem;
+    left: 18rem;
+    width: 20rem;
+    height: 20rem;
+    background-size: contain;
+}
+
+#topupimg2{
+    background-image: url(https://images.vexels.com/media/users/3/289096/isolated/preview/58ef6141f73a0cc959038cbe876864ef-cat-circus-character.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 36rem;
+    left: 79rem;
+    width: 20rem;
+    height: 20rem;
+    background-size: contain;
+    transform: scaleX(-1);
+}
