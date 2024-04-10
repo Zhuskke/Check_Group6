@@ -18,6 +18,8 @@ import OrderScreen from "./screens/OrderScreen";
 import TopUpScreen from "./screens/TopUpScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import VisitProfile from "./screens/VisitProfile";
+import AdminUserList from "./screens/AdminUsersScreen";
+import AdminQuestionsScreen from "./screens/AdminQuestionScreen";
 function App() {
   return (
     <Router>
@@ -41,6 +43,8 @@ function App() {
         <Route path="/topup" element={<TopUpScreen />} />
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/profile/:id" element={<VisitProfile />} />
+        <Route path="/admin/users" element={<AdminUserList />} />
+        <Route path="/admin/questions" element={<AdminQuestionsScreen />} />
       </Routes>
     </Router>
     

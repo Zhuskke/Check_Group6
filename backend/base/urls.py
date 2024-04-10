@@ -31,5 +31,9 @@ urlpatterns = [
     path('top-up-packages/', views.get_top_up_packages, name='top-up'),
     path('purchase-points/<int:package_id>/', views.purchase_points, name='purchase-points'),
     path('package-details/<int:package_id>/', views.package_detail, name='package-detail'),
+    path('admin/users/', views.AdminUserListCreateAPIView.as_view(), name='admin-user-list-create'),
+    path('admin/users/<int:pk>/', views.AdminUserRetrieveUpdateDestroyAPIView.as_view(), name='admin-user-detail'),
     path('comments/<int:question_id>/', views.create_comment, name='comment-create'),
+    path('admin/questions/', views.AdminQuestionListCreateAPIView.as_view(), name='admin-question-list-create'),
+    path('admin/questions/<int:pk>/', views.AdminQuestionRetrieveUpdateDestroyAPIView.as_view(), name='admin-question-detail'),
 ]
