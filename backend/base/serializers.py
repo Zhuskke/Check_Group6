@@ -55,6 +55,15 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
+    def create(self, validated_data):
+        userprofile_data = validated_data.pop('userprofile', None)  # Extract UserProfile data
+        
+        user = User.objects.create_user(**validated_data)  # Create User instance
+        
+        if userprofile_data:
+            UserProfile.objects.create(user=user, **userprofile_data)  # Create UserProfile instance
+        
+        return user
 
     
 class UserSerializerWithToken(UserSerializer):
@@ -115,10 +124,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
-    points = serializers.IntegerField(source='userprofile.points')
-    is_active = serializers.BooleanField()
-    is_superuser = serializers.BooleanField()
-    is_staff = serializers.BooleanField()
     password = serializers.CharField(write_only=True, required=True)
 
     class Meta:

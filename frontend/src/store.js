@@ -45,6 +45,7 @@
   import {
     userListReducer,
     userDetailsReducer,
+    adminQuestionListReducer,
   } from './reducers/adminReducers';
 
   import {
@@ -86,6 +87,7 @@
     userList: userListReducer,
     userDetails : userDetailsReducer,
     createComment: createCommentReducer,
+    questionList: adminQuestionListReducer,
   });
 
   const userInfoFromStorage = localStorage.getItem("userInfo")
