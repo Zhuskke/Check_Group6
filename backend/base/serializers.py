@@ -91,7 +91,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class QuestionSerializer(serializers.ModelSerializer):
-    attachment = serializers.FileField(required=False)
+    attachment = serializers.FileField(required=False, allow_null=True)
     class Meta:
         model = Question
         fields = '__all__'

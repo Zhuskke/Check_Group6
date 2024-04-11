@@ -313,6 +313,23 @@ class AdminQuestionRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAP
     serializer_class = QuestionSerializer
     permission_classes = [permissions.IsAdminUser]
 
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+
+        clear_attachment = request.data.get('clearAttachment') == 'true'
+        
+        # If the attachment is being cleared, remove the existing attachment
+        if clear_attachment:
+            if instance.attachment:
+                instance.attachment.delete()
+                instance.attachment = None
+
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def activate_subscription(request, user_id):  # Accept 'user_id' as a parameter

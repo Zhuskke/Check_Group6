@@ -248,37 +248,48 @@ export const getUserDetails = (userId) => async (dispatch, getState) => {
     }
   };
   
-  export const updateQuestion = (questionId, questionData) => async (dispatch, getState) => {
+  export const updateQuestion = (questionId, questionData, clearAttachment) => async (dispatch, getState) => {
     try {
-      dispatch({ type: QUESTION_UPDATE_REQUEST });
-  
-      const {
-        userLogin: { userInfo },
-      } = getState();
-  
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo && userInfo.token}`,
-          'Content-Type': 'application/json',
-        },
-      };
-  
-      const { data } = await axios.put(`/api/admin/questions/${questionId}/`, questionData, config);
-  
-      dispatch({
-        type: QUESTION_UPDATE_SUCCESS,
-        payload: data,
-      });
+        dispatch({ type: QUESTION_UPDATE_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo && userInfo.token}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+
+        // If clearAttachment is true, set a flag to indicate clearing the attachment
+        if (clearAttachment) {
+            questionData.append('clear_attachment', 'true');
+        }
+
+        const { data } = await axios.put(`/api/admin/questions/${questionId}/`, questionData, config);
+
+        dispatch({
+            type: QUESTION_UPDATE_SUCCESS,
+            payload: data,
+        });
+
+        dispatch(listQuestions()); // Fetch updated list of questions
     } catch (error) {
-      dispatch({
-        type: QUESTION_UPDATE_FAIL,
-        payload:
-          error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
-      });
+        dispatch({
+            type: QUESTION_UPDATE_FAIL,
+            payload:
+                error.response && error.response.data.detail
+                    ? error.response.data.detail
+                    : error.message,
+        });
     }
-  };
+};
+
+
+  
+  
   
   export const deleteQuestion = (questionId) => async (dispatch, getState) => {
     try {
