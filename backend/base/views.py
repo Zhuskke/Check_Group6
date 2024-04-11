@@ -166,14 +166,19 @@ def delete_question(request, pk):
 def get_question_details(request, pk):
     try:
         question = Question.objects.get(pk=pk)
+        print('question', question.user)
+        user = UserProfile.objects.get(user=question.user)
+        print('user', user.profile_picture)
         serializer = QuestionSerializer(question, context={'request': request})
         
         serializer_data = serializer.data
         serializer_data['user_profile_link'] = request.build_absolute_uri(reverse('user-profile') + f'?user_id={question.user.id}')
+        serializer_data['user_profile_picture_url'] = user.profile_picture.url if user.profile_picture else None
         
         return Response(serializer_data)
     except Question.DoesNotExist:
         return Response({'error': 'Question not found'}, status=status.HTTP_404_NOT_FOUND)
+
 
 
     
