@@ -376,6 +376,7 @@ background-size: contain;
   left: 30.5rem;
   width: 15rem;
   height: 15rem;
+<<<<<<< HEAD
 }
 
 #homescreen-image3 {
@@ -488,3 +489,147 @@ background-size: contain;
   height: 10rem;
 }
 }
+=======
+  background-size: contain;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .title {
+    margin-top: 4rem;
+    padding-left: 2rem;
+    font-size: 3.5rem;
+    width: auto;
+  }
+  
+  .title-2 {
+    padding-left: 2rem;
+    font-size: 1rem;
+    width: auto;
+  }
+  
+  #homescreen-image {
+    top: 7rem;
+    left: 5rem;
+    width: 20rem;
+    height: 20rem;
+  }
+  
+  #homescreen-image2 {
+    top: 22.1rem;
+    left: 30.5rem;
+    width: 15rem;
+    height: 15rem;
+  }
+  
+  #homescreen-image3 {
+    top: 23.8rem;
+    left: 9.2rem;
+    width: 15rem;
+    height: 15rem;
+  }
+  
+  .section2title {
+    margin-top: 4rem;
+    padding-left: 2rem;
+    font-size: 3.5rem;
+    width: auto;
+  }
+  
+  .section2title-2 {
+    padding-left: 2rem;
+    font-size: 1rem;
+    width: auto;
+  }
+  
+  #homescreenbtn {
+    margin-left: 2rem;
+  }
+  
+  #section-3 {
+    height: auto;
+  }
+  
+  .section3title {
+    margin-top: 4rem;
+    padding-left: 5rem;
+    font-size: 3rem;
+    width: auto;
+  }
+  
+  .section3title-2 {
+    padding-left: 5rem;
+    font-size: 1rem;
+    width: auto;
+  }
+  
+  #homescreenbtn2 {
+    margin-left: 3rem;
+  }
+  
+  #section3-image {
+    top: 69rem;
+    left: 10rem;
+    width: 15rem;
+    height: 15rem;
+  }
+  
+  #section3-image2 {
+    top: 69rem;
+    left: 35rem;
+    width: 15rem;
+    height: 15rem;
+  }
+  
+  .section4title {
+    margin-top: 6rem;
+    padding-left: 2rem;
+    font-size: 3.5rem;
+    width: auto;
+  }
+  
+  .section4title-2 {
+    padding-left: 2rem;
+    font-size: 1rem;
+    width: auto;
+  }
+  
+  #section4-container {
+    margin-left: 1.5rem;
+    margin-top: -17rem;
+    width: auto;
+    height: auto;
+  }
+  
+  #homescreenbtn3 {
+    margin-left: 4.58rem;
+  }
+  
+  #listtext {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  
+  #listitems {
+    margin-left: 2.5rem;
+  }
+  
+  #listtext2 {
+    margin-top: 1rem;
+  }
+  
+  #section4-image {
+    top: 86rem;
+    left: 10rem;
+    width: 10rem;
+    height: 10rem;
+  }
+  
+  #section4-image2 {
+    top: 60rem;
+    left: 44rem;
+    width: 10rem;
+    height: 10rem;
+  }
+}
+>>>>>>> 5122a370fd202e03e0df504dd80ec1180e695ee3

@@ -3,6 +3,7 @@
 }
 
 #footerbg{
+<<<<<<< HEAD
 background-color: white;
 /* position: fixed; */
 /* left: 0;
@@ -12,6 +13,17 @@ background-color: #333; /* Adjust as needed */
 /* color: white; /* Adjust as needed */
 /* text-align: center; */ 
 /* padding: 10px 0; Adjust padding as needed */ 
+=======
+  background-color: white;
+  /* position: fixed; */
+  /* left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333; /* Adjust as needed */
+  /* color: white; /* Adjust as needed */
+  /* text-align: center; */ 
+  /* padding: 10px 0; Adjust padding as needed */ 
+>>>>>>> 5122a370fd202e03e0df504dd80ec1180e695ee3
 }
 
 .footer-container {

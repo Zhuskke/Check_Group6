@@ -112,7 +112,7 @@ function HomeScreen() {
               </div>
 
               <div id='section4-image2'>
-          </div>
+              </div>
 
 
 
