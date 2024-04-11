@@ -36,6 +36,10 @@ const QuestionDetail = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const profPic = useSelector((state) => state.getProfileImage.profileImageUrl);
+  const profilePic = useSelector((state) => state.questionDetail.question);
+  console.log('profilepic', profilePic.user_profile_picture_url)
+
   useEffect(() => {
     if (question && question.user && !users[question.user]) {
       dispatch(fetchUser(question.user));
@@ -89,7 +93,8 @@ const QuestionDetail = () => {
                 <label htmlFor="profile-image-input">
                   <img
                     src={
-                      "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
+
+                     profPic || "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
                     }
                     alt="Profile"
                     className="questiondetail-profile-picture"
@@ -108,6 +113,7 @@ const QuestionDetail = () => {
                 <label htmlFor="profile-image-input">
                   <img
                     src={
+                      profilePic.user_profile_picture_url ||
                       "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
                     }
                     alt="Profile"

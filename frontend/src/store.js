@@ -1,56 +1,60 @@
-  import { configureStore } from "@reduxjs/toolkit";
-  import { thunk } from "redux-thunk";
-  import {
-    userLoginReducer,
-    userRegisterReducer,
-    userFetchReducer,
-    uploadImageReducer,
-    getUploadedImagesReducer,
-    userDescriptionReducer,
-    getProfileImageReducer,
-    uploadProfileImageReducer,
-    userProfileReducer
-  } from "./reducers/userReducers";
-  import { combineReducers } from "redux";
-  import {
-    askQuestionReducer,
-    questionListReducer,
-    questionDetailReducer,
-    searchReducer,
-    userQuestionsReducer,
-    deleteQuestionReducer,
-  } from "./reducers/questionReducers";
-  import {
-    uploadImageEnglishReducer,
-    uploadImageHistoryReducer,
-    uploadImageMathReducer,
-    uploadImageScienceReducer,
-    uploadImagePhysicsReducer,
-    uploadImageCalculusReducer,
-    getUploadedImagesEnglishReducer,
-    getUploadedImagesHistoryReducer,
-    getUploadedImagesMathReducer,
-    getUploadedImagesScienceReducer,
-    getUploadedImagesPhysicsReducer,
-    getUploadedImagesCalculusReducer,
-  } from "./reducers/subjectReducers";
+import { configureStore } from "@reduxjs/toolkit";
+import { thunk } from "redux-thunk";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userFetchReducer,
+  uploadImageReducer,
+  getUploadedImagesReducer,
+  userDescriptionReducer,
+  getProfileImageReducer,
+  uploadProfileImageReducer,
+  userProfileReducer
+} from "./reducers/userReducers";
+import { combineReducers } from "redux";
+import {
+  askQuestionReducer,
+  questionListReducer,
+  questionDetailReducer,
+  searchReducer,
+  userQuestionsReducer,
+  deleteQuestionReducer,
+} from "./reducers/questionReducers";
+import {
+  uploadImageEnglishReducer,
+  uploadImageHistoryReducer,
+  uploadImageMathReducer,
+  uploadImageScienceReducer,
+  uploadImagePhysicsReducer,
+  uploadImageCalculusReducer,
+  getUploadedImagesEnglishReducer,
+  getUploadedImagesHistoryReducer,
+  getUploadedImagesMathReducer,
+  getUploadedImagesScienceReducer,
+  getUploadedImagesPhysicsReducer,
+  getUploadedImagesCalculusReducer,
+} from "./reducers/subjectReducers";
 
-  import {
-    userPointsReducer,
-    topUpPackagesReducer,
-    purchasePointsReducer,
-    packageReducer,
-  } from "./reducers/pointsReducers";
+import {
+  userPointsReducer,
+  topUpPackagesReducer,
+  purchasePointsReducer,
+  packageReducer,
+} from "./reducers/pointsReducers";
 
-  import {
-    userListReducer,
-    userDetailsReducer,
-    adminQuestionListReducer,
-  } from './reducers/adminReducers';
+import {
+  userListReducer,
+  userDetailsReducer,
+  adminQuestionListReducer,
+} from './reducers/adminReducers';
 
-  import {
-    createCommentReducer,
-  } from "./reducers/commentReducers";
+import {
+  createCommentReducer,
+} from "./reducers/commentReducers";
+
+import {
+    premiumReducer,
+  } from "./reducers/premiumReducers";
 
   const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -88,6 +92,8 @@
     userDetails : userDetailsReducer,
     createComment: createCommentReducer,
     questionList: adminQuestionListReducer,
+    premium: premiumReducer,
+    
   });
 
   const userInfoFromStorage = localStorage.getItem("userInfo")

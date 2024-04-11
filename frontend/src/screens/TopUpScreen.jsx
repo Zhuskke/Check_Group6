@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTopUpPackages } from "../actions/pointsActions";
 import HeaderUser from "../components/HeaderUser";
+import '../designs/Topupscreen.css'
+import Footer from "../components/Footer";
+import { FaCoins } from "react-icons/fa6";
 
 const TopUpScreen = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -20,21 +23,30 @@ const TopUpScreen = () => {
   };
 
   return (
-    <div>
+    <>
       <HeaderUser />
-      <h2>Top Up Points</h2>
-      <ul>
-        {packages.map((topUpPackage) => (
-          <li key={topUpPackage.id}>
-            {/* Handle package click */}
-            <div onClick={() => handlePackageClick(topUpPackage.id)}>
+      <div id="topupcontainer">
+        <p id='topuptitle'>Top Up Points:</p>
+        <div className="flex-container">
+          {packages.map((topUpPackage) => (
+            <div key={topUpPackage.id} className="listcontainer" onClick={() => handlePackageClick(topUpPackage.id)}>
               {topUpPackage.points} Points - ${topUpPackage.price}
+
+              <FaCoins id="topupicon"/>
+
             </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-    
+          ))}
+
+            <div id='topupimg'>
+            </div>
+
+            <div id='topupimg2'>
+            </div>
+          
+        </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 

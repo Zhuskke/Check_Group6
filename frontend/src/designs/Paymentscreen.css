@@ -1,0 +1,67 @@
+#paymentcontainerbg{
+    height: 59.5rem;
+    padding-top: 3rem;
+    background-color: #B2D8D8;
+}
+
+#paymenttitle{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    padding-top: 5rem;
+}
+
+#paymenttext{
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#paymentcontainer {
+    height: 30rem;
+    /* padding-top: 4rem; */
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
+    width: 75rem;
+    background-color: rgba(255, 255, 255, 0.582);
+    border-radius: 2rem;
+    margin-left: 20.5rem;   
+    margin-top: 11rem;
+    /* -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75); */
+}
+
+#paypalbtn{
+    margin-top: 2rem;
+    margin-left: 8.3rem;
+}
+
+#paymentimg{
+    background-image: url(https://images.vexels.com/media/users/3/286295/isolated/preview/8dc6e6a225bdc100a57b10a23137703c-cute-cat-with-lightbulb.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 22.5rem;
+    left: 10rem;
+    width: 23.5rem;
+    height: 23.5rem;
+    background-size: contain;
+    transform: scaleX(-1);
+}
+
+#paymentimg2{
+    background-image: url(https://images.vexels.com/media/users/3/287060/isolated/preview/bb3c667866a08af269b17a637f1c458a-cute-cat-with-backpack.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 23rem;
+    left: 83rem;
+    width: 23rem;
+    height: 23rem;
+    background-size: contain;
+}

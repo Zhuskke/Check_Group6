@@ -4,7 +4,9 @@ import { purchasePoints, getPackageDetails } from "../actions/pointsActions";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import HeaderUser from "../components/HeaderUser";
-
+import { PURCHASE_POINTS_RESET } from "../constants/pointsConstants";
+import Footer from "../components/Footer";
+import '../designs/Paymentscreen.css';
 
 const PaymentScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -14,6 +16,22 @@ const PaymentScreen = () => {
   const location = useLocation();
   const packageId = new URLSearchParams(location.search).get("packageId");
   const packageDetails = useSelector((state) => state.package.packageDetails);
+  const [SdkReady, setSdkReady] = useState(false);
+
+  const onError = (err) => {
+    console.error("PayPal SDK error:", err);
+  };
+
+  const addPayPalScript = () => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src =  'https://www.paypal.com/sdk/js?client-id=AZCdyKNZ2p8oABKCFwy2w0_tJA1dsr5ghWDDDpLl_7YLn3b6GwL6uTK9oWb3vsImxyqQnBzdma0GdCnv&currency=USD'
+    script.async = true;
+    script.onload = () => {
+      setSdkReady(true);
+    }
+    document.body.appendChild(script)
+  }
   
 
   useEffect(() => {
@@ -26,8 +44,19 @@ const PaymentScreen = () => {
     if (success) {
       navigate("/home");
       window.location.reload();
+      dispatch({ type: PURCHASE_POINTS_RESET });;
     }
   }, [success, navigate]);
+
+  useEffect(() => {
+    if (packageDetails && !packageDetails.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
+    }
+  }, [packageDetails]);
 
   const handlePurchase = () => {
     if (!packageDetails) return;
@@ -38,7 +67,7 @@ const PaymentScreen = () => {
   const successPaymentHandler = (paymentResult) => {
     dispatch(purchasePoints(packageId, paymentResult))
       .then(() => {
-        setSuccess(true); // Update success state after successful purchase
+        setSuccess(true);
       })
       .catch((error) => {
         setLoading(false);
@@ -71,13 +100,15 @@ const PaymentScreen = () => {
   };
 
   return (
-    <div>
-      <HeaderUser />
-      <h2>Payment Screen</h2>
+    <>
+    <HeaderUser />
+    <div id="paymentcontainerbg">
+    <div id="paymentcontainer">
+    <p id='paymenttitle'>You are paying for:</p>
       {packageDetails ? (
         <div>
-          <p>Points: {packageDetails.points}</p>
-          <p>Amount: ${packageDetails.price}</p>
+          <p id="paymenttext">Points: {packageDetails.points}</p>
+          <p id="paymenttext">Amount: ${packageDetails.price}</p>
         </div>
       ) : (
         <p>Loading package details...</p>
@@ -89,14 +120,28 @@ const PaymentScreen = () => {
           currency: "USD",
         }}
       >
+        <div id="paypalbtn">
         <PayPalButtons
-          style={{ layout: "horizontal" }}
+          style={{ layout: "horizontal"}}
           createOrder={createOrderHandler}
           onApprove={onApproveHandler}
           onSuccess={successPaymentHandler}
+          onError={onError} 
         />
+        </div>
       </PayPalScriptProvider>
+
+          <div id='paymentimg'>
+          </div>
+
+          <div id='paymentimg2'>
+          </div>
+
+
     </div>
+    </div>
+    <Footer />
+    </>
   );
 };
 

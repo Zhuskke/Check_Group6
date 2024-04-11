@@ -26,6 +26,9 @@ import {
   QUESTION_DELETE_REQUEST,
   QUESTION_DELETE_SUCCESS,
   QUESTION_DELETE_FAIL,
+  QUESTION_CREATE_REQUEST,
+  QUESTION_CREATE_SUCCESS,
+  QUESTION_CREATE_FAIL,
 } from '../constants/adminConstants';
 
 export const userListReducer = (state = { users: [] }, action) => {
@@ -139,6 +142,19 @@ export const questionDeleteReducer = (state = {}, action) => {
     case QUESTION_DELETE_SUCCESS:
       return { loading: false, success: true };
     case QUESTION_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const questionCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case QUESTION_CREATE_REQUEST:
+      return { loading: true };
+    case QUESTION_CREATE_SUCCESS:
+      return { loading: false, success: true, question: action.payload };
+    case QUESTION_CREATE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

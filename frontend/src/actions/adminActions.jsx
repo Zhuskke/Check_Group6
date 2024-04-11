@@ -307,3 +307,43 @@ export const getUserDetails = (userId) => async (dispatch, getState) => {
       });
     }
   };
+
+  export const createQuestion = (questionData) => async (dispatch, getState) => {
+    console.log('actions log',questionData)
+    try {
+      dispatch({ type: QUESTION_CREATE_REQUEST });
+  
+      const {
+        userLogin: { userInfo },
+      } = getState();
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo && userInfo.token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+  
+      // Include the user ID in the question data
+      const dataWithUserId = {
+        ...questionData,
+        user: questionData.userId, // Assuming the API expects a 'user' field with the user ID
+      };
+  
+      const { data } = await axios.post('/api/admin/questions/', dataWithUserId, config);
+  
+      dispatch({
+        type: QUESTION_CREATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: QUESTION_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+  

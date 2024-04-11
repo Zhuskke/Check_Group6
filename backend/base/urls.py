@@ -36,4 +36,6 @@ urlpatterns = [
     path('comments/<int:question_id>/', views.create_comment, name='comment-create'),
     path('admin/questions/', views.AdminQuestionListCreateAPIView.as_view(), name='admin-question-list-create'),
     path('admin/questions/<int:pk>/', views.AdminQuestionRetrieveUpdateDestroyAPIView.as_view(), name='admin-question-detail'),
+    path('users/<int:user_id>/activate-subscription/', views.activate_subscription, name='activate-subscription'),
+    path('premium-details/', get_premium_details, name='premium-details'),
 ]

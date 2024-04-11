@@ -1,0 +1,284 @@
+#subscreencontainer{
+    height: 59.5rem;
+    background-color:  #B2D8D8;
+}
+
+#subguest-containerbg{
+    height: 51rem;
+    padding-top: 4rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
+    width: 75rem;
+    background-color: rgba(255, 255, 255, 0.582);
+    border-radius: 2rem;
+    margin-left: 20.5rem;   
+    margin-top: 3rem;
+    /* -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75); */
+}
+
+#subscreentext{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem; 
+    color: black; 
+    text-align: center;
+}
+
+#subscreenbtn{
+    width: 25rem;
+    height: 4rem;
+    border: hidden;
+    border-radius: 3rem;
+    background-color: rgba(0, 0, 0, 0.87);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-left: 20rem;
+}
+
+#subscreenbtn:hover{
+    width: 25rem;
+    height: 4rem;
+    border: hidden;
+    border-radius: 3rem;
+    border: 2px solid black;
+    background-color: #B2D8D8;
+    color: black;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-left: 20rem;
+}
+
+#sublistitems{
+    text-align: left;
+    margin-left: 22rem;
+    margin-top: 3rem;
+    font-family: 'Russo One', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: black;
+}
+
+#subscreenimg{
+    background-image: url(https://images.vexels.com/media/users/3/202328/isolated/preview/a3c3dd6ef259935cc937105fc9074ebc-studying-koala-character.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 18rem;
+    left: 18rem;
+    width: 30rem;
+    height: 30rem;
+    background-size: contain;
+}
+
+#subscreenimg2{
+    background-image: url(https://images.vexels.com/media/users/3/202333/isolated/preview/81be899817881d9b48955ef1ca9247ff-studying-zebra-character.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 18rem;
+    left: 66.5rem;
+    width: 30rem;
+    height: 30rem;
+    background-size: contain;
+    transform: scaleX(-1);
+}
+
+#subuserslogan{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem; 
+    color: black; 
+    text-align: center;
+    padding-top: 2rem;
+}
+
+#subusercontainerbg{
+    height: 56rem;
+    background-color: #b2d8d8;
+}
+
+#sub1container{
+    height: 40rem;
+    width: 30rem;
+    padding-top: 1rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2rem;
+    margin-left: 23rem;   
+    margin-top: 2rem;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    transition: 0.2s ease-in-out;
+    /* scale: 1.05;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75); */
+}
+
+#sub1container:hover{
+    /* height: 41rem;
+    width: 33rem;
+    padding-top: 1rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2rem;
+    margin-left: 23rem;   
+    margin-top: 2rem;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    transition: 0.2s ease; */
+    transform: scale(1.05);
+    transition: 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+}
+
+#sub2container{
+    height: 40rem;
+    width: 30rem;
+    padding-top: 1rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 2rem;
+    margin-left: 10rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    transition: 0.2s ease-in-out;
+}
+
+#sub2container:hover{
+    transform: scale(1.05);
+    transition: 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+}
+
+#sub1smalltext{
+    width: 10rem;
+    height: 2rem;
+    margin-top: -1rem;
+    margin-left: 20.03rem;
+    background-color: #B2D8D8;
+    border-top-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: large;
+    padding-top: .1rem;
+    color: white;
+}
+
+
+#sub1text{
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
+    padding-top: 1rem;
+    font-size: 2.5rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    color: black;
+    text-align: center;
+}
+
+#sub2text{
+    padding-left: 6.5rem;
+    padding-right: 6.5rem;
+    padding-top: 2rem;
+    font-size: 2.5rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    color: black;
+    text-align: center;
+}
+
+#subbtn{
+    width: 20rem;
+    height: 3rem;
+    border: hidden;
+    border-radius: 3rem;
+    background-color: #B2D8D8;
+    color: black;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-top: .5rem;
+    margin-left: .3rem;
+    padding-top: .6rem;
+}
+
+#subbtn:hover{
+    width: 20rem;
+    height: 3rem;
+    border: hidden;
+    border-radius: 3rem;
+    background-color: black;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-top: .5rem;
+    margin-left: .3rem;
+}
+
+#subitems{
+    text-align: left;
+    margin-left: 10.5rem;
+    margin-top: 1.5rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: black;
+    list-style-type: none; /* Remove default bullet points */
+    position: relative; /* Positioning context for pseudo-element */
+}
+
+#subitems:before {
+    content: "\2713"; /* Unicode check mark character */
+    color: green; /* Color of the check mark */
+    font-size: 1.2em; /* Adjust size if needed */
+    position: absolute;
+    left: -1.3em; /* Adjust the position of the check mark */
+}
+
+#subitems2{
+    text-align: left;
+    margin-left: 10.5rem;
+    margin-top: 1.5rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: black;
+    list-style-type: none; /* Remove default bullet points */
+    position: relative; /* Positioning context for pseudo-element */
+}
+
+#subitems2:before {
+    content: "\2717"; /* Unicode check mark character */
+    color: red; /* Color of the check mark */
+    font-size: 1.2em; /* Adjust size if needed */
+    position: absolute;
+    left: -1.3em; /* Adjust the position of the check mark */
+}
+
+#subtext2{
+    text-align: center;
+    margin-top: 4rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.466);
+}
+
+#subtext2 {
+    font-size: 0.8em; /* Adjust size if needed */
+    color: gray; /* Color of the subtext */
+}

@@ -62,9 +62,6 @@ function CalculusScreen() {
           <div id='subjectscreen-container'>
             <p id='subjectscreentext'>You are viewing as a guest :c Sign up for a better study experience!</p>
             <button onClick={handleSignUp} id='subjectscreenbtn'>Sign up Now!</button>
-          </div>
-        </div>
-      )}
 
             <div id='subjectscreen-image'>
             </div>
@@ -74,6 +71,11 @@ function CalculusScreen() {
 
             <div id='subjectscreen-image3'>
             </div>
+
+          </div>
+        </div>
+      )}
+
 
       {userInfo && (
         <div>
