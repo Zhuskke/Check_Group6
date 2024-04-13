@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'; 
 import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
+import HeaderRegister from '../components/HeaderRegister';
 import HeaderUser from '../components/HeaderUser';
 import Footer from '../components/Footer';
 import '../designs/Subscreen.css'
@@ -18,7 +19,7 @@ const SubscriptionChoiceScreen = () => {
 
   return (
     <>
-      {userInfo ? <HeaderUser /> : <Header />}
+      {userInfo ? <HeaderUser /> : <HeaderRegister />}
       <div className="subscription-choice-screen" id='subscreencontainer'>
         <h1>Subscription Choice Screen</h1>
         {/* Render sign-up message and button only if the user is not logged in */}

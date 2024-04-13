@@ -3,6 +3,8 @@ import { useLocation, Link } from 'react-router-dom'; // Import Link from react-
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSearchResults } from '../actions/questionActions';
 import HeaderUser from '../components/HeaderUser';
+import FooterProfile from '../components/FooterProfile';
+import '../designs/Searchscreen.css'
 
 const SearchScreen = () => {
   const dispatch = useDispatch();
@@ -24,8 +26,8 @@ const SearchScreen = () => {
   return (
     <>
       <HeaderUser/>
-      <div>
-        <h2>Search Results for: {searchTerm}</h2>
+      <div id='searchscreenbg'>
+      <p id='searchscreentitle'>Search Results For: {searchTerm }</p>
         <div>
           {loading ? (
             <p>Loading...</p>
@@ -34,15 +36,35 @@ const SearchScreen = () => {
           ) : (
             results.map((result) => (
               // Wrap each result in a Link to its detail view
-              <div key={result.id}>
-                <Link to={`/questions/${result.id}`}>
+              <div key={result.id} id='searchqcontainer'>
+                <Link id='searchquestion' to={`/questions/${result.id}`}>
                   <p>{result.content}</p>
                 </Link>
               </div>
             ))
           )}
+
+          <div id='searchquestionimg'>
+          </div>
+
+          <div id='searchquestionimg2'>
+          </div>
+
+          <div id='searchquestionimg3'>
+          </div>
+
+          <div id='searchquestionimg4'>
+          </div>
+
+          <div id='searchquestionimg5'>
+          </div>
+
+          <div id='searchquestionimg6'>
+          </div>
+
         </div>
       </div>
+      <FooterProfile />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import HeaderUser from "../components/HeaderUser";
 import Footer from "../components/Footer";
+import FooterProfile from "../components/FooterProfile"
 import { Container  } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { fetchUserQuestions } from "../actions/questionActions";
@@ -38,9 +39,16 @@ const VisitProfile = () => {
   }
 
   return (
-    <div>
-      <HeaderUser />
-      <Container className="container" id="profile-container">
+    <>
+    <HeaderUser />
+    <div id="profilesection">
+
+      <div id='profileimg'>
+      </div>
+
+      <div id='profileimg2'>
+      </div>
+
         <div className="profile-picture-container">
           <label htmlFor="profile-image-input">
             <img
@@ -49,25 +57,41 @@ const VisitProfile = () => {
               className="profile-picture"
             />
           </label>
-          <p>Name: {user.username}</p>
-          <p>Description: {user.description}</p>
+          </div>
+
+        <div id="profile-container">
+          <div>
+            <p id="profileuser">{user.username}</p>
+            <p id="profiledescription">Bio: {user.description}</p>
+          </div>  
+
+        <div id="profile-questions-answers-container">
+          <div className="profile-section">
+            <p id="profileq">Questions:</p>
+            {questions && questions.length > 0 ? (
+              <ul>
+                {questions.map((question) => (
+                  <li key={question.id} id="profile-question-item">
+                    <Link to={`/questions/${question.id}`}>{question.content}</Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No questions found.</p>
+            )}
+          </div>
+
+          <div className="divider"></div>
+
+            <div className="profile-section">
+              <p id="profilea">Answers: </p>
+            </div>
+            
         </div>
-        <p>Questions:</p>
-        {questions && questions.length > 0 ? (
-          <ul>
-            {questions.map((question) => (
-              <li key={question.id}>
-                <Link to={`/questions/${question.id}`}>{question.content}</Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No questions found.</p>
-        )}
-        <p>Answers:</p>
-      </Container>
-      <Footer />
+      </div>
     </div>
+    <FooterProfile />
+    </>
   );
 }  
 

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HeaderProfile from "../components/HeaderProfile";
 import Footer from "../components/Footer";
+import FooterProfile from "../components/FooterProfile"
 import { Container, Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { AiFillEdit } from "react-icons/ai";
 // import { fetchUser } from "../actions/userActions";
 import { fetchUserQuestions } from "../actions/questionActions";
 import {
@@ -31,6 +33,7 @@ const Profile = () => {
   const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
   const [description, setDescription] = useState("");
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
+  const [showProfileOptions, setShowProfileOptions] = useState(false);
 
   useEffect(() => {
     if (userData) {
@@ -59,6 +62,7 @@ const Profile = () => {
       .then(() => {
         dispatch(fetchUserDescription());
         dispatch(getProfileImage());
+        setShowProfileOptions(false); // Hide the profile options after changing the image
       })
       .catch(error =>
         console.error("Error uploading profile picture:", error)
@@ -66,7 +70,7 @@ const Profile = () => {
   };
 
   const handleChooseFileClick = () => {
-    document.getElementById("profile-image-input").click();
+    setShowProfileOptions((prev) => !prev); // Toggle visibility of profile options
   };
 
   const handleRemoveProfilePicture = () => {
@@ -76,10 +80,20 @@ const Profile = () => {
         localStorage.removeItem(`${localStorageKey}-${userData.id}`);
         dispatch(fetchUserDescription());
         dispatch(getProfileImage());
+        setShowProfileOptions(false); // Hide the profile options after removing the image
       })
       .catch(error =>
         console.error("Error removing profile picture:", error)
       );
+  };
+
+  const handleProfileOptionClick = (action) => {
+    setShowProfileOptions(false);
+    if (action === "change") {
+      document.getElementById("profile-image-input").click();
+    } else if (action === "remove") {
+      handleRemoveProfilePicture();
+    }
   };
 
   const handleDescriptionChange = (event) => {
@@ -102,58 +116,83 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <HeaderProfile />
-      <Container className="container" id="profile-container">
-        <div className="profile-picture-container">
-          <label htmlFor="profile-image-input">
-            <img
-              src={profilePicture}
-              alt="Profile"
-              className="profile-picture"
-            />
-          </label>
-          <input
-            type="file"
-            id="profile-image-input"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-          />
-          <Button variant="primary" onClick={handleChooseFileClick}>
-            Change Profile Picture
-          </Button>
-          <Button variant="danger" onClick={handleRemoveProfilePicture}>
-            Remove Profile Picture
-          </Button>
-          <p>Name: {userData ? userData.username : ""}</p>
-          <p>Description: {description}</p>
+    <>
+    <HeaderProfile />
+    <div id="profilesection">
+
+      <div id='profileimg'>
+      </div>
+
+      <div id='profileimg2'>
+      </div>
+
+      <div className="profile-picture-container">
+        <img
+          src={profilePicture}
+          alt="Profile"
+          className="profile-picture"
+          onClick={handleChooseFileClick}
+        />
+        {showProfileOptions && (
+          <div className="profile-options">
+            <Button id="profpicbtn" variant="primary" onClick={() => handleProfileOptionClick("change")}>
+              Change Profile Picture
+            </Button>
+            <Button id="profpicbtn2" variant="danger" onClick={() => handleProfileOptionClick("remove")}>
+              Remove Profile Picture
+            </Button>
+          </div>
+        )}
+      </div>
+
+      <input
+        type="file"
+        id="profile-image-input"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ display: "none" }}
+      />
+
+      <div id="profile-container">
+        <div>
+          <p id="profileuser">{userData ? userData.username : ""}</p>
+          <p id="profiledescription">Bio: {description}
           <Button
             className="edit-description-button"
             onClick={handleEditDescription}
+            id="editbio"
           >
-            Edit Description
+            <AiFillEdit id="editbiobtn"/>
           </Button>
+          </p>
         </div>
-        <p>Questions: </p>
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : userQuestions ? (
-          <ul>
-            {userQuestions.map((question) => (
-              <li key={question.id}>
-                <Link to={`/questions/${question.id}`}>{question.content}</Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No questions found.</p>
-        )}
-        <p>Answers: </p>
-      </Container>
-      <Footer />
+        <div id="profile-questions-answers-container">
+          <div className="profile-section">
+            <p id="profileq">Questions: </p>
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : userQuestions ? (
+              <ul>
+                {userQuestions.map((question) => (
+                  <li key={question.id} id="profile-question-item">
+                    <Link to={`/questions/${question.id}`}>{question.content}</Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No questions found.</p>
+            )}
+          </div>
+
+          <div className="divider"></div>
+
+          <div className="profile-section">
+            <p id="profilea">Answers: </p>
+          </div>
+        </div>
+      </div>
 
       <Modal show={showDescriptionModal} onHide={handleCloseDescriptionModal}>
         <Modal.Header>
@@ -177,6 +216,8 @@ const Profile = () => {
         </Modal.Footer>
       </Modal>
     </div>
+    <FooterProfile />
+    </>
   );
 };
 

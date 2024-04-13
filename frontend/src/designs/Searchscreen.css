@@ -1,0 +1,117 @@
+#searchscreenbg{
+    background-color: #B2D8D8;
+    max-height: fit-content;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+#searchscreentitle{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#searchqcontainer{
+    width: 40rem;
+    max-height: fit-content;
+    background-color: rgba(255, 255, 255, 0.555);
+    margin-left: 38.5rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: .1rem;
+    border-radius: 3rem;
+    margin-top: 1rem;
+    transition: 0.2s ease-in-out;
+}
+
+#searchqcontainer:hover{
+    background-color: white;
+    color: #B2D8D8;
+    transform: scale(1.10);
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    transition: 0.2s ease-in-out;
+}
+
+#searchquestion{
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    font-size: larger;
+    word-break: break-all;
+    text-decoration: solid;
+}
+
+#searchquestionimg{
+    background-image: url(https://images.vexels.com/media/users/3/287057/isolated/preview/01646d314a5922699c4cab8d0411a979-cute-cat-with-shield.png);
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 7rem;
+    left: 19rem;
+    width: 15rem;
+    height: 15rem;
+    background-size: contain;
+}
+
+#searchquestionimg2{
+    background-image: url(https://images.vexels.com/media/users/3/286297/isolated/preview/e24b4a76ad6dcf7f9cb607c236e8a1bb-cute-cat-reading-with-pencil-on-its-ear.png);
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 7rem;
+    left: 82.5rem;
+    width: 15rem;
+    height: 15rem;
+    background-size: contain;
+    transform: scaleX(-1);
+}
+
+#searchquestionimg3{
+    background-image: url(https://images.vexels.com/media/users/3/286298/isolated/preview/6bc882c0aacb3b2c8a2b821bf339da53-cute-wizard-cat.png);
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 23.5rem;
+    left: 19rem;
+    width: 15rem;
+    height: 15rem;
+    background-size: contain;
+}
+
+#searchquestionimg4{
+    background-image: url(https://images.vexels.com/media/users/3/287059/isolated/preview/91be8ff67b4f27d3717d88408fbf98f7-cute-cat-with-sword.png);
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 23.5rem;
+    left: 82.5rem;
+    width: 15rem;
+    height: 15rem;
+    background-size: contain;
+}
+
+#searchquestionimg5{
+    background-image: url(https://images.vexels.com/media/users/3/286299/isolated/preview/c7fc607ede36d8b179f71ab9afb4a330-cute-science-cat-character.png?w=360);
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 40rem;
+    left: 19rem;
+    width: 15rem;
+    height: 15rem;
+    background-size: contain;
+    transform: scaleX(-1);
+}
+
+#searchquestionimg6{
+    background-image: url(https://images.vexels.com/media/users/3/286295/isolated/preview/8dc6e6a225bdc100a57b10a23137703c-cute-cat-with-lightbulb.png);
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 40rem;
+    left: 82.5rem;
+    width: 15rem;
+    height: 15rem;
+    background-size: contain;
+}
