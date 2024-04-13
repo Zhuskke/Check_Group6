@@ -6,6 +6,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import HeaderUser from "../components/HeaderUser";
 import { PURCHASE_POINTS_RESET } from "../constants/pointsConstants";
 import Footer from "../components/Footer";
+import '../designs/Paymentscreen.css';
 
 const PaymentScreen = () => {
   const [loading, setLoading] = useState(false);

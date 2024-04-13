@@ -1,32 +1,261 @@
-#profile-section{
-    background-color: #B2D8D8;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    height: fit-content;
-    height: 85.3vh;
-  }
+#profilesection{
+  background-color: #B2D8D8;
+  max-height: fit-content;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
   
-  #profile-container{
-    width: 80%;
-    height: fit-content;
-    padding: 2rem;
-    background: #B2D8D8 ;
+#profile-container{
+    width: 65rem;
+    height: auto;
+    margin-left: 24rem;
+    margin-top: -5.5rem;
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
     background-color: white;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;;
+    transition: all 0.2s ease-in-out;
   
-    -webkit-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
+    /* -webkit-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
     -moz-box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
-    box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85);
-  }
+    box-shadow: -1px 2px 50px -15px rgba(0,0,0,0.85); */
+}
   
-  .profile-picture { /*pfp size*/
-    width: 5rem; 
-    height: 5rem; 
+.profile-picture { /*pfp size*/
+    width: 10rem; 
+    height: 10rem; 
     border-radius: 100%;
-    border-style: solid;
+    border: 5px solid;
     border-color: #B2D8D8;
     margin-bottom: 0.625rem;
-  }
+    margin-left: 51rem;
+}
+
+.profile-picture:hover { /*pfp size*/
+  width: 10rem; 
+  height: 10rem; 
+  border-radius: 100%;
+  border: 5px solid;
+  border-color: black;
+  margin-bottom: 0.625rem;
+  margin-left: 51rem;
+}
+
+#profileuser{
+  margin-top: 3rem;
+  color: black;
+  font-family: "Lato", sans-serif;
+  font-size: larger;
+  font-size: 2rem;
+  font-weight: 300;
+  font-weight: bolder;
+  text-align: center;
+  font-style: italic;
+  margin-left: -1rem;
+}
+
+#profiledescription{
+  font-family: "Lato", sans-serif;
+  color: gray;
+  font-size: larger;
+  font-size: 1rem;
+  font-weight: 300;
+  font-weight: bolder;
+  text-align: center;
+  margin-left: -1rem;
+}
+
+#profile-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* #profileq {
+  display: flex;
+  width: 30rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: black;
+  font-family: "Lato", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-weight: 900;
+}
+
+#profilea{
+  display: flex;
+  max-width: min-content;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: black;
+  font-family: "Lato", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-weight: 900;
+} */
+
+#profile-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-questions-answers-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-section {
+  width: 45%; /* Adjust width as needed */
+}
+
+#profileq,
+#profilea {
+  color: black;
+  font-family: "Lato", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-weight: 900;
+  padding-left: 10rem;
+  padding-top: 1rem;
+  text-decoration: underline;
+  padding-bottom: 1rem;
+}
+
+#profileq {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#profilea {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.divider {
+  border-left: 2px solid black; /* Adjust color and thickness as needed */
+  height: 1px fit-content;
+  padding-right: .5rem;
+  margin-top: 2rem;
+}
+
+#profile-question-item {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  margin-left: 2rem;
+  max-width: fit-content;
+  overflow-wrap: break-word;
+}
+
+#profile-question-item::before {
+  content: "\2022"; /* Bullet point */
+  color: black; /* Bullet point color */
+  font-weight: bold;
+  display: inline-block;
+  width: 1rem;
+  margin-left: -1.1em;
+}
+
+#profile-question-item a {
+  text-decoration: none;
+  color: #333; /* Link color */
+}
+
+#profile-question-item:hover a {
+  text-decoration: underline; /* Underline on hover */
+  color: #B2D8D8;
+}
+
+#editbio{
+  width: 2rem;
+  height: 2rem;
+  border: hidden;
+  border-radius: 2rem;
+  background-color: rgba(255, 255, 255, 0);
+  margin-left: -9px;
+  margin-top: -11px;
+}
+
+#editbiobtn{
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 2rem;
+  color: #B2D8D8;
+}
+
+#editbiobtn:hover{
+  color: black;
+}
+
+.profile-options{
+  margin-left: 44rem;
+  margin-bottom: 1rem;
+  z-index: 999;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+#profpicbtn{
+  border-radius: 2rem;
+  margin-right: 1rem;
+  background-color: #B2D8D8;
+  color: black;
+  font-family: "Lato",sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  border: none;
+}
+
+#profpicbtn:hover{
+  background-color: green;
+  color: white;
+}
+
+#profpicbtn2{
+  border-radius: 2rem;
+  margin-right: 1rem;
+  background-color: #B2D8D8;
+  color: black;
+  font-family: "Lato",sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  border: none;
+}
+
+#profpicbtn2:hover{
+  background-color: red;
+  color: white;
+}
+
+#profileimg{
+  background-image: url(https://images.vexels.com/media/users/3/287057/isolated/preview/01646d314a5922699c4cab8d0411a979-cute-cat-with-shield.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 7rem;
+  left: 19rem;
+  width: 15rem;
+  height: 15rem;
+  background-size: contain;
+}
+
+#profileimg2{
+  background-image: url(https://images.vexels.com/media/users/3/286297/isolated/preview/e24b4a76ad6dcf7f9cb607c236e8a1bb-cute-cat-reading-with-pencil-on-its-ear.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 7rem;
+  left: 80rem;
+  width: 15rem;
+  height: 15rem;
+  background-size: contain;
+  transform: scaleX(-1);
+}
+
