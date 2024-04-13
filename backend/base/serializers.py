@@ -14,6 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
     is_superuser = serializers.BooleanField()
     is_staff = serializers.BooleanField()
     password = serializers.CharField(write_only=True)
+    is_premium = serializers.BooleanField(source='userprofile.is_premium', required=False)  # Include is_premium field
 
     class Meta:
         model = User
@@ -69,10 +70,11 @@ class UserSerializer(serializers.ModelSerializer):
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
     question = serializers.SerializerMethodField(read_only=True)
+    is_premium = serializers.BooleanField(source='userprofile.is_premium') # Include is_premium field
 
     class Meta:
         model = User
-        fields = ['id', '_id', 'email', 'username', 'name', 'isAdmin', 'token', 'question']
+        fields = ['id', '_id', 'email', 'username', 'name', 'isAdmin', 'is_premium', 'token', 'question'] # Include is_premium field in fields
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
@@ -89,7 +91,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class QuestionSerializer(serializers.ModelSerializer):
-    attachment = serializers.FileField(required=False)
+    attachment = serializers.FileField(required=False, allow_null=True)
     class Meta:
         model = Question
         fields = '__all__'
@@ -143,6 +145,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     is_superuser = serializers.BooleanField()
     is_staff = serializers.BooleanField()
     password = serializers.CharField(write_only=True, required=False)
+    is_premium = serializers.BooleanField(required=False)
 
     class Meta:
         model = User
@@ -166,6 +169,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         instance.is_active = validated_data.get('is_active', instance.is_active)
         instance.is_staff = validated_data.get('is_staff', instance.is_staff)
         instance.is_superuser = validated_data.get('is_superuser', instance.is_superuser)
+       # instance.is_premium = validated_data.get('is_premium', instance.is_premium)
 
         # Update password if provided
         password = validated_data.get('password')
@@ -183,3 +187,8 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             user_profile.save()
 
         return instance
+    
+class PremiumPackageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PremiumPackage
+        fields = '__all__'  

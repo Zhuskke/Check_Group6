@@ -1,490 +1,490 @@
 
 #section-1{
-    background-color: #B2D8D8;
-    height: 61.58rem;
+  background-color: #B2D8D8;
+  height: 61.58rem;
 }
-  
+
 #slogan-container { /*background of homescreen*/
-    /* min-height: 70vh;
-    padding-right: 12rem;
-    display: flex;
-    justify-content: center;
-    align-items: center; */
+  /* min-height: 70vh;
+  padding-right: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
 }
-  
+
 .title { /* the title of homescreen */
-    margin-top: 8.5rem;
-    padding-left: 8rem;
-    width: 70rem;
-    font-size: 6.5rem;
-    margin-right: 1.875rem;
-    font-family: 'Russo One', sans-serif;
-    font-weight: 900; 
-    color: black;
+  margin-top: 8.5rem;
+  padding-left: 8rem;
+  width: 70rem;
+  font-size: 6.5rem;
+  margin-right: 1.875rem;
+  font-family: 'Russo One', sans-serif;
+  font-weight: 900; 
+  color: black;
 }
 
 .title-2 { /* the title of homescreen */
-    padding-left: 8rem;
-    font-size: 1.3rem;
-    width: 60rem;
-    margin-right: 1.875rem;
-    font-family: 'Russo One', sans-serif;
-    font-weight: 500;
-    color: black;
+  padding-left: 8rem;
+  font-size: 1.3rem;
+  width: 60rem;
+  margin-right: 1.875rem;
+  font-family: 'Russo One', sans-serif;
+  font-weight: 500;
+  color: black;
 }
 
 #homescreen-image{
-  background-image: url(https://images.vexels.com/media/users/3/202325/isolated/preview/eebffeab679338af3684c4eac8f47f00-studying-cat-character.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 9.5rem;
-  left: 63rem;
-  width: 40rem;
-  height: 40rem;
-  background-size: contain;
+background-image: url(https://images.vexels.com/media/users/3/202325/isolated/preview/eebffeab679338af3684c4eac8f47f00-studying-cat-character.png);
+background-repeat: no-repeat;
+position: absolute;
+top: 9.5rem;
+left: 63rem;
+width: 40rem;
+height: 40rem;
+background-size: contain;
 }
 
 #homescreen-image2{
-  background-image: url(https://images.vexels.com/media/users/3/243245/isolated/preview/8bc57085bf46e5ea9306be970ab19117-cat-with-books-cute.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 24.1rem;
-  left: 85.5rem;
-  width: 25rem;
-  height: 25rem;
-  background-size: contain;
+background-image: url(https://images.vexels.com/media/users/3/243245/isolated/preview/8bc57085bf46e5ea9306be970ab19117-cat-with-books-cute.png);
+background-repeat: no-repeat;
+position: absolute;
+top: 24.1rem;
+left: 85.5rem;
+width: 25rem;
+height: 25rem;
+background-size: contain;
 }
 
 #homescreen-image3{
-  background-image: url(https://images.vexels.com/media/users/3/202324/isolated/preview/0514a273174209128b3435a1477e8048-studying-bear-character.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 25.8rem;
-  left: 64.2rem;
-  width: 25rem;
-  height: 23rem;
-  background-size: contain;
+background-image: url(https://images.vexels.com/media/users/3/202324/isolated/preview/0514a273174209128b3435a1477e8048-studying-bear-character.png);
+background-repeat: no-repeat;
+position: absolute;
+top: 25.8rem;
+left: 64.2rem;
+width: 25rem;
+height: 23rem;
+background-size: contain;
 }
 
 p {
-    color: #555;
+  color: #555;
 }
 
 .subject {
-    font-size: 1.2em; /* adjust the font size of the text */
+  font-size: 1.2em; /* adjust the font size of the text */
 }
 
 .subject img { /*makes the subject images same size */
-    width: auto; 
-    height: 2em; 
-    margin-right: 5px; 
+  width: auto; 
+  height: 2em; 
+  margin-right: 5px; 
 }
 
 .subject span{
-  color: black;
+color: black;
 }
 
 .subject span:hover{
-  color: #B2D8D8;
+color: #B2D8D8;
 }
 
- 
+
 #section-2{
-  height: 45rem;
-  background-color: aliceblue;
+height: 45rem;
+background-color: aliceblue;
 }
 
 #section2-image{
-  background-image: url(https://images.vexels.com/media/users/3/288705/isolated/preview/8c6b8e6c9b0170c3672fb7688db1ef0a-veterinary-clipboard.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 66.5rem;
-  left: 21.5rem;
-  width: 30rem;
-  height: 30rem;
-  background-size: contain;
+background-image: url(https://images.vexels.com/media/users/3/288705/isolated/preview/8c6b8e6c9b0170c3672fb7688db1ef0a-veterinary-clipboard.png);
+background-repeat: no-repeat;
+position: absolute;
+top: 66.5rem;
+left: 21.5rem;
+width: 30rem;
+height: 30rem;
+background-size: contain;
 }
 
 .section2title{
-  margin-top: 8rem;
-  padding-left: 56rem;
-  width: 100rem;
-  font-size: 6.5rem;
-  margin-right: 1.875rem;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 500; 
-  color: black;
+margin-top: 8rem;
+padding-left: 56rem;
+width: 100rem;
+font-size: 6.5rem;
+margin-right: 1.875rem;
+font-family: 'Russo One', sans-serif;
+font-weight: 500; 
+color: black;
 }
 
 .section2title-2{
-  padding-left: 56rem;
-  font-size: 1.3rem;
-  width: 100rem;
-  margin-right: 1.875rem;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 500;
-  color: black;
+padding-left: 56rem;
+font-size: 1.3rem;
+width: 100rem;
+margin-right: 1.875rem;
+font-family: 'Russo One', sans-serif;
+font-weight: 500;
+color: black;
 }
 
 #homescreenbtn{
-  width: 15rem;
-  height: 3rem;
-  border: hidden;
-  border-radius: 3rem;
-  background-color: rgba(0, 0, 0, 0.87);
-  color: white;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  margin-left: 56rem;
+width: 15rem;
+height: 3rem;
+border: hidden;
+border-radius: 3rem;
+background-color: rgba(0, 0, 0, 0.87);
+color: white;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+margin-top: 1rem;
+margin-left: 56rem;
 }
 
 #homescreenbtn:hover{
-  width: 15rem;
-  height: 3rem;
-  border: hidden;
-  border-radius: 3rem;
-  background-color: #B2D8D8;
-  color: black;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  margin-left: 56rem;
+width: 15rem;
+height: 3rem;
+border: hidden;
+border-radius: 3rem;
+background-color: #B2D8D8;
+color: black;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+margin-top: 1rem;
+margin-left: 56rem;
 }
 
 #section-3{
-  height: 32rem;
-  background-color:#ccddff;
+height: 32rem;
+background-color:#ccddff;
 }
 
 .section3title{
-  margin-top: 8rem;
-  padding-left: 30rem;
-  width: 120rem;
-  font-size: 4.5rem;
-  margin-right: 1.875rem;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 500; 
-  color: black;
+margin-top: 8rem;
+padding-left: 30rem;
+width: 120rem;
+font-size: 4.5rem;
+margin-right: 1.875rem;
+font-family: 'Russo One', sans-serif;
+font-weight: 500; 
+color: black;
 }
 
 .section3title-2{
-  padding-left: 31rem;
-  font-size: 1.2rem;
-  width: 120rem;
-  margin-right: 1.875rem;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 500;
-  color: black;
+padding-left: 31rem;
+font-size: 1.2rem;
+width: 120rem;
+margin-right: 1.875rem;
+font-family: 'Russo One', sans-serif;
+font-weight: 500;
+color: black;
 }
 
 #homescreenbtn2{
-  width: 15rem;
-  height: 4.5rem;
-  border: hidden;
-  border-radius: 3rem;
-  background-color: rgba(0, 0, 0, 0.87);
-  color: white;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  margin-left: 49rem;
+width: 15rem;
+height: 4.5rem;
+border: hidden;
+border-radius: 3rem;
+background-color: rgba(0, 0, 0, 0.87);
+color: white;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+margin-top: 1rem;
+margin-left: 49rem;
 }
 
 #homescreenbtn2:hover{
-  width: 15rem;
-  height: 4.5rem;
-  border: hidden;
-  border-radius: 3rem;
-  background-color: #B2D8D8;
-  color: black;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  margin-left: 49rem;
+width: 15rem;
+height: 4.5rem;
+border: hidden;
+border-radius: 3rem;
+background-color: #B2D8D8;
+color: black;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+margin-top: 1rem;
+margin-left: 49rem;
 }
 
 #section3-image{
-  background-image: url(https://images.vexels.com/media/users/3/287058/isolated/preview/c882c2db8bf2516220aa33c78d21e038-science-cute-cat-character.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 113rem;
-  left: 85rem;
-  width: 20rem;
-  height: 20rem;
-  background-size: contain;
+background-image: url(https://images.vexels.com/media/users/3/287058/isolated/preview/c882c2db8bf2516220aa33c78d21e038-science-cute-cat-character.png);
+background-repeat: no-repeat;
+position: absolute;
+top: 113rem;
+left: 85rem;
+width: 20rem;
+height: 20rem;
+background-size: contain;
 }
 
 #section3-image2{
-  background-image: url(https://images.vexels.com/media/users/3/287058/isolated/preview/c882c2db8bf2516220aa33c78d21e038-science-cute-cat-character.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 113rem;
-  left: 10rem;
-  width: 19rem;
-  height: 19rem;
-  background-size: contain;
-  transform: scaleX(-1);
+background-image: url(https://images.vexels.com/media/users/3/287058/isolated/preview/c882c2db8bf2516220aa33c78d21e038-science-cute-cat-character.png);
+background-repeat: no-repeat;
+position: absolute;
+top: 113rem;
+left: 10rem;
+width: 19rem;
+height: 19rem;
+background-size: contain;
+transform: scaleX(-1);
 }
 
 #section-4{
-  height: 45rem;
-  background-color: aliceblue;
+height: 45rem;
+background-color: aliceblue;
 }
 
 .section4title{
-  margin-top: 12rem;
-  padding-left: 13rem;
-  width: 60rem;
-  font-size: 6.5rem;
-  margin-right: 1.875rem;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 500; 
-  color: black;
+margin-top: 12rem;
+padding-left: 13rem;
+width: 60rem;
+font-size: 6.5rem;
+margin-right: 1.875rem;
+font-family: 'Russo One', sans-serif;
+font-weight: 500; 
+color: black;
 }
 
 .section4title-2{
-  padding-left: 13rem;
-  font-size: 1.3rem;
-  width: 50rem;
-  margin-right: 1.875rem;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 500;
-  color: black;
+padding-left: 13rem;
+font-size: 1.3rem;
+width: 50rem;
+margin-right: 1.875rem;
+font-family: 'Russo One', sans-serif;
+font-weight: 500;
+color: black;
 }
 
 #section4-container{
-  width: 35rem;
-  height: 35rem;
-  margin-left: 66.5rem;
-  margin-top: -27rem;
-  background-color: white;
-  border-radius: 3rem;
-  -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+width: 35rem;
+height: 35rem;
+margin-left: 66.5rem;
+margin-top: -27rem;
+background-color: white;
+border-radius: 3rem;
+-webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
 }
 
 #listtext{
-  padding-left: 6.5rem;
-  padding-right: 6.5rem;
-  padding-top: 2.5rem;
-  font-size: 2.5rem;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  color: black;
-  text-align: center;
+padding-left: 6.5rem;
+padding-right: 6.5rem;
+padding-top: 2.5rem;
+font-size: 2.5rem;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+color: black;
+text-align: center;
 }
 
 #homescreenbtn3{
-  width: 20rem;
-  height: 3rem;
-  border: hidden;
-  border-radius: 3rem;
-  background-color: rgba(0, 0, 0, 0.87);
-  color: white;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  margin-top: .5rem;
-  margin-left: 7.58rem;
+width: 20rem;
+height: 3rem;
+border: hidden;
+border-radius: 3rem;
+background-color: rgba(0, 0, 0, 0.87);
+color: white;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+margin-top: .5rem;
+margin-left: 7.58rem;
 }
 
 #homescreenbtn3:hover{
-  width: 20rem;
-  height: 3rem;
-  border: hidden;
-  border-radius: 3rem;
-  background-color: #B2D8D8;
-  color: black;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  margin-top: .5rem;
-  margin-left: 7.58rem;
+width: 20rem;
+height: 3rem;
+border: hidden;
+border-radius: 3rem;
+background-color: #B2D8D8;
+color: black;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+margin-top: .5rem;
+margin-left: 7.58rem;
 }
 
 #listitems{
-  text-align: left;
-  margin-left: 6.5rem;
-  margin-top: 1.5rem;
-  font-family: 'Lato', sans-serif;
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: black;
+text-align: left;
+margin-left: 6.5rem;
+margin-top: 1.5rem;
+font-family: 'Lato', sans-serif;
+font-weight: 900;
+font-size: 1.2rem;
+color: black;
 }
 
 #listtext2{
-  text-align: center;
-  margin-top: 2rem;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  color: rgba(0, 0, 0, 0.466);
+text-align: center;
+margin-top: 2rem;
+font-family: 'Lato', sans-serif;
+font-weight: 700;
+font-size: 1rem;
+color: rgba(0, 0, 0, 0.466);
 }
 
 #section4-image{
-  background-image: url(https://images.vexels.com/media/users/3/286295/isolated/preview/8dc6e6a225bdc100a57b10a23137703c-gato-bonito-com-l-mpada.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 166rem;
-  left: 60rem;
-  width: 15rem;
-  height: 15rem;
-  background-size: contain;
+background-image: url(https://images.vexels.com/media/users/3/286295/isolated/preview/8dc6e6a225bdc100a57b10a23137703c-gato-bonito-com-l-mpada.png);
+background-repeat: no-repeat;
+position: absolute;
+top: 166rem;
+left: 60rem;
+width: 15rem;
+height: 15rem;
+background-size: contain;
 }
 
 #section4-image2{
-  background-image: url(https://images.vexels.com/media/users/3/287062/isolated/lists/0f4f1cf8441d354d35d39ae5f882ae75-gato-bonito-com-culos-e-livro.png  );
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 140rem;
-  left: 94rem;
-  width: 15rem;
-  height: 15rem;
-  background-size: contain;
+background-image: url(https://images.vexels.com/media/users/3/287062/isolated/lists/0f4f1cf8441d354d35d39ae5f882ae75-gato-bonito-com-culos-e-livro.png  );
+background-repeat: no-repeat;
+position: absolute;
+top: 140rem;
+left: 94rem;
+width: 15rem;
+height: 15rem;
+background-size: contain;
 }
 
 /* Adjustments for smaller screens */
 @media (max-width: 768px) {
-  .title {
-    margin-top: 4rem;
-    padding-left: 2rem;
-    font-size: 3.5rem;
-    width: auto;
-  }
-  
-  .title-2 {
-    padding-left: 2rem;
-    font-size: 1rem;
-    width: auto;
-  }
-  
-  #homescreen-image {
-    top: 7rem;
-    left: 5rem;
-    width: 20rem;
-    height: 20rem;
-  }
-  
-  #homescreen-image2 {
-    top: 22.1rem;
-    left: 30.5rem;
-    width: 15rem;
-    height: 15rem;
-  }
-  
-  #homescreen-image3 {
-    top: 23.8rem;
-    left: 9.2rem;
-    width: 15rem;
-    height: 15rem;
-  }
-  
-  .section2title {
-    margin-top: 4rem;
-    padding-left: 2rem;
-    font-size: 3.5rem;
-    width: auto;
-  }
-  
-  .section2title-2 {
-    padding-left: 2rem;
-    font-size: 1rem;
-    width: auto;
-  }
-  
-  #homescreenbtn {
-    margin-left: 2rem;
-  }
-  
-  #section-3 {
-    height: auto;
-  }
-  
-  .section3title {
-    margin-top: 4rem;
-    padding-left: 5rem;
-    font-size: 3rem;
-    width: auto;
-  }
-  
-  .section3title-2 {
-    padding-left: 5rem;
-    font-size: 1rem;
-    width: auto;
-  }
-  
-  #homescreenbtn2 {
-    margin-left: 3rem;
-  }
-  
-  #section3-image {
-    top: 69rem;
-    left: 10rem;
-    width: 15rem;
-    height: 15rem;
-  }
-  
-  #section3-image2 {
-    top: 69rem;
-    left: 35rem;
-    width: 15rem;
-    height: 15rem;
-  }
-  
-  .section4title {
-    margin-top: 6rem;
-    padding-left: 2rem;
-    font-size: 3.5rem;
-    width: auto;
-  }
-  
-  .section4title-2 {
-    padding-left: 2rem;
-    font-size: 1rem;
-    width: auto;
-  }
-  
-  #section4-container {
-    margin-left: 1.5rem;
-    margin-top: -17rem;
-    width: auto;
-    height: auto;
-  }
-  
-  #homescreenbtn3 {
-    margin-left: 4.58rem;
-  }
-  
-  #listtext {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-  
-  #listitems {
-    margin-left: 2.5rem;
-  }
-  
-  #listtext2 {
-    margin-top: 1rem;
-  }
-  
-  #section4-image {
-    top: 86rem;
-    left: 10rem;
-    width: 10rem;
-    height: 10rem;
-  }
-  
-  #section4-image2 {
-    top: 60rem;
-    left: 44rem;
-    width: 10rem;
-    height: 10rem;
-  }
+.title {
+  margin-top: 4rem;
+  padding-left: 2rem;
+  font-size: 3.5rem;
+  width: auto;
+}
+
+.title-2 {
+  padding-left: 2rem;
+  font-size: 1rem;
+  width: auto;
+}
+
+#homescreen-image {
+  top: 7rem;
+  left: 5rem;
+  width: 20rem;
+  height: 20rem;
+}
+
+#homescreen-image2 {
+  top: 22.1rem;
+  left: 30.5rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+#homescreen-image3 {
+  top: 23.8rem;
+  left: 9.2rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+.section2title {
+  margin-top: 4rem;
+  padding-left: 2rem;
+  font-size: 3.5rem;
+  width: auto;
+}
+
+.section2title-2 {
+  padding-left: 2rem;
+  font-size: 1rem;
+  width: auto;
+}
+
+#homescreenbtn {
+  margin-left: 2rem;
+}
+
+#section-3 {
+  height: auto;
+}
+
+.section3title {
+  margin-top: 4rem;
+  padding-left: 5rem;
+  font-size: 3rem;
+  width: auto;
+}
+
+.section3title-2 {
+  padding-left: 5rem;
+  font-size: 1rem;
+  width: auto;
+}
+
+#homescreenbtn2 {
+  margin-left: 3rem;
+}
+
+#section3-image {
+  top: 69rem;
+  left: 10rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+#section3-image2 {
+  top: 69rem;
+  left: 35rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+.section4title {
+  margin-top: 6rem;
+  padding-left: 2rem;
+  font-size: 3.5rem;
+  width: auto;
+}
+
+.section4title-2 {
+  padding-left: 2rem;
+  font-size: 1rem;
+  width: auto;
+}
+
+#section4-container {
+  margin-left: 1.5rem;
+  margin-top: -17rem;
+  width: auto;
+  height: auto;
+}
+
+#homescreenbtn3 {
+  margin-left: 4.58rem;
+}
+
+#listtext {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+#listitems {
+  margin-left: 2.5rem;
+}
+
+#listtext2 {
+  margin-top: 1rem;
+}
+
+#section4-image {
+  top: 86rem;
+  left: 10rem;
+  width: 10rem;
+  height: 10rem;
+}
+
+#section4-image2 {
+  top: 60rem;
+  left: 44rem;
+  width: 10rem;
+  height: 10rem;
+}
 }

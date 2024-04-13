@@ -1,8 +1,9 @@
 #footer-text{
-    padding-left: 25rem;
-  }
+  padding-left: 25rem;
+}
 
 #footerbg{
+<<<<<<< HEAD
   background-color: white;
   /* position: fixed;
   left: 0;
@@ -11,4 +12,23 @@
   color: #ccc; 
   text-align: center;
   padding: 0px 0; */
+=======
+background-color: white;
+/* position: fixed; */
+/* left: 0;
+bottom: 0;
+width: 100%;
+background-color: #333; /* Adjust as needed */
+/* color: white; /* Adjust as needed */
+/* text-align: center; */ 
+/* padding: 10px 0; Adjust padding as needed */ 
+}
+
+.footer-container {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+
+>>>>>>> 6b7fb429229737fd82b415e63251037dc47245a5
 }
