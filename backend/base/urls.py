@@ -38,4 +38,9 @@ urlpatterns = [
     path('admin/questions/<int:pk>/', views.AdminQuestionRetrieveUpdateDestroyAPIView.as_view(), name='admin-question-detail'),
     path('users/<int:user_id>/activate-subscription/', views.activate_subscription, name='activate-subscription'),
     path('premium-details/', get_premium_details, name='premium-details'),
+    path('admin/top-up-packages/', TopUpPackageListCreateAPIView.as_view(), name='top-up-packages-list-create'),
+    path('admin/top-up-packages/<int:pk>/', TopUpPackageRetrieveUpdateDestroyAPIView.as_view(), name='top-up-package-detail'),
+    path('admin/create-top-up-package/', create_top_up_package, name='create-top-up-package'),
+    path('admin/update-top-up-package/<int:pk>/', update_top_up_package, name='update-top-up-package'),
+    path('admin/delete-top-up-package/<int:pk>/', delete_top_up_package, name='delete-top-up-package'),
 ]

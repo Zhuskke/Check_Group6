@@ -349,3 +349,47 @@ def get_premium_details(request):
         return Response(serializer.data)
     except PremiumPackage.DoesNotExist:
         return Response({'error': 'Premium details not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class TopUpPackageListCreateAPIView(generics.ListCreateAPIView):
+    queryset = TopUpPackage.objects.all()
+    serializer_class = TopUpPackageSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+class TopUpPackageRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = TopUpPackage.objects.all()
+    serializer_class = TopUpPackageSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def create_top_up_package(request):
+    serializer = TopUpPackageSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def update_top_up_package(request, pk):
+    try:
+        package = TopUpPackage.objects.get(pk=pk)
+    except TopUpPackage.DoesNotExist:
+        return Response({'error': 'Package not found'}, status=404)
+
+    serializer = TopUpPackageSerializer(package, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def delete_top_up_package(request, pk):
+    try:
+        package = TopUpPackage.objects.get(pk=pk)
+    except TopUpPackage.DoesNotExist:
+        return Response({'error': 'Package not found'}, status=404)
+
+    package.delete()
+    return Response(status=204)

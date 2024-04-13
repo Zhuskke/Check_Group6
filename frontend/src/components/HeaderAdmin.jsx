@@ -108,6 +108,8 @@ React.useEffect(() => {
             <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/admin/questions" role='button' id='headeruserbtn'>Questions</Nav.Link>
             <div className='headeruserline'></div>
+            <Nav.Link as={Link} to="/admin/packages" role='button' id='headeruserbtn'>Packages</Nav.Link>
+            <div className='headeruserline'></div>
             <NavDropdown title={<img src={profilePicture} id='dropdownimage' />} id="headerdropdown" className="header-dropdown">
               <NavDropdown.Item as={Link} to="/profile" id='dropdownitem'>Profile</NavDropdown.Item>
               <NavDropdown.Divider />
