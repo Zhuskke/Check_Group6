@@ -45,6 +45,21 @@ import {
   TOP_UP_PACKAGE_CREATE_REQUEST,
   TOP_UP_PACKAGE_CREATE_SUCCESS,
   TOP_UP_PACKAGE_CREATE_FAIL,
+  COMMENT_LIST_REQUEST,
+  COMMENT_LIST_SUCCESS,
+  COMMENT_LIST_FAIL,
+  COMMENT_DETAILS_REQUEST,
+  COMMENT_DETAILS_SUCCESS,
+  COMMENT_DETAILS_FAIL,
+  COMMENT_UPDATE_REQUEST,
+  COMMENT_UPDATE_SUCCESS,
+  COMMENT_UPDATE_FAIL,
+  COMMENT_DELETE_REQUEST,
+  COMMENT_DELETE_SUCCESS,
+  COMMENT_DELETE_FAIL,
+  COMMENT_CREATE_REQUEST,
+  COMMENT_CREATE_SUCCESS,
+  COMMENT_CREATE_FAIL,
 } from '../constants/adminConstants';
 
 export const listUsers = () => async (dispatch, getState) => {
@@ -540,3 +555,157 @@ export const getUserDetails = (userId) => async (dispatch, getState) => {
         });
       }
     };
+
+    export const listComments = () => async (dispatch, getState) => {
+      try {
+        dispatch({ type: COMMENT_LIST_REQUEST });
+    
+        const {
+          userLogin: { userInfo },
+        } = getState();
+    
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userInfo && userInfo.token}`, 
+          },
+        };
+    
+        const { data } = await axios.get('/api/admin/comments/', config);
+    
+        dispatch({
+          type: COMMENT_LIST_SUCCESS,
+          payload: data,
+        });
+      } catch (error) {
+        dispatch({
+          type: COMMENT_LIST_FAIL,
+          payload:
+            error.response && error.response.data.detail
+              ? error.response.data.detail
+              : error.message,
+        });
+      }
+    };
+    
+    export const getCommentDetails = (commentId) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: COMMENT_DETAILS_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+            },
+          };
+      
+          const { data } = await axios.get(`/api/admin/comments/${commentId}/`, config);
+      
+          dispatch({
+            type: COMMENT_DETAILS_SUCCESS,
+            payload: data,
+          });
+        } catch (error) {
+          dispatch({
+            type: COMMENT_DETAILS_FAIL,
+            payload:
+              error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+          });
+        }
+      };
+    
+    
+      export const updateComment = (commentId, commentData) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: COMMENT_UPDATE_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+            },
+          };
+      
+          const { data } = await axios.put(`/api/admin/comments/${commentId}/`, commentData, config);
+      
+          dispatch({
+            type: COMMENT_UPDATE_SUCCESS,
+            payload: data,
+          });
+        } catch (error) {
+          dispatch({
+            type: COMMENT_UPDATE_FAIL,
+            payload:
+              error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+          });
+        }
+      };
+      
+      export const deleteComment = (commentId) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: COMMENT_DELETE_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+            },
+          };
+      
+          await axios.delete(`/api/admin/comments/${commentId}/`, config);
+      
+          dispatch({ type: COMMENT_DELETE_SUCCESS });
+        } catch (error) {
+          dispatch({
+            type: COMMENT_DELETE_FAIL,
+            payload:
+              error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+          });
+        }
+      };
+    
+      export const createComment = (commentData) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: COMMENT_CREATE_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+            },
+          };
+      
+          const { data } = await axios.post('/api/admin/comments/', commentData, config);
+      
+          dispatch({
+            type: COMMENT_CREATE_SUCCESS,
+            payload: data,
+          });
+        } catch (error) {
+          dispatch({
+            type: COMMENT_CREATE_FAIL,
+            payload:
+              error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+          });
+        }
+      };

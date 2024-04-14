@@ -335,12 +335,21 @@ class AdminQuestionRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAP
 def activate_subscription(request, user_id):  # Accept 'user_id' as a parameter
     try:
         user_profile = UserProfile.objects.get(user_id=user_id)  # Retrieve UserProfile using user_id
+
+        # Check if the user is already a premium member
+        if user_profile.is_premium:
+            return Response({'error': 'User is already a premium member'}, status=status.HTTP_400_BAD_REQUEST)
+
         user_profile.is_premium = True
         user_profile.save()
-        return Response({'message': 'Subscription activated successfully'})
+        # return Response({'message': 'Subscription activated successfully'})
+    
+        # Return updated user profile data
+        serializer = UserProfileSerializer(user_profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     except UserProfile.DoesNotExist:
         return Response({'error': 'User profile not found'}, status=status.HTTP_404_NOT_FOUND)
-    
+
 @api_view(['GET'])
 def get_premium_details(request):
     try:
@@ -393,3 +402,10 @@ def delete_top_up_package(request, pk):
 
     package.delete()
     return Response(status=204)
+
+class AdminCommentListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = AdminCommentSerializer
+class AdminCommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = AdminCommentSerializer

@@ -122,6 +122,14 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ['id', 'user', 'question', 'content', 'created_at']
 
+class AdminCommentSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    question = serializers.PrimaryKeyRelatedField(queryset=Question.objects.all())
+    content = serializers.CharField(max_length=255)  
+    class Meta:
+        model = Comment
+        fields = ['id', 'user', 'question', 'content', 'created_at']
+
 class UserRegistrationSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)

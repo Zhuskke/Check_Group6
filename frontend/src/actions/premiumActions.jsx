@@ -5,7 +5,7 @@ import {
     ACTIVATE_PREMIUM_FAILURE,
     GET_PREMIUM_DETAILS_REQUEST, 
     GET_PREMIUM_DETAILS_SUCCESS, 
-    GET_PREMIUM_DETAILS_FAILURE 
+    GET_PREMIUM_DETAILS_FAILURE
 } from '../constants/premiumConstants';
 
 export const activatePremium = (userId) => async (dispatch, getState) => {
@@ -21,11 +21,16 @@ export const activatePremium = (userId) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(`/api/users/${userId}/activate-subscription/`, null, config);
+
+     // Update is_premium field in userInfo stored in localStorage
+     const updatedUserInfo = { ...userInfo, is_premium: true };
+     localStorage.setItem('userInfo', JSON.stringify(updatedUserInfo));
+
     dispatch({ type: ACTIVATE_PREMIUM_SUCCESS, payload: response.data });
-    // Handle success
+    
   } catch (error) {
     dispatch({ type: ACTIVATE_PREMIUM_FAILURE, error: error.message });
-    // Handle error
+    
   }
 };
 

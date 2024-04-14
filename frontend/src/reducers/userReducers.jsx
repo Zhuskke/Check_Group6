@@ -31,6 +31,9 @@ import {
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
 } from '../constants/userConstants'
+// import {
+    // ACTIVATE_PREMIUM_SUCCESS
+// } from '../constants/premiumConstants'
 
 export const userLoginReducer = (state = {}, action) => {
     switch (action.type) {
@@ -38,6 +41,8 @@ export const userLoginReducer = (state = {}, action) => {
             return { loading: true }
         case USER_LOGIN_SUCCESS:
             return { loading: false, userInfo: action.payload }
+        // case 'ACTIVATE_PREMIUM_SUCCESS':
+            // return { ...state, userInfo: action.payload };
         case USER_LOGIN_FAIL:
             return { loading: false, error: action.payload }
         case USER_LOGOUT:

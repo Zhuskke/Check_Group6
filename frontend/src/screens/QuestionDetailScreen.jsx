@@ -35,6 +35,7 @@ const QuestionDetail = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const [points_spent, setPointsSpent] = useState(0)
 
   const profPic = useSelector((state) => state.getProfileImage.profileImageUrl);
   const profilePic = useSelector((state) => state.questionDetail.question);
@@ -149,6 +150,8 @@ const QuestionDetail = () => {
               />
             </div>
           )}
+          <p><strong>Points Spent:</strong> {question.points_spent}</p>
+
           <div className="line"></div>
           <form onSubmit={handleSubmitComment}>
             <input

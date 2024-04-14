@@ -88,7 +88,7 @@ export const register = (username, email, password, question) => async (dispatch
     });
 
     localStorage.setItem('userInfo', JSON.stringify(data));
-
+    
     // Return the user data along with the question
     return { userData: data, question }; 
   } catch (error) {
