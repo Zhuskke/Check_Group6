@@ -46,6 +46,16 @@ import {
   userListReducer,
   userDetailsReducer,
   adminQuestionListReducer,
+  topUpPackageListReducer,
+  topUpPackageDetailsReducer,
+  topUpPackageUpdateReducer,
+  topUpPackageDeleteReducer,
+  topUpPackageCreateReducer,
+  commentListReducer,
+  commentDetailsReducer,
+  commentUpdateReducer,
+  commentDeleteReducer,
+  commentCreateReducer,
 } from './reducers/adminReducers';
 
 import {
@@ -54,6 +64,7 @@ import {
 
 import {
     premiumReducer,
+    premiumDetailsReducer,
   } from "./reducers/premiumReducers";
 
   const reducer = combineReducers({
@@ -93,7 +104,17 @@ import {
     createComment: createCommentReducer,
     questionList: adminQuestionListReducer,
     premium: premiumReducer,
-    
+    premiumDetails: premiumDetailsReducer,
+    topUpPackageList: topUpPackageListReducer,
+    topUpPackageDetails: topUpPackageDetailsReducer,
+    topUpPackageUpdate: topUpPackageUpdateReducer,
+    topUpPackageDelete: topUpPackageDeleteReducer,
+    topUpPackageCreate: topUpPackageCreateReducer,
+    commentList: commentListReducer,
+    commentDetails: commentDetailsReducer,
+    commentUpdate: commentUpdateReducer,
+    commentDelete: commentDeleteReducer,
+    commentCreate: commentCreateReducer,
   });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

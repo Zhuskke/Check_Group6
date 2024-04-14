@@ -26,6 +26,7 @@ const HeaderUser = () => {
   const profilePictureState = useSelector((state) => state.getProfileImage);
   const { profileImageUrl: profilePictureUrl } = profilePictureState;
   const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
+  const isAdmin = userInfo && userInfo.isAdmin;
 
   useEffect(() => {
     if (userData) {
@@ -79,6 +80,8 @@ React.useEffect(() => {
   };
 }, []);
 
+const isPremiumUser = useSelector((state) => state.userLogin.userInfo?.is_premium);
+
     return (
         <Navbar expand="lg" id='navbar' collapseOnSelect className={isScrolled ? 'navbar circular' : 'navbar p-3'}>
         <Navbar.Brand as={Link} to="/">
@@ -101,13 +104,25 @@ React.useEffect(() => {
             </Form>
             <Nav.Link></Nav.Link>
           </Nav>
+          {isAdmin && (
+              <React.Fragment>
+                <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Admin</Nav.Link>
+                <div className='headeruserline'></div>
+              </React.Fragment>
+            )}
           <Nav>
+            {isAdmin && (
+              <React.Fragment>
+                <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Admin</Nav.Link>
+                <div className='headeruserline'></div>
+              </React.Fragment>
+            )}
             <Nav.Link as={Link} to="/topup" role='button' id='headeruserbtn'>{`Points: ${points}`}</Nav.Link>
             <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/ask-a-question" role='button' id='headeruserbtn'>Ask a Question</Nav.Link>
             <div className='headeruserline'></div>
             <NavDropdown title={<img src={profilePicture} id='dropdownimage' />} id="headerdropdown" className="header-dropdown">
-              <NavDropdown.Item as={Link} to="/subscription" id='dropdownitem'>Join Now!</NavDropdown.Item>
+            {!isPremiumUser && <NavDropdown.Item as={Link} to="/subscription" id='dropdownitem'>Join Now!</NavDropdown.Item>}
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout} id='dropdownitem'>Logout</NavDropdown.Item>
             </NavDropdown>

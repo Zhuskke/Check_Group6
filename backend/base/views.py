@@ -291,6 +291,7 @@ class AdminUserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVie
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer  # Use UserUpdateSerializer for user updates
     permission_classes = [IsAdminUser]
+
 @api_view(['POST'])
 def create_comment(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -335,12 +336,21 @@ class AdminQuestionRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAP
 def activate_subscription(request, user_id):  # Accept 'user_id' as a parameter
     try:
         user_profile = UserProfile.objects.get(user_id=user_id)  # Retrieve UserProfile using user_id
+
+        # Check if the user is already a premium member
+        if user_profile.is_premium:
+            return Response({'error': 'User is already a premium member'}, status=status.HTTP_400_BAD_REQUEST)
+
         user_profile.is_premium = True
         user_profile.save()
-        return Response({'message': 'Subscription activated successfully'})
+        # return Response({'message': 'Subscription activated successfully'})
+    
+        # Return updated user profile data
+        serializer = UserProfileSerializer(user_profile)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     except UserProfile.DoesNotExist:
         return Response({'error': 'User profile not found'}, status=status.HTTP_404_NOT_FOUND)
-    
+
 @api_view(['GET'])
 def get_premium_details(request):
     try:
@@ -349,3 +359,54 @@ def get_premium_details(request):
         return Response(serializer.data)
     except PremiumPackage.DoesNotExist:
         return Response({'error': 'Premium details not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class TopUpPackageListCreateAPIView(generics.ListCreateAPIView):
+    queryset = TopUpPackage.objects.all()
+    serializer_class = TopUpPackageSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+class TopUpPackageRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = TopUpPackage.objects.all()
+    serializer_class = TopUpPackageSerializer
+    permission_classes = [permissions.IsAdminUser]
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def create_top_up_package(request):
+    serializer = TopUpPackageSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def update_top_up_package(request, pk):
+    try:
+        package = TopUpPackage.objects.get(pk=pk)
+    except TopUpPackage.DoesNotExist:
+        return Response({'error': 'Package not found'}, status=404)
+
+    serializer = TopUpPackageSerializer(package, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def delete_top_up_package(request, pk):
+    try:
+        package = TopUpPackage.objects.get(pk=pk)
+    except TopUpPackage.DoesNotExist:
+        return Response({'error': 'Package not found'}, status=404)
+
+    package.delete()
+    return Response(status=204)
+
+class AdminCommentListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = AdminCommentSerializer
+class AdminCommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = AdminCommentSerializer

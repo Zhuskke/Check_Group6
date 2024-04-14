@@ -16,6 +16,8 @@ function EnglishScreen() {
   const { loading: uploadLoading, error: uploadError, imageUrl } = useSelector((state) => state.uploadImage);
   const { loading: getImagesLoading, error: getImagesError, images } = useSelector((state) => state.getUploadedImages);
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { is_premium } = userInfo || {};
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,54 +50,51 @@ function EnglishScreen() {
   };
 
   const handleSignUp = () => {
-    navigate('/register');
+    if (userInfo) {
+      // If user is logged in, redirect to subscription page
+      navigate('/subscription');
+    } else {
+      // If user is a guest, redirect to register page
+      navigate('/register');
+    }
   };
 
   return (
-    <><div>
-    {userInfo ? <HeaderUser /> : <Header />}
-    <div style={{ paddingTop: '10px', paddingBottom: '5rem', backgroundColor: '#B2D8D8' }}> <SubjectBar /> </div>
-
-    {!userInfo && (
-      <div id='subjectscreen-containerbg'>
-        <div id='subjectscreen-container'>
-          <p id='subjectscreentext'>You are viewing as a guest :c Sign up for a better study experience!</p>
-          <button onClick={handleSignUp} id='subjectscreenbtn'>Sign up Now!</button>
-        </div>
-
-        <div id='subjectscreen-image'>
-          </div>
-
-          <div id='subjectscreen-image2'>
-          </div>
-
-          <div id='subjectscreen-image3'>
-          </div>
-
-      </div>
-    )}
-
-    {userInfo && (
+    <>
       <div>
-        <input type="file" onChange={handleImageChange} />
-        {uploadedImageEnglish && (
+        {userInfo ? <HeaderUser /> : <Header />}
+        <div style={{ paddingTop: '10px', paddingBottom: '5rem', backgroundColor: '#B2D8D8' }}> <SubjectBar /> </div>
+
+        {!is_premium && (
+        <div id='subjectscreen-containerbg'>
+          <div id='subjectscreen-container'>
+            <p id='subjectscreentext'>This content is only available for premium users. Sign up for a premium account!</p>
+            <button onClick={handleSignUp} id='subjectscreenbtn'>Subscribe Now!</button>
+          </div>
+        </div>
+      )}
+
+        {is_premium && (
           <div>
-            <p>Uploaded Image Preview:</p>
-            <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+            <input type="file" onChange={handleImageChange} />
+            {uploadedImageEnglish && (
+              <div>
+                <p>Uploaded Image Preview:</p>
+                <img src={uploadedImageEnglish} alt="Uploaded" style={{ maxWidth: '100%', height: 'auto' }} />
+              </div>
+            )}
+            <button onClick={handleUpload} disabled={!image}>
+              Upload Image
+            </button>
           </div>
         )}
-        <button onClick={handleUpload} disabled={!image}>
-          Upload Image
-        </button>
+        {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
+        {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
       </div>
-    )}
-    {(uploadLoading || getImagesLoading) && <p>Loading...</p>}
-    {(uploadError || getImagesError) && <p>Error: {uploadError || getImagesError}</p>}
-  </div>
-  {userInfo && <Worksheet subject = "English"/>}
-  <Footer /></>
-);
+      {is_premium && <Worksheet subject="English" />}
+      <Footer />
+    </>
+  );
 }
-
 
 export default EnglishScreen;

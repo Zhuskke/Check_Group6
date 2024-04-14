@@ -4,7 +4,6 @@ import logo from '../images/logocheck.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
-import { getUserPoints } from '../actions/pointsActions';
 import { getProfileImage } from '../actions/userActions';
 import { FaSearch } from "react-icons/fa";
 import '../designs/Navbaruser.css';
@@ -15,8 +14,6 @@ const HeaderAdmin = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const userPoints = useSelector((state) => state.userPoints);
-  const { points } = userPoints;
   const defaultProfilePicture =
     "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg";
   const localStorageKey = "userProfilePicture";
@@ -41,12 +38,6 @@ const HeaderAdmin = () => {
       setProfilePicture(profilePictureUrl);
     }
   }, [profilePictureUrl]);
-
-  useEffect(() => {
-      if (userInfo) {
-          dispatch(getUserPoints());
-      }
-  }, [dispatch, userInfo]);
 
   const handleLogout = () => {
       dispatch(logout());
@@ -102,16 +93,16 @@ React.useEffect(() => {
             <Nav.Link></Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/topup" role='button' id='headeruserbtn'>{`Points: ${points}`}</Nav.Link>
-            <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Users</Nav.Link>
             <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/admin/questions" role='button' id='headeruserbtn'>Questions</Nav.Link>
             <div className='headeruserline'></div>
+            <Nav.Link as={Link} to="/admin/comments" role='button' id='headeruserbtn'>Comments</Nav.Link>
+            <div className='headeruserline'></div>
+            <Nav.Link as={Link} to="/admin/packages" role='button' id='headeruserbtn'>Packages</Nav.Link>
+            <div className='headeruserline'></div>
             <NavDropdown title={<img src={profilePicture} id='dropdownimage' />} id="headerdropdown" className="header-dropdown">
               <NavDropdown.Item as={Link} to="/profile" id='dropdownitem'>Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/subscription" id='dropdownitem'>Join Now!</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout} id='dropdownitem'>Logout</NavDropdown.Item>
             </NavDropdown>

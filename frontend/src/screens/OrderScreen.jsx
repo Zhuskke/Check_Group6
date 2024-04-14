@@ -2,7 +2,7 @@ import React, { useEffect, useState   } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch  } from 'react-redux';
 import HeaderUser from '../components/HeaderUser';
-import Footer from '../components/Footer';
+// import Footer from '../components/Footer';
 import { getPremiumDetails,activatePremium } from '../actions/premiumActions';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { BiArrowBack } from "react-icons/bi";
@@ -137,4 +137,3 @@ const OrderScreen = () => {
 };
 
 export default OrderScreen;
-
