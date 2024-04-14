@@ -407,10 +407,6 @@ def delete_top_up_package(request, pk):
 class AdminCommentListCreateAPIView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = AdminCommentSerializer
-<<<<<<< HEAD
-=======
-
->>>>>>> 3b4377db98f7280a794f380e4844dd2e20fcdb54
 class AdminCommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = AdminCommentSerializer
