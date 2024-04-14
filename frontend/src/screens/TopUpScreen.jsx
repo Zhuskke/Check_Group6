@@ -5,6 +5,7 @@ import HeaderUser from "../components/HeaderUser";
 import '../designs/Topupscreen.css'
 import Footer from "../components/Footer";
 import { FaCoins } from "react-icons/fa6";
+import FooterProfile from "../components/FooterProfile";
 
 const TopUpScreen = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -45,7 +46,7 @@ const TopUpScreen = () => {
           
         </div>
       </div>
-      <Footer />
+      <FooterProfile />
     </>
   );
 };

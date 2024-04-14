@@ -133,6 +133,7 @@ const Profile = () => {
           className="profile-picture"
           onClick={handleChooseFileClick}
         />
+
         {showProfileOptions && (
           <div className="profile-options">
             <Button id="profpicbtn" variant="primary" onClick={() => handleProfileOptionClick("change")}>
@@ -143,6 +144,7 @@ const Profile = () => {
             </Button>
           </div>
         )}
+        
       </div>
 
       <input

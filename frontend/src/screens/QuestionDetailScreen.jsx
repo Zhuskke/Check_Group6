@@ -11,6 +11,9 @@ import { fetchUser } from "../actions/userActions";
 import { createComment } from "../actions/commentActions"; // Import the createComment action
 import HeaderUser from "../components/HeaderUser";
 import Footer from "../components/Footer";
+import FooterProfile from "../components/FooterProfile";
+import { AiOutlineSend } from "react-icons/ai";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import "../designs/QuestionDetail.css";
 
 const QuestionDetail = () => {
@@ -18,10 +21,15 @@ const QuestionDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [content, setContent] = useState("");
+  const [showAnswerArea, setShowAnswerArea] = useState(false);
 
   useEffect(() => {
     dispatch(fetchQuestionDetail(id));
   }, [dispatch, id]);
+
+  const toggleAnswerArea = () => {
+    setShowAnswerArea(!showAnswerArea);
+  };
 
   const questionDetails = useSelector((state) => state.questionDetail);
   const {
@@ -88,7 +96,7 @@ const QuestionDetail = () => {
       <div id="questiondetailbg">
         <div id="questiondetail-container">
           {userInfo && userInfo.id === question.user ? (
-            <Link to={`/profile`}>
+            <Link id="detaillink" to={`/profile`}>
               <div className="profile-picture-container">
                 <label htmlFor="profile-image-input">
                   <img
@@ -100,15 +108,18 @@ const QuestionDetail = () => {
                     className="questiondetail-profile-picture"
                   />
                 </label>
-                <div>
-                  <p id="questiondetail-info">
-                    <strong>Posted By:</strong> {username}
+                <div className="profile-info">
+                  <p id="posted-by">
+                  {username}
                   </p>
+                  <p id="created-at">
+                {new Date(question.created_at).toLocaleString()}
+                </p>
                 </div>
               </div>
             </Link>
           ) : (
-            <Link to={`/profile/${question.user}`}>
+            <Link id="detaillink" to={`/profile/${question.user}`}>
               <div className="profile-picture-container">
                 <label htmlFor="profile-image-input">
                   <img
@@ -120,24 +131,23 @@ const QuestionDetail = () => {
                     className="questiondetail-profile-picture"
                   />
                 </label>
-                <div>
-                  <p id="questiondetail-info">
-                    <strong>Posted By:</strong> {username}
+                <div className="profile-info">
+                  <p id="posted-by">
+                    {username}
                   </p>
+                  <p id="created-at">
+                {new Date(question.created_at).toLocaleString()}
+              </p>
                 </div>
               </div>
             </Link>
           )}
           {/* Moved the closing tag here */}
-          <p id="questiondetail-info">
-            <strong>Created At: </strong>
-            {new Date(question.created_at).toLocaleString()}
-          </p>
-          <div className="line"></div>
+          {/* <div className="detailline"></div> */}
           <h2>{question.title}</h2>
           <h3 id="questiondetail-content">
             <strong>
-              <p>{question.content}</p>
+              <p id="questiontext">{question.content}</p>
             </strong>
           </h3>
           {question.attachment && (
@@ -149,22 +159,33 @@ const QuestionDetail = () => {
               />
             </div>
           )}
-          <div className="line"></div>
-          <form onSubmit={handleSubmitComment}>
-            <input
-              id="answer-area"
-              placeholder="Answer Question?"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            ></input>
-            <button type="submit">Submit Comment</button>
-          </form>
+          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer +pointsused idk</button>
+          {showAnswerArea && (
+              <form
+                className={`answer-area-form ${
+                  showAnswerArea ? "show" : ""
+                }`}
+                onSubmit={handleSubmitComment}
+              >
+          <div className="detailline"></div>
+                <input
+                  id="answer-area"
+                  placeholder="Answer Question?"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  autoComplete='off'
+                ></input>
+                <button id="submitanswerbtn" type="submit"><AiOutlineSend id="submitanswericon"/></button>
+              </form>
+            )}
+
+            {showDeleteButton && (
+            <button id="deletebtn" onClick={() => deleteHandler(question.id)}><RiDeleteBin6Line id="deleteicon"/></button>
+            )}
+
         </div>
       </div>
-      {showDeleteButton && (
-        <button onClick={() => deleteHandler(question.id)}>Delete</button>
-      )}
-      <Footer />
+      <FooterProfile />
     </>
   );
 };

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import HeaderUser from "../components/HeaderUser";
 import Footer from "../components/Footer";
-import FooterProfile from "../components/FooterProfile"
+import FooterProfile from "../components/FooterProfile";
 import { Container  } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { fetchUserQuestions } from "../actions/questionActions";
@@ -54,7 +54,7 @@ const VisitProfile = () => {
             <img
               src={user.profile_picture_url || defaultProfilePicture}
               alt="Profile"
-              className="profile-picture"
+              className="visit-profile-picture"
             />
           </label>
           </div>

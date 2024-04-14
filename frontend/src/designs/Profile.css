@@ -34,6 +34,7 @@
     border-color: #B2D8D8;
     margin-bottom: 0.625rem;
     margin-left: 51rem;
+    object-fit: cover;
 }
 
 .profile-picture:hover { /*pfp size*/
@@ -42,6 +43,16 @@
   border-radius: 100%;
   border: 5px solid;
   border-color: black;
+  margin-bottom: 0.625rem;
+  margin-left: 51rem;
+}
+
+.visit-profile-picture { /*pfp size*/
+  width: 10rem; 
+  height: 10rem; 
+  border-radius: 100%;
+  border: 5px solid;
+  border-color: #B2D8D8;
   margin-bottom: 0.625rem;
   margin-left: 51rem;
 }
@@ -197,7 +208,8 @@
 }
 
 .profile-options{
-  margin-left: 44rem;
+  margin-left: -22.5rem;
+  margin-top: 5rem;
   margin-bottom: 1rem;
   z-index: 999;
   position: relative;
@@ -206,7 +218,7 @@
 
 #profpicbtn{
   border-radius: 2rem;
-  margin-right: 1rem;
+  margin-right: 11.4rem;
   background-color: #B2D8D8;
   color: black;
   font-family: "Lato",sans-serif;
@@ -252,10 +264,11 @@
   background-repeat: no-repeat;
   position: absolute;
   top: 7rem;
-  left: 80rem;
+  left: 79.9rem;
   width: 15rem;
   height: 15rem;
   background-size: contain;
   transform: scaleX(-1);
 }
+
 

@@ -1,0 +1,67 @@
+.order-screen{
+    background-color: #B2D8D8;
+    max-height: fit-content;
+    padding-top: 5rem;
+}
+
+#gobackbtn{
+    margin-left: 1rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+}
+
+#gobackbtn:hover{
+    color: white;
+
+}
+
+#btnicon{
+    width: 3rem;
+    height: 3rem;
+}
+
+#orderscreentitle{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+}
+
+#ordercontainer{
+    height: 30rem;
+    padding-top: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 5rem;
+    width: 75rem;
+    background-color: rgba(255, 255, 255, 0.582);
+    border-radius: 2rem;
+    margin-left: 21rem; 
+    margin-top: 3rem;  
+}
+
+#ordertext{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#ordertext2{
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#paypalbtnorder{
+    margin-top: 2rem;
+    margin-left: 8.3rem;
+}

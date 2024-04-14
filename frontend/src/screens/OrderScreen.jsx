@@ -5,6 +5,9 @@ import HeaderUser from '../components/HeaderUser';
 import Footer from '../components/Footer';
 import { getPremiumDetails,activatePremium } from '../actions/premiumActions';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { BiArrowBack } from "react-icons/bi";
+import FooterProfile from '../components/FooterProfile';
+import '../designs/Orderscreen.css';
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
@@ -79,49 +82,56 @@ const OrderScreen = () => {
 
   return (
     <>
-       <HeaderUser />
+        <HeaderUser />
       <div className="order-screen">
-        <h1>Order Screen</h1>
         {loading ? (
           <p>Loading...</p>
         ) : (
           <>
-            <Link to="/subscription">
-              <button>Go Back</button>
-            </Link>
+              <Link to="/subscription">
+              <button id='gobackbtn'><BiArrowBack id='btnicon'/></button>
+              </Link>
             <div>
-              <p>Greetings, {userInfo.name}! Here is your subscription plan:</p>
-              <div style={{ marginRight: '20px' }}>
-                <h2>Check Premium</h2>
+              <p id='orderscreentitle'>Greetings, {userInfo.name}! Here is your subscription plan:</p>
+              <div id='ordercontainer'>
+                <h2 id="ordertext">Check Premium</h2>
                 <div>
                   {premiumDetails ? (
                     <>
-                      <p>{premiumDetails.price} USD/mo.</p>
-                      <h4>Your plan includes:</h4>
-                      <p>{premiumDetails.description}</p>
+                      <p id='ordertext2'>{premiumDetails.price} USD/mo.</p>
+                      <h4 id='ordertext2'>Your plan includes:</h4>
+                      <p id='ordertext2'>{premiumDetails.description}</p>
                     </>
                   ) : (
-                    <p>No premium details available</p>
+                    <p id='ordertext2'>No premium details available</p>
                   )}
                 </div>
-              </div>
               <PayPalScriptProvider options={{ 
                 "client-id": 
                 "AcwQ7SsQNu37f_CvQCZTXj8CzrVdKSy-yEmXvGTWKKON9nGOWh8MPZTiGEyDAWDeOKQiJAGKEqrSrv80",
                 currency: "USD",
               }}>
+                <div id="paypalbtnorder">
                 <PayPalButtons
               style={{layout: "horizontal" }}
               createOrder={createOrderHandler}
               onApprove={onApproveHandler}
               onSuccess={successPaymentHandler}
               />
-             </PayPalScriptProvider>
+              </div>
+              </PayPalScriptProvider>
+              </div>
             </div>
           </>
         )}
+
+          <div id='paymentimg'>
+          </div>
+
+          <div id='paymentimg2'>
+          </div>
       </div>
-      <Footer />
+      <FooterProfile />
     </>
   );
 };

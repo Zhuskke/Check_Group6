@@ -130,6 +130,7 @@
     font-weight: 900 bolder;
     font-family: "Lato", sans-serif;
     font-weight: 900;
+    object-fit: cover;
 }
 
 #dropdownimage:hover{
