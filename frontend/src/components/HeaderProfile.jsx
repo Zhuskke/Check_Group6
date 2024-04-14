@@ -111,6 +111,12 @@ const isPremiumUser = useSelector((state) => state.userLogin.userInfo?.is_premiu
               </React.Fragment>
             )}
           <Nav>
+            {isAdmin && (
+              <React.Fragment>
+                <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Admin</Nav.Link>
+                <div className='headeruserline'></div>
+              </React.Fragment>
+            )}
             <Nav.Link as={Link} to="/topup" role='button' id='headeruserbtn'>{`Points: ${points}`}</Nav.Link>
             <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/ask-a-question" role='button' id='headeruserbtn'>Ask a Question</Nav.Link>

@@ -27,7 +27,6 @@ const HeaderUser = () => {
   const { profileImageUrl: profilePictureUrl } = profilePictureState;
   const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
   const isAdmin = userInfo && userInfo.isAdmin; // Assuming userInfo contains isAdmin field
-  
   useEffect(() => {
     if (userData) {
       dispatch(getProfileImage())
@@ -105,7 +104,7 @@ const isPremiumUser = useSelector((state) => state.userLogin.userInfo?.is_premiu
             <Nav.Link></Nav.Link>
           </Nav>
           <Nav>
-          {isAdmin && (
+            {isAdmin && (
               <React.Fragment>
                 <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Admin</Nav.Link>
                 <div className='headeruserline'></div>
