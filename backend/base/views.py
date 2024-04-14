@@ -291,6 +291,7 @@ class AdminUserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVie
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer  # Use UserUpdateSerializer for user updates
     permission_classes = [IsAdminUser]
+
 @api_view(['POST'])
 def create_comment(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -393,3 +394,11 @@ def delete_top_up_package(request, pk):
 
     package.delete()
     return Response(status=204)
+
+class AdminCommentListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = AdminCommentSerializer
+
+class AdminCommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = AdminCommentSerializer

@@ -51,6 +51,11 @@ import {
   topUpPackageUpdateReducer,
   topUpPackageDeleteReducer,
   topUpPackageCreateReducer,
+  commentListReducer,
+  commentDetailsReducer,
+  commentUpdateReducer,
+  commentDeleteReducer,
+  commentCreateReducer,
 } from './reducers/adminReducers';
 
 import {
@@ -103,6 +108,11 @@ import {
     topUpPackageUpdate: topUpPackageUpdateReducer,
     topUpPackageDelete: topUpPackageDeleteReducer,
     topUpPackageCreate: topUpPackageCreateReducer,
+    commentList: commentListReducer,
+    commentDetails: commentDetailsReducer,
+    commentUpdate: commentUpdateReducer,
+    commentDelete: commentDeleteReducer,
+    commentCreate: commentCreateReducer,
   });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

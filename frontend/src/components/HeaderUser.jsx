@@ -26,6 +26,7 @@ const HeaderUser = () => {
   const profilePictureState = useSelector((state) => state.getProfileImage);
   const { profileImageUrl: profilePictureUrl } = profilePictureState;
   const [profilePicture, setProfilePicture] = useState(defaultProfilePicture);
+  const isAdmin = userInfo && userInfo.isAdmin; // Assuming userInfo contains isAdmin field
 
   useEffect(() => {
     if (userData) {
@@ -102,6 +103,12 @@ React.useEffect(() => {
             <Nav.Link></Nav.Link>
           </Nav>
           <Nav>
+            {isAdmin && (
+              <React.Fragment>
+                <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Admin</Nav.Link>
+                <div className='headeruserline'></div>
+              </React.Fragment>
+            )}
             <Nav.Link as={Link} to="/topup" role='button' id='headeruserbtn'>{`Points: ${points}`}</Nav.Link>
             <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/ask-a-question" role='button' id='headeruserbtn'>Ask a Question</Nav.Link>

@@ -21,6 +21,7 @@ import VisitProfile from "./screens/VisitProfile";
 import AdminUserList from "./screens/AdminUsersScreen";
 import AdminQuestionsScreen from "./screens/AdminQuestionScreen";
 import AdminPackagesScreen from "./screens/AdminPackagesScreen";
+import AdminCommentsScreen from "./screens/AdminCommentsScreen";
 function App() {
   return (
     <Router>
@@ -46,6 +47,7 @@ function App() {
         <Route path="/profile/:id" element={<VisitProfile />} />
         <Route path="/admin/users" element={<AdminUserList />} />
         <Route path="/admin/questions" element={<AdminQuestionsScreen />} />
+        <Route path="/admin/comments" element={<AdminCommentsScreen />} />
         <Route path="/admin/packages" element={<AdminPackagesScreen />} />
       </Routes>
     </Router>
