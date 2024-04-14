@@ -160,7 +160,7 @@ const QuestionDetail = () => {
               />
             </div>
           )}
-<<<<<<< HEAD
+          <p><strong>Points Spent:</strong> {question.points_spent}</p>
           <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer +pointsused idk</button>
           {showAnswerArea && (
               <form
@@ -185,20 +185,6 @@ const QuestionDetail = () => {
             <button id="deletebtn" onClick={() => deleteHandler(question.id)}><RiDeleteBin6Line id="deleteicon"/></button>
             )}
 
-=======
-          <p><strong>Points Spent:</strong> {question.points_spent}</p>
-
-          <div className="line"></div>
-          <form onSubmit={handleSubmitComment}>
-            <input
-              id="answer-area"
-              placeholder="Answer Question?"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            ></input>
-            <button type="submit">Submit Comment</button>
-          </form>
->>>>>>> 16e144f8a7ba43057c054158d77b88a837085d69
         </div>
       </div>
       <FooterProfile />
