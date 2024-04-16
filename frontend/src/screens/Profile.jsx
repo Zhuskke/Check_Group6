@@ -13,6 +13,7 @@ import {
   fetchUserDescription,
   uploadProfileImage,
   getProfileImage,
+  updateUserPassword,
 } from "../actions/userActions";
 import "../designs/Profile.css";
 
@@ -34,6 +35,12 @@ const Profile = () => {
   const [description, setDescription] = useState("");
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
   const [showProfileOptions, setShowProfileOptions] = useState(false);
+
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [passwordChangeMessage, setPasswordChangeMessage] = useState('');
 
   useEffect(() => {
     if (userData) {
@@ -115,6 +122,43 @@ const Profile = () => {
     setShowDescriptionModal(false);
   };
 
+  const handleOpenChangePasswordModal = () => {
+    setShowChangePasswordModal(true);
+  };
+  
+  const handleCloseChangePasswordModal = () => {
+    setShowChangePasswordModal(false);
+  };
+
+  const handleChangePassword = async () => {
+    // Clear previous messages
+    setPasswordChangeMessage('');
+    
+    // Add password validation logic here
+    if (!currentPassword || !newPassword || !confirmNewPassword) {
+      setPasswordChangeMessage('Please fill in all fields');
+      return;
+    }
+    if (newPassword !== confirmNewPassword) {
+      setPasswordChangeMessage('New password and confirm password do not match');
+      return;
+    }
+
+    try {
+      await dispatch(updateUserPassword(currentPassword, newPassword));
+      setPasswordChangeMessage('Password changed successfully');
+      handleCloseChangePasswordModal();
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmNewPassword('');
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setPasswordChangeMessage(error.response.data.error);
+      } else {
+        setPasswordChangeMessage('Failed to change password. Please try again later.');
+      }
+    }
+  };
   return (
     <>
     <HeaderProfile />
@@ -167,6 +211,15 @@ const Profile = () => {
             <AiFillEdit id="editbiobtn"/>
           </Button>
           </p>
+          <p id="changepassword">Change Password
+          <Button
+             className="changepassword-button"
+             onClick={handleOpenChangePasswordModal}
+             id="editbio"
+            >
+              <AiFillEdit id="editbiobtn"/>
+            </Button>
+          </p>
         </div>
         <div id="profile-questions-answers-container">
           <div className="profile-section">
@@ -217,6 +270,26 @@ const Profile = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={showChangePasswordModal} onHide={handleCloseChangePasswordModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Change Password</Modal.Title>
+        </Modal.Header>
+      <Modal.Body>
+         <p className="password-change-message">{passwordChangeMessage}</p>
+          <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="Current Password" className="password-input" />
+          <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="New Password" className="password-input" />
+          <input type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} placeholder="Confirm New Password" className="password-input" />
+      </Modal.Body>
+      <Modal.Footer>
+         <Button variant="secondary" onClick={handleCloseChangePasswordModal}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleChangePassword}>
+          Change Password
+        </Button>
+      </Modal.Footer>
+      </Modal>    
     </div>
     <FooterProfile />
     </>

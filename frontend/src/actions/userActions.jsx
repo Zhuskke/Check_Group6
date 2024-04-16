@@ -32,6 +32,9 @@ import {
     USER_PROFILE_REQUEST,
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
+    USER_CHANGE_PASSWORD_REQUEST,
+    USER_CHANGE_PASSWORD_SUCCESS,
+    USER_CHANGE_PASSWORD_FAIL,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch) => {
@@ -305,4 +308,37 @@ export const uploadImage = (image) => async (dispatch, getState) => {
             payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
         });
     }
+};
+
+export const updateUserPassword = (currentPassword, newPassword) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_CHANGE_PASSWORD_REQUEST });
+
+    const { userInfo } = getState().userLogin;
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      '/api/users/change-password/',
+      { currentPassword, newPassword },
+      config
+    );
+
+    dispatch({
+      type: USER_CHANGE_PASSWORD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_CHANGE_PASSWORD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

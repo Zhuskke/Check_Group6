@@ -47,4 +47,5 @@ urlpatterns = [
     path('admin/comments/<int:pk>/', views.AdminCommentRetrieveUpdateDestroyAPIView.as_view(), name='admin-comment-detail'),
     path('admin/worksheets/', AdminWorksheetListCreateAPIView.as_view(), name='admin-worksheet-list-create'),
     path('admin/worksheets/<int:pk>/', AdminWorksheetRetrieveUpdateDestroyAPIView.as_view(), name='admin-worksheet-detail'),
+    path('users/change-password/', views.change_password, name='change_password'),
 ]

@@ -9,7 +9,8 @@ import {
   userDescriptionReducer,
   getProfileImageReducer,
   uploadProfileImageReducer,
-  userProfileReducer
+  userProfileReducer,
+  userChangePasswordReducer,
 } from "./reducers/userReducers";
 import { combineReducers } from "redux";
 import {
@@ -67,6 +68,7 @@ import {
     premiumReducer,
     premiumDetailsReducer,
   } from "./reducers/premiumReducers";
+import { updateUserPassword } from "./actions/userActions";
 
   const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -117,6 +119,7 @@ import {
     commentDelete: commentDeleteReducer,
     commentCreate: commentCreateReducer,
     worksheetList: worksheetListReducer,
+    updateUserPassword: userChangePasswordReducer,
   });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
