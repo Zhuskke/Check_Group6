@@ -117,12 +117,12 @@ const AdminUsersScreen = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
-  
+
     setEditedUser((prevState) => ({
       ...prevState,
       [name]: val,
     }));
-  
+
     if (
       name === "password" &&
       (!value || value.trim() === "") &&
@@ -141,10 +141,10 @@ const AdminUsersScreen = () => {
       setEditedUser((prevState) => ({
         ...prevState,
         confirmPassword: "",
-        [name]: name === 'is_premium' ? checked : value,
+        [name]: name === "is_premium" ? checked : value,
       }));
     }
-  
+
     // Update is_premium field when checkbox changes
     if (name === "is_premium") {
       setEditedUser((prevState) => ({
@@ -153,7 +153,6 @@ const AdminUsersScreen = () => {
       }));
     }
   };
-  
 
   const handleUpdateUser = () => {
     // Check if username, email, and points are not blank
@@ -165,7 +164,7 @@ const AdminUsersScreen = () => {
       console.error("Username, email, and points are required.");
       return; // Exit the function without updating if any required fields are empty
     }
-  
+
     // Check if either the new password or the confirm password field is filled
     if (
       editedUser.password.trim() !== "" ||
@@ -177,7 +176,7 @@ const AdminUsersScreen = () => {
         return; // Exit the function without updating if passwords don't match
       }
     }
-  
+
     // Prepare the payload with updated user information
     const payload = {
       username: editedUser.username,
@@ -188,12 +187,12 @@ const AdminUsersScreen = () => {
       is_superuser: editedUser.is_superuser,
       is_premium: editedUser.is_premium, // Include is_premium in the payload
     };
-  
+
     // Include the password field in the payload only if it's not empty
     if (editedUser.password && editedUser.password.trim() !== "") {
       payload.password = editedUser.password;
     }
-  
+
     // Dispatch the updateUser action with the updated payload
     dispatch(updateUser(editedUser.id, payload))
       .then(() => {
@@ -204,7 +203,6 @@ const AdminUsersScreen = () => {
         console.error("Error updating user:", error);
       });
   };
-  
 
   const handleDeleteUser = (userId) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
@@ -218,6 +216,18 @@ const AdminUsersScreen = () => {
     }
   };
 
+  const resetNewUserState = () => {
+    setEditedUser({
+      username: "",
+      email: "",
+      points: 0,
+      is_active: false,
+      is_staff: false,
+      is_superuser: false,
+      is_premium: false,
+    });
+  };
+
   return (
     <div className="admin-users-container">
       <HeaderAdmin />
@@ -229,7 +239,13 @@ const AdminUsersScreen = () => {
           <Message variant="danger">{error}</Message>
         ) : (
           <ul>
-            <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+            <Button
+              variant="primary"
+              onClick={() => {
+                resetNewUserState(); // Reset the state of editedUser
+                setShowCreateModal(true); // Open the modal for creating a new user
+              }}
+            >
               Add User
             </Button>
 
