@@ -30,6 +30,9 @@ import {
     USER_PROFILE_REQUEST,
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
+    USER_CHANGE_PASSWORD_REQUEST,
+    USER_CHANGE_PASSWORD_SUCCESS,
+    USER_CHANGE_PASSWORD_FAIL,
 } from '../constants/userConstants'
 // import {
     // ACTIVATE_PREMIUM_SUCCESS
@@ -159,6 +162,19 @@ export const userProfileReducer = (state = { user: {} }, action) => {
     case USER_PROFILE_SUCCESS:
       return { loading: false, user: action.payload };
     case USER_PROFILE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const userChangePasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_CHANGE_PASSWORD_REQUEST:
+      return { loading: true };
+    case USER_CHANGE_PASSWORD_SUCCESS:
+      return { loading: false, success: true };
+    case USER_CHANGE_PASSWORD_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

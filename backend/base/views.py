@@ -407,16 +407,20 @@ def delete_top_up_package(request, pk):
 class AdminCommentListCreateAPIView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = AdminCommentSerializer
+    permission_classes = [permissions.IsAdminUser]
 class AdminCommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = AdminCommentSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 class AdminWorksheetListCreateAPIView(generics.ListCreateAPIView):
     queryset = Worksheet.objects.all()
     serializer_class = WorksheetSerializer
+    permission_classes = [permissions.IsAdminUser]
 class AdminWorksheetRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Worksheet.objects.all()
     serializer_class = WorksheetSerializer
+    permission_classes = [permissions.IsAdminUser]
     parser_classes = [MultiPartParser] 
 
     def update(self, request, *args, **kwargs):
@@ -435,3 +439,22 @@ class AdminWorksheetRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyA
 
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def change_password(request):
+    currentPassword = request.data.get('currentPassword')
+    newPassword = request.data.get('newPassword')
+    
+    user = request.user
+    
+    # Verify the current password
+    if not user.check_password(currentPassword):
+        return Response({'error': 'Incorrect current password'}, status=400)
+    
+    # Update the password
+    user.password = make_password(newPassword)
+    user.save()
+    
+    return Response({'message': 'Password changed successfully'})

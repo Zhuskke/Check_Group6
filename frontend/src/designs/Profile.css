@@ -271,4 +271,35 @@
   transform: scaleX(-1);
 }
 
+.change-password-modal .modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 
+/* Password change message */
+.password-change-message {
+  font-size: 1rem;
+  color: #FF0000; /* Red color for error messages */
+  margin-bottom: 1rem;
+}
+
+/* Password input fields */
+.password-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da; /* Gray border */
+  border-radius: 0.25rem;
+}
+
+#changepassword{
+  font-family: "Lato", sans-serif;
+  color: gray;
+  font-size: larger;
+  font-size: 1rem;
+  font-weight: 300;
+  font-weight: bolder;
+  text-align: center;
+  margin-left: -1rem;
+}
