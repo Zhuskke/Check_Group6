@@ -20,7 +20,7 @@ const AdminWorksheetsScreen = () => {
   const [editedWorksheet, setEditedWorksheet] = useState({
     id: '',
     name: '',
-    category: '', // Add category field to the state
+    category: '',
     file: '',
   });
 
@@ -54,19 +54,32 @@ const AdminWorksheetsScreen = () => {
     formData.append('name', editedWorksheet.name);
     formData.append('category', editedWorksheet.category);
     
-    // Check if a new file is selected before appending it
+    // Check if a new file is selected
     if (editedWorksheet.file instanceof File) {
       formData.append('file', editedWorksheet.file); // Append the new file
-    } else {
-      // No new file selected, retain the existing file value
-      formData.append('file', editedWorksheet.file); // Append the existing file URL
+    } else if (editedWorksheet.file) {
+      // A file URL is provided, fetch the file and append it
+      fetch(editedWorksheet.file)
+        .then(response => response.blob())
+        .then(blob => {
+          const file = new File([blob], editedWorksheet.file.split('/').pop()); // Create a new File object
+          formData.append('file', file); // Append the file
+        })
+        .catch(error => {
+          console.error('Error fetching file:', error);
+        });
     }
-    
+  
+    // Include the ID of the worksheet in the form data
+    formData.append('id', editedWorksheet.id);
+  
     dispatch(updateWorksheet(editedWorksheet.id, formData)).then(() => {
       setShowEditModal(false);
       dispatch(listWorksheets());
     });
   };
+  
+  
   
   
   const handleDeleteWorksheet = (id) => {

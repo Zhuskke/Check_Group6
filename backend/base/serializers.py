@@ -208,6 +208,11 @@ class WorksheetSerializer(serializers.ModelSerializer):
         model = Worksheet
         fields = '__all__'
 
+class WorksheetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Worksheet
+        fields = '__all__'
+
     def update(self, instance, validated_data):
         # Pop the 'file' field from validated_data
         uploaded_file = validated_data.pop('file', None)
@@ -223,6 +228,8 @@ class WorksheetSerializer(serializers.ModelSerializer):
         if uploaded_file:
             # Update the file field if a new file is provided
             instance.file = uploaded_file
+
+            # Save the instance with the new file
             instance.save()
 
         return instance

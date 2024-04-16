@@ -424,13 +424,8 @@ class AdminWorksheetRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyA
 
         uploaded_file = request.data.get('file', None)
 
-        # Create a mutable copy of the request data to modify
-        mutable_request_data = request.data.copy()
-
-        mutable_request_data.pop('file', None)
-
-
-        serializer = self.get_serializer(instance, data=mutable_request_data, partial=True)
+        # Assuming you don't modify the file URL here
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
 
