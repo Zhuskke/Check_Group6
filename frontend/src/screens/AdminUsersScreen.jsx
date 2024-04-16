@@ -25,6 +25,7 @@ const AdminUsersScreen = () => {
     is_active: false,
     is_staff: false,
     is_superuser: false,
+    is_premium: false,
   });
   const [showCreateModal, setShowCreateModal] = useState(false);
   useEffect(() => {
@@ -67,6 +68,7 @@ const AdminUsersScreen = () => {
       email: editedUser.email,
       points: editedUser.points,
       is_active: editedUser.is_active,
+      is_premium: editedUser.is_premium,
       is_staff: editedUser.is_staff,
       is_superuser: editedUser.is_superuser,
       password: editedUser.password,
@@ -90,6 +92,7 @@ const AdminUsersScreen = () => {
       email: user.email,
       points: user.points || 0,
       is_active: user.is_active || false,
+      is_premium: user.is_premium || false,
       is_staff: user.is_staff || false,
       is_superuser: user.is_superuser || false,
       password: "",
@@ -114,12 +117,12 @@ const AdminUsersScreen = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
-
+  
     setEditedUser((prevState) => ({
       ...prevState,
       [name]: val,
     }));
-
+  
     if (
       name === "password" &&
       (!value || value.trim() === "") &&
@@ -138,9 +141,20 @@ const AdminUsersScreen = () => {
       setEditedUser((prevState) => ({
         ...prevState,
         confirmPassword: "",
+        [name]: name === 'is_premium' ? checked : value,
+      }));
+    }
+  
+    // Update is_premium field when checkbox changes
+    if (name === "is_premium") {
+      setEditedUser((prevState) => ({
+        ...prevState,
+        is_premium: checked,
       }));
     }
   };
+  
+
   const handleUpdateUser = () => {
     // Check if username, email, and points are not blank
     if (
@@ -151,7 +165,7 @@ const AdminUsersScreen = () => {
       console.error("Username, email, and points are required.");
       return; // Exit the function without updating if any required fields are empty
     }
-
+  
     // Check if either the new password or the confirm password field is filled
     if (
       editedUser.password.trim() !== "" ||
@@ -163,7 +177,7 @@ const AdminUsersScreen = () => {
         return; // Exit the function without updating if passwords don't match
       }
     }
-
+  
     // Prepare the payload with updated user information
     const payload = {
       username: editedUser.username,
@@ -172,13 +186,14 @@ const AdminUsersScreen = () => {
       is_active: editedUser.is_active,
       is_staff: editedUser.is_staff,
       is_superuser: editedUser.is_superuser,
+      is_premium: editedUser.is_premium, // Include is_premium in the payload
     };
-
+  
     // Include the password field in the payload only if it's not empty
     if (editedUser.password && editedUser.password.trim() !== "") {
       payload.password = editedUser.password;
     }
-
+  
     // Dispatch the updateUser action with the updated payload
     dispatch(updateUser(editedUser.id, payload))
       .then(() => {
@@ -189,6 +204,7 @@ const AdminUsersScreen = () => {
         console.error("Error updating user:", error);
       });
   };
+  
 
   const handleDeleteUser = (userId) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
@@ -299,6 +315,16 @@ const AdminUsersScreen = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+            <Form.Group controlId="formIsPremium">
+              <Form.Check
+                type="checkbox"
+                label="Premium"
+                name="is_premium"
+                checked={editedUser.is_premium}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
             <Form.Group controlId="formis_staff">
               <Form.Check
                 type="checkbox"
@@ -391,6 +417,15 @@ const AdminUsersScreen = () => {
                 label="Active"
                 name="is_active"
                 checked={editedUser.is_active}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formIsPremium">
+              <Form.Check
+                type="checkbox"
+                label="Premium"
+                name="is_premium"
+                checked={editedUser.is_premium}
                 onChange={handleChange}
               />
             </Form.Group>

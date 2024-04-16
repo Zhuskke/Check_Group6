@@ -154,7 +154,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     is_superuser = serializers.BooleanField()
     is_staff = serializers.BooleanField()
     password = serializers.CharField(write_only=True, required=False)
-    is_premium = serializers.BooleanField(required=False)
+    is_premium = serializers.BooleanField(source='userprofile.is_premium', required=False)
 
     class Meta:
         model = User
@@ -178,7 +178,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         instance.is_active = validated_data.get('is_active', instance.is_active)
         instance.is_staff = validated_data.get('is_staff', instance.is_staff)
         instance.is_superuser = validated_data.get('is_superuser', instance.is_superuser)
-       # instance.is_premium = validated_data.get('is_premium', instance.is_premium)
 
         # Update password if provided
         password = validated_data.get('password')
@@ -193,11 +192,37 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         if user_profile_data:
             user_profile = instance.userprofile
             user_profile.points = user_profile_data.get('points', user_profile.points)
+            user_profile.is_premium = user_profile_data.get('is_premium', user_profile.is_premium)  # Update is_premium field
             user_profile.save()
 
         return instance
+
     
 class PremiumPackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PremiumPackage
         fields = '__all__'  
+
+class WorksheetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Worksheet
+        fields = '__all__'
+
+    def update(self, instance, validated_data):
+        # Pop the 'file' field from validated_data
+        uploaded_file = validated_data.pop('file', None)
+
+        # Update the instance fields except for the 'file' field
+        instance.name = validated_data.get('name', instance.name)
+        instance.category = validated_data.get('category', instance.category)
+
+        # Save the instance with the updated fields
+        instance.save()
+
+        # Check if a new file is provided
+        if uploaded_file:
+            # Update the file field if a new file is provided
+            instance.file = uploaded_file
+            instance.save()
+
+        return instance

@@ -104,12 +104,6 @@ const isPremiumUser = useSelector((state) => state.userLogin.userInfo?.is_premiu
             </Form>
             <Nav.Link></Nav.Link>
           </Nav>
-          {isAdmin && (
-              <React.Fragment>
-                <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Admin</Nav.Link>
-                <div className='headeruserline'></div>
-              </React.Fragment>
-            )}
           <Nav>
             {isAdmin && (
               <React.Fragment>

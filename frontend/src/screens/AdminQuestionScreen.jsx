@@ -31,39 +31,39 @@ const AdminQuestionsScreen = () => {
     points_spent: 0,
   });
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false); 
-  const [showAddModal, setShowAddModal] = useState(false); 
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [clearAttachment, setClearAttachment] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null); 
-  const userList = useSelector((state) => state.userList); 
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const userList = useSelector((state) => state.userList);
   const { users } = userList;
 
   const handleUpdateQuestion = async () => {
     const formData = new FormData();
     formData.append("content", editedQuestion.content);
     formData.append("points_spent", editedQuestion.points_spent);
-    
+
     // Append clearAttachment parameter
     formData.append("clearAttachment", clearAttachment ? "true" : "false");
-    
+
     // Append attachment if it's not null
     if (editedQuestion.attachment) {
       formData.append("attachment", editedQuestion.attachment);
     }
-    
+
     await dispatch(updateQuestion(selectedQuestionId, formData)); // Wait for updateQuestion action to complete
-  
+
     setShowEditModal(false);
     dispatch(listQuestions()); // Fetch updated list of questions
   };
-  
-const resetNewQuestionState = () => {
-  setNewQuestion({
-    content: "",
-    attachment: null,
-    points_spent: 0,
-  });
-};
+
+  const resetNewQuestionState = () => {
+    setNewQuestion({
+      content: "",
+      attachment: null,
+      points_spent: 0,
+    });
+  };
   const handleDeleteQuestion = async (questionId) => {
     if (window.confirm("Are you sure you want to delete this question?")) {
       await dispatch(deleteQuestion(questionId));
@@ -89,8 +89,6 @@ const resetNewQuestionState = () => {
     dispatch(listQuestions());
   };
 
-  
-
   return (
     <div className="admin-questions-container">
       <HeaderAdmin />
@@ -101,16 +99,15 @@ const resetNewQuestionState = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-
-<Button
-  variant="primary"
-  onClick={() => {
-    resetNewQuestionState();
-    setShowAddModal(true);
-  }}
->
-  Add Question
-</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              resetNewQuestionState();
+              setShowAddModal(true);
+            }}
+          >
+            Add Question
+          </Button>
           <ul>
             {questions.map((question) => (
               <li key={question.id}>
@@ -146,7 +143,7 @@ const resetNewQuestionState = () => {
                     <Modal.Body>
                       <Form>
                         <Form.Group controlId="formContent">
-                          <Form.Label>Content</Form.Label>
+                          <Form.Label>Question</Form.Label>
                           <Form.Control
                             type="text"
                             placeholder="Enter content"
@@ -159,61 +156,64 @@ const resetNewQuestionState = () => {
                             }
                           />
                         </Form.Group>
-<Form.Group controlId="formImage">
-  <Form.Label>Image</Form.Label>
-  <Form.Control
-    type="file"
-    onChange={(e) =>
-      setEditedQuestion({
-        ...editedQuestion,
-        attachment: e.target.files[0],
-      })
-    }
-    name="attachment"
-  />
-  {editedQuestion.attachment && (
-    <div>
-      <p>Uploaded File: {editedQuestion.attachment.name}</p>
-      <Form.Check
-  type="checkbox"
-  label="Clear Image"
-  onChange={(e) => {
-    setClearAttachment(e.target.checked);
-    if (e.target.checked) {
-      setEditedQuestion({
-        ...editedQuestion,
-        attachment: null,
-      });
-    }
-  }}
-/>
-
-    </div>
-  )}
-  {!editedQuestion.attachment && question.attachment && (
-    <div>
-      <p>Uploaded File: {question.attachment.split("/").pop()}</p>
-      <Form.Check
-  type="checkbox"
-  label="Clear Image"
-  onChange={(e) => {
-    setClearAttachment(e.target.checked);
-    if (e.target.checked) {
-      setEditedQuestion({
-        ...editedQuestion,
-        attachment: null,
-      });
-    }
-  }}
-/>
-
-    </div>
-  )}
-</Form.Group>
-
+                        <Form.Group controlId="formImage">
+                          <Form.Label>Image</Form.Label>
+                          <Form.Control
+                            type="file"
+                            onChange={(e) =>
+                              setEditedQuestion({
+                                ...editedQuestion,
+                                attachment: e.target.files[0],
+                              })
+                            }
+                            name="attachment"
+                          />
+                          {editedQuestion.attachment && (
+                            <div>
+                              <p>
+                                Uploaded File: {editedQuestion.attachment.name}
+                              </p>
+                              <Form.Check
+                                type="checkbox"
+                                label="Clear Image"
+                                onChange={(e) => {
+                                  setClearAttachment(e.target.checked);
+                                  if (e.target.checked) {
+                                    setEditedQuestion({
+                                      ...editedQuestion,
+                                      attachment: null,
+                                    });
+                                  }
+                                }}
+                              />
+                            </div>
+                          )}
+                          {!editedQuestion.attachment &&
+                            question.attachment && (
+                              <div>
+                                <p>
+                                  Uploaded File:{" "}
+                                  {question.attachment.split("/").pop()}
+                                </p>
+                                <Form.Check
+                                  type="checkbox"
+                                  label="Clear Image"
+                                  onChange={(e) => {
+                                    setClearAttachment(e.target.checked);
+                                    if (e.target.checked) {
+                                      setEditedQuestion({
+                                        ...editedQuestion,
+                                        attachment: null,
+                                      });
+                                    }
+                                  }}
+                                />
+                              </div>
+                            )}
+                        </Form.Group>
 
                         <Form.Group controlId="formPointsSpent">
-                          <Form.Label>Points Spent</Form.Label>
+                          <Form.Label>Points</Form.Label>
                           <Form.Control
                             type="number"
                             placeholder="Enter points spent"
@@ -265,7 +265,7 @@ const resetNewQuestionState = () => {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formContent">
-                  <Form.Label>Content</Form.Label>
+                  <Form.Label>Question</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter content"
@@ -291,7 +291,7 @@ const resetNewQuestionState = () => {
                   />
                 </Form.Group>
                 <Form.Group controlId="formPointsSpent">
-                  <Form.Label>Points Spent</Form.Label>
+                  <Form.Label>Points</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="Enter points spent"

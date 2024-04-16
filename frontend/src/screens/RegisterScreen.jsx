@@ -98,7 +98,6 @@ return (
               <MDBInput wrapperClass='mb-4' label='Password' size='lg' id='form' type='password' placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
               <MDBInput wrapperClass='mb-4' label='Confirm Password' size='lg' id='form' type='password' placeholder='confirm password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
               <div className='d-flex flex-row justify-content-center mb-4'>
-                <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I agree all statements in Terms of service' />
               </div>
               <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' type='submit' id='register-button'>Register</MDBBtn>
               <Link to="/login" className="nav-link" id="register-login">Already have an account?</Link>

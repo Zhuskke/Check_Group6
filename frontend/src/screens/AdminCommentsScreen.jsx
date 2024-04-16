@@ -191,9 +191,13 @@ const AdminCommentsScreen = () => {
             {comments.map((comment) => (
               <li key={comment.id} className="comment-item">
                 <div className="comment-info">
-                  <span>User: {comment.user}</span> -{" "}
-                  <span>Question: {comment.question}</span> -{" "}
-                  <span>Content: {comment.content}</span>
+                  {/* Display the question content */}
+                  <span>
+                    Question:{" "}
+                    {questions.find((q) => q.id === comment.question)?.content}
+                  </span>{" "}
+                  - {/* Display the comment content */}
+                  <span>Comment: {comment.content}</span>
                 </div>
                 <div className="comment-actions">
                   <button onClick={() => handleEditComment(comment)}>
@@ -250,7 +254,7 @@ const AdminCommentsScreen = () => {
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formContent">
-              <Form.Label>Content</Form.Label>
+              <Form.Label>Comment</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter content"
@@ -311,7 +315,7 @@ const AdminCommentsScreen = () => {
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formContent">
-              <Form.Label>Content</Form.Label>
+              <Form.Label>Comment</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter content"

@@ -45,4 +45,6 @@ urlpatterns = [
     path('admin/delete-top-up-package/<int:pk>/', delete_top_up_package, name='delete-top-up-package'),
     path('admin/comments/', views.AdminCommentListCreateAPIView.as_view(), name='admin-comment-list-create'),
     path('admin/comments/<int:pk>/', views.AdminCommentRetrieveUpdateDestroyAPIView.as_view(), name='admin-comment-detail'),
+    path('admin/worksheets/', AdminWorksheetListCreateAPIView.as_view(), name='admin-worksheet-list-create'),
+    path('admin/worksheets/<int:pk>/', AdminWorksheetRetrieveUpdateDestroyAPIView.as_view(), name='admin-worksheet-detail'),
 ]

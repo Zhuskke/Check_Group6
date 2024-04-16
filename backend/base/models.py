@@ -59,3 +59,19 @@ class PremiumPackage(models.Model):
 
     def __str__(self):
         return self.name
+
+class Worksheet(models.Model):
+    CATEGORY_CHOICES = [
+        ('English', 'English'),
+        ('Math', 'Math'),
+        ('History', 'History'),
+        ('Science', 'Science'),
+        ('Physics', 'Physics'),
+        ('Calculus', 'Calculus'),
+    ]
+
+    name = models.CharField(max_length=100)
+    file = models.FileField(upload_to='worksheets/')
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='English')
+    def __str__(self):
+        return self.name

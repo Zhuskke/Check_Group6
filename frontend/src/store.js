@@ -56,6 +56,7 @@ import {
   commentUpdateReducer,
   commentDeleteReducer,
   commentCreateReducer,
+  worksheetListReducer,
 } from './reducers/adminReducers';
 
 import {
@@ -115,6 +116,7 @@ import {
     commentUpdate: commentUpdateReducer,
     commentDelete: commentDeleteReducer,
     commentCreate: commentCreateReducer,
+    worksheetList: worksheetListReducer,
   });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

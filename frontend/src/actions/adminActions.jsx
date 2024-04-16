@@ -60,6 +60,21 @@ import {
   COMMENT_CREATE_REQUEST,
   COMMENT_CREATE_SUCCESS,
   COMMENT_CREATE_FAIL,
+  WORKSHEET_LIST_REQUEST,
+  WORKSHEET_LIST_SUCCESS,
+  WORKSHEET_LIST_FAIL,
+  WORKSHEET_DETAILS_REQUEST,
+  WORKSHEET_DETAILS_SUCCESS,
+  WORKSHEET_DETAILS_FAIL,
+  WORKSHEET_UPDATE_REQUEST,
+  WORKSHEET_UPDATE_SUCCESS,
+  WORKSHEET_UPDATE_FAIL,
+  WORKSHEET_DELETE_REQUEST,
+  WORKSHEET_DELETE_SUCCESS,
+  WORKSHEET_DELETE_FAIL,
+  WORKSHEET_CREATE_REQUEST,
+  WORKSHEET_CREATE_SUCCESS,
+  WORKSHEET_CREATE_FAIL,
 } from '../constants/adminConstants';
 
 export const listUsers = () => async (dispatch, getState) => {
@@ -133,13 +148,19 @@ export const getUserDetails = (userId) => async (dispatch, getState) => {
         userLogin: { userInfo },
       } = getState();
   
+      // Make sure is_premium is included in userData
+      const updatedUserData = {
+        ...userData,
+        is_premium: userData.is_premium || false, // default to false if not provided
+      };
+  
       const config = {
         headers: {
           Authorization: `Bearer ${userInfo && userInfo.token}`,
         },
       };
   
-      const { data } = await axios.put(`/api/admin/users/${userId}/`, userData, config);
+      const { data } = await axios.put(`/api/admin/users/${userId}/`, updatedUserData, config);
   
       dispatch({
         type: USER_UPDATE_SUCCESS,
@@ -155,6 +176,7 @@ export const getUserDetails = (userId) => async (dispatch, getState) => {
       });
     }
   };
+  
   
   export const deleteUser = (userId) => async (dispatch, getState) => {
     try {
@@ -706,6 +728,148 @@ export const getUserDetails = (userId) => async (dispatch, getState) => {
               error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
+          });
+        }
+      };
+
+      export const listWorksheets = () => async (dispatch, getState) => {
+        try {
+          dispatch({ type: WORKSHEET_LIST_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+            },
+          };
+      
+          const { data } = await axios.get('/api/admin/worksheets/', config);
+      
+          dispatch({
+            type: WORKSHEET_LIST_SUCCESS,
+            payload: data,
+          });
+        } catch (error) {
+          dispatch({
+            type: WORKSHEET_LIST_FAIL,
+            payload:
+              error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+          });
+        }
+      };
+
+      export const getWorksheetDetails = (worksheetId) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: WORKSHEET_DETAILS_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+            },
+          };
+      
+          const { data } = await axios.get(`/api/admin/worksheets/${worksheetId}/`, config);
+      
+          dispatch({
+            type: WORKSHEET_DETAILS_SUCCESS,
+            payload: data,
+          });
+        } catch (error) {
+          dispatch({
+            type: WORKSHEET_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
+          });
+        }
+      };
+      
+      export const updateWorksheet = (worksheetId, worksheetData) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: WORKSHEET_UPDATE_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+              'Content-Type': 'multipart/form-data',
+            },
+          };
+      
+          const { data } = await axios.put(`/api/admin/worksheets/${worksheetId}/`, worksheetData, config);
+      
+          dispatch({
+            type: WORKSHEET_UPDATE_SUCCESS,
+            payload: data,
+          });
+        } catch (error) {
+          dispatch({
+            type: WORKSHEET_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
+          });
+        }
+      };
+      
+      export const deleteWorksheet = (worksheetId) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: WORKSHEET_DELETE_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+            },
+          };
+      
+          await axios.delete(`/api/admin/worksheets/${worksheetId}/`, config);
+      
+          dispatch({ type: WORKSHEET_DELETE_SUCCESS });
+        } catch (error) {
+          dispatch({
+            type: WORKSHEET_DELETE_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
+          });
+        }
+      };
+      
+      export const createWorksheet = (worksheetData) => async (dispatch, getState) => {
+        try {
+          dispatch({ type: WORKSHEET_CREATE_REQUEST });
+      
+          const {
+            userLogin: { userInfo },
+          } = getState();
+      
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo && userInfo.token}`,
+              'Content-Type': 'multipart/form-data',
+            },
+          };
+      
+          const { data } = await axios.post('/api/admin/worksheets/', worksheetData, config);
+      
+          dispatch({
+            type: WORKSHEET_CREATE_SUCCESS,
+            payload: data,
+          });
+        } catch (error) {
+          dispatch({
+            type: WORKSHEET_CREATE_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
           });
         }
       };

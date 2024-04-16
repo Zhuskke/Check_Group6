@@ -59,6 +59,21 @@ import {
   COMMENT_CREATE_REQUEST,
   COMMENT_CREATE_SUCCESS,
   COMMENT_CREATE_FAIL,
+  WORKSHEET_LIST_REQUEST,
+  WORKSHEET_LIST_SUCCESS,
+  WORKSHEET_LIST_FAIL,
+  WORKSHEET_DETAILS_REQUEST,
+  WORKSHEET_DETAILS_SUCCESS,
+  WORKSHEET_DETAILS_FAIL,
+  WORKSHEET_UPDATE_REQUEST,
+  WORKSHEET_UPDATE_SUCCESS,
+  WORKSHEET_UPDATE_FAIL,
+  WORKSHEET_DELETE_REQUEST,
+  WORKSHEET_DELETE_SUCCESS,
+  WORKSHEET_DELETE_FAIL,
+  WORKSHEET_CREATE_REQUEST,
+  WORKSHEET_CREATE_SUCCESS,
+  WORKSHEET_CREATE_FAIL,
 } from '../constants/adminConstants';
 
 export const userListReducer = (state = { users: [] }, action) => {
@@ -315,6 +330,71 @@ export const commentCreateReducer = (state = {}, action) => {
     case COMMENT_CREATE_SUCCESS:
       return { loading: false, success: true, comment: action.payload };
     case COMMENT_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const worksheetListReducer = (state = { worksheets: [] }, action) => {
+  switch (action.type) {
+    case WORKSHEET_LIST_REQUEST:
+      return { loading: true, worksheets: [] };
+    case WORKSHEET_LIST_SUCCESS:
+      return { loading: false, worksheets: action.payload };
+    case WORKSHEET_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const worksheetDetailsReducer = (state = { worksheet: {} }, action) => {
+  switch (action.type) {
+    case WORKSHEET_DETAILS_REQUEST:
+      return { loading: true, ...state };
+    case WORKSHEET_DETAILS_SUCCESS:
+      return { loading: false, worksheet: action.payload };
+    case WORKSHEET_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const worksheetUpdateReducer = (state = { worksheet: {} }, action) => {
+  switch (action.type) {
+    case WORKSHEET_UPDATE_REQUEST:
+      return { loading: true };
+    case WORKSHEET_UPDATE_SUCCESS:
+      return { loading: false, success: true, worksheet: action.payload };
+    case WORKSHEET_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const worksheetDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case WORKSHEET_DELETE_REQUEST:
+      return { loading: true };
+    case WORKSHEET_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case WORKSHEET_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const worksheetCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case WORKSHEET_CREATE_REQUEST:
+      return { loading: true };
+    case WORKSHEET_CREATE_SUCCESS:
+      return { loading: false, success: true, worksheet: action.payload };
+    case WORKSHEET_CREATE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

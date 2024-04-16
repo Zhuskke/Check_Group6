@@ -72,11 +72,7 @@ function LoginScreen() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className="d-flex flex-row justify-content-center mb-4">
-                <MDBCheckbox
-                  name="flexCheck"
-                  id="flexCheckDefault"
-                  label="Keep me logged in."
-                />
+                
               </div>
               <MDBBtn id="loginbutton" className="mb-4 w-100" size="lg" type="submit">
                 Log In

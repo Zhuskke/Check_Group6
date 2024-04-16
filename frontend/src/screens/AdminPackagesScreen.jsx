@@ -22,7 +22,7 @@ const AdminPackagesScreen = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
-  
+
   useEffect(() => {
     dispatch(listTopUpPackages());
   }, [dispatch]);
@@ -58,13 +58,12 @@ const AdminPackagesScreen = () => {
 
   const handleEditPackage = (pkg) => {
     setEditedPackage({
-        points: pkg.points,
-        price: pkg.price,
-      });
+      points: pkg.points,
+      price: pkg.price,
+    });
     setSelectedPackage(pkg); // Store the selected package
     setShowModal(true);
   };
-
 
   const handleUpdatePackage = async (packageId, packageData) => {
     try {
@@ -75,8 +74,6 @@ const AdminPackagesScreen = () => {
       console.error("Error updating package:", error);
     }
   };
-  
-  
 
   const handleDeletePackage = async (packageId) => {
     if (window.confirm("Are you sure you want to delete this package?")) {
@@ -106,11 +103,14 @@ const AdminPackagesScreen = () => {
             {packages.map((pkg) => (
               <li key={pkg.id} className="package-item">
                 <div className="package-info">
-                  <span>Points: {pkg.points}</span> - <span>Price: {pkg.price}</span>
+                  <span>Points: {pkg.points}</span> -{" "}
+                  <span>Price: {pkg.price}</span>
                 </div>
                 <div className="package-actions">
                   <button onClick={() => handleEditPackage(pkg)}>Edit</button>
-                  <button onClick={() => handleDeletePackage(pkg.id)}>Delete</button>
+                  <button onClick={() => handleDeletePackage(pkg.id)}>
+                    Delete
+                  </button>
                 </div>
               </li>
             ))}
@@ -150,11 +150,14 @@ const AdminPackagesScreen = () => {
           <Button variant="secondary" onClick={handleCloseModal}>
             Close
           </Button>
-<Button variant="primary" onClick={() => handleUpdatePackage(selectedPackage.id, editedPackage)}>
-  Save Changes
-</Button>
-
-
+          <Button
+            variant="primary"
+            onClick={() =>
+              handleUpdatePackage(selectedPackage.id, editedPackage)
+            }
+          >
+            Save Changes
+          </Button>
         </Modal.Footer>
       </Modal>
 

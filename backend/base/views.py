@@ -289,7 +289,7 @@ class AdminUserListCreateAPIView(generics.ListCreateAPIView):
 
 class AdminUserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
-    serializer_class = UserUpdateSerializer  # Use UserUpdateSerializer for user updates
+    serializer_class = UserUpdateSerializer 
     permission_classes = [IsAdminUser]
 
 @api_view(['POST'])
@@ -410,3 +410,33 @@ class AdminCommentListCreateAPIView(generics.ListCreateAPIView):
 class AdminCommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = AdminCommentSerializer
+
+class AdminWorksheetListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Worksheet.objects.all()
+    serializer_class = WorksheetSerializer
+class AdminWorksheetRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Worksheet.objects.all()
+    serializer_class = WorksheetSerializer
+    parser_classes = [MultiPartParser] 
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        uploaded_file = request.data.get('file', None)
+
+        # Create a mutable copy of the request data to modify
+        mutable_request_data = request.data.copy()
+
+        mutable_request_data.pop('file', None)
+
+
+        serializer = self.get_serializer(instance, data=mutable_request_data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
+            if uploaded_file:
+                instance.file = uploaded_file
+                instance.save()
+
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
