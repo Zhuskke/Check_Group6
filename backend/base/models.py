@@ -42,6 +42,19 @@ class Comment(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    totalUpvotes = models.IntegerField(default=0) 
+    totalDownvotes = models.IntegerField(default=0)
+    
+class CommentVote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    vote_type = models.CharField(max_length=10) 
+
+    class Meta:
+        unique_together = ('user', 'comment')  
+
+    def __str__(self):
+        return f'{self.user.username} {self.vote_type}d comment {self.comment.id}'
 
 class Subscription(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

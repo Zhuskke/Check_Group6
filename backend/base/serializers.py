@@ -121,6 +121,10 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'user', 'question', 'content', 'created_at']
+class CommentVoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentVote
+        fields = ['user', 'comment', 'vote_type']
 
 class AdminCommentSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
