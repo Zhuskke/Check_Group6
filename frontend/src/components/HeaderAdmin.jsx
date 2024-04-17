@@ -84,15 +84,11 @@ React.useEffect(() => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          <Form inline onSubmit={handleSearch} className="d-flex align-items-center justify-content-center">
-            <FormControl type="search" placeholder="What is your question?" className="mr-sm-2 mx-auto" autoComplete='off' id='searchbar' onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
-            <Button variant="outline-success" type="submit" id='searchbarbtn'>
-              <FaSearch />
-            </Button>
-            </Form>
             <Nav.Link></Nav.Link>
           </Nav>
           <Nav>
+            <Nav.Link as={Link} to="/" role='button' id='headeruserbtn'>Home</Nav.Link>
+            <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/admin/users" role='button' id='headeruserbtn'>Users</Nav.Link>
             <div className='headeruserline'></div>
             <Nav.Link as={Link} to="/admin/questions" role='button' id='headeruserbtn'>Questions</Nav.Link>

@@ -13,6 +13,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import HeaderAdmin from "../components/HeaderAdmin";
+import '../designs/Adminuser.css';
+import Footer from "../components/Footer";
 
 const AdminUsersScreen = () => {
   const dispatch = useDispatch();
@@ -229,9 +231,10 @@ const AdminUsersScreen = () => {
   };
 
   return (
+    <>
+    <HeaderAdmin />
     <div className="admin-users-container">
-      <HeaderAdmin />
-      <h1>Users</h1>
+      <h1 id="adminutitle">Users</h1>
       <div className="user-list">
         {loading ? (
           <Loader />
@@ -239,6 +242,7 @@ const AdminUsersScreen = () => {
           <Message variant="danger">{error}</Message>
         ) : (
           <ul>
+<<<<<<< Updated upstream
             <Button
               variant="primary"
               onClick={() => {
@@ -246,10 +250,14 @@ const AdminUsersScreen = () => {
                 setShowCreateModal(true); // Open the modal for creating a new user
               }}
             >
+=======
+            <Button id="adduserbtn" variant="primary" onClick={() => setShowCreateModal(true)}>
+>>>>>>> Stashed changes
               Add User
             </Button>
 
             {users.map((user) => (
+              <div className="user-container">
               <li key={user.id} className="user-item">
                 <div className="user-info">
                   <span>{user.username}</span> -<span>{user.email}</span>
@@ -261,6 +269,7 @@ const AdminUsersScreen = () => {
                   </button>
                 </div>
               </li>
+              </div>
             ))}
           </ul>
         )}
@@ -475,6 +484,8 @@ const AdminUsersScreen = () => {
         </Modal.Footer>
       </Modal>
     </div>
+    {/* <Footer /> */}
+    </>
   );
 };
 

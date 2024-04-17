@@ -43,6 +43,7 @@ function CalculusScreen() {
         </div>
 
         {!is_premium && (
+<<<<<<< Updated upstream
           <div id='subjectscreen-containerbg'>
             <div id='subjectscreen-container'>
               <p id='subjectscreentext'>This content is only available for premium users. Sign up for a premium account!</p>
@@ -50,6 +51,25 @@ function CalculusScreen() {
             </div>
           </div>
         )}
+=======
+        <div id='subjectscreen-containerbg'>
+          <div id='subjectscreen-container'>
+            <p id='subjectscreentext'>This content is only available for premium users. Upgrade to Premium Now!</p>
+            <button onClick={handleSignUp} id='subjectscreenbtn'>Subscribe Now!</button>
+          </div>
+
+          <div id='subjectscreen-image'>
+          </div>
+
+          <div id='subjectscreen-image2'>
+          </div>
+
+          <div id='subjectscreen-image3'>
+          </div>
+
+        </div>
+      )}
+>>>>>>> Stashed changes
 
         {is_premium && (
           <div>

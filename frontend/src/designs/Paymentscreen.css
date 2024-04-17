@@ -49,8 +49,8 @@
     position: absolute;
     top: 22.5rem;
     left: 10rem;
-    width: 23.5rem;
-    height: 23.5rem;
+    width: 23rem;
+    height: 23rem;
     background-size: contain;
     transform: scaleX(-1);
 }
@@ -61,7 +61,7 @@
     position: absolute;
     top: 23rem;
     left: 83rem;
-    width: 23rem;
-    height: 23rem;
+    width: 22rem;
+    height: 22rem;
     background-size: contain;
 }

@@ -14,6 +14,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import HeaderAdmin from "../components/HeaderAdmin";
+import '../designs/Admincomment.css';
 
 const AdminCommentsScreen = () => {
   const dispatch = useDispatch();
@@ -168,9 +169,10 @@ const AdminCommentsScreen = () => {
   };
 
   return (
+    <>
+    <HeaderAdmin />
     <div className="admin-comments-container">
-      <HeaderAdmin />
-      <h1>Comments</h1>
+      <h1 id="adminctitle">Comments</h1>
       <div className="comment-list">
         {loading ? (
           <Loader />
@@ -184,11 +186,13 @@ const AdminCommentsScreen = () => {
                 resetNewCommentState();
                 setShowCreateModal(true);
               }}
+              id="admincbtn"
             >
               Add Comment
             </Button>
 
             {comments.map((comment) => (
+              <div className="comment-container">
               <li key={comment.id} className="comment-item">
                 <div className="comment-info">
                   {/* Display the question content */}
@@ -208,6 +212,7 @@ const AdminCommentsScreen = () => {
                   </button>
                 </div>
               </li>
+              </div>
             ))}
           </ul>
         )}
@@ -336,6 +341,7 @@ const AdminCommentsScreen = () => {
         </Modal.Footer>
       </Modal>
     </div>
+    </>
   );
 };
 

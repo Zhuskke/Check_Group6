@@ -163,8 +163,8 @@ const QuestionDetail = () => {
               />
             </div>
           )}
-          <p><strong>Points Spent:</strong> {question.points_spent}</p>
-          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer +pointsused idk</button>
+          {/* <p><strong>Points Spent:</strong> {question.points_spent}</p> */}
+          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get + {question.points_spent} points</button>
           {showAnswerArea && (
               <form
                 className={`answer-area-form ${

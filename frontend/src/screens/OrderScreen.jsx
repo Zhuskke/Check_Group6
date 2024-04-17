@@ -125,10 +125,10 @@ const OrderScreen = () => {
           </>
         )}
 
-          <div id='paymentimg'>
+          <div id='orderimg'>
           </div>
 
-          <div id='paymentimg2'>
+          <div id='orderimg2'>
           </div>
       </div>
       <FooterProfile />

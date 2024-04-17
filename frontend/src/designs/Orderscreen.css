@@ -65,3 +65,26 @@
     margin-top: 2rem;
     margin-left: 8.3rem;
 }
+
+#orderimg{
+    background-image: url(https://images.vexels.com/media/users/3/286295/isolated/preview/8dc6e6a225bdc100a57b10a23137703c-cute-cat-with-lightbulb.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 23.5rem;
+    left: 10rem;
+    width: 23rem;
+    height: 23rem;
+    background-size: contain;
+    transform: scaleX(-1);
+}
+
+#orderimg2{
+    background-image: url(https://images.vexels.com/media/users/3/287060/isolated/preview/bb3c667866a08af269b17a637f1c458a-cute-cat-with-backpack.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 24.5rem;
+    left: 84rem;
+    width: 22rem;
+    height: 22rem;
+    background-size: contain;
+}
