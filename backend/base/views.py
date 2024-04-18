@@ -19,7 +19,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.conf import settings
 from django.templatetags.static import static
 from django.urls import reverse
-
+from django.http import JsonResponse
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -297,13 +297,139 @@ class UserWorksheetListAPIView(generics.ListCreateAPIView):
     serializer_class = WorksheetSerializer
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_comment(request, question_id):
+    
     question = get_object_or_404(Question, pk=question_id)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(user=request.user, question=question)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_comments_for_question(request, question_id):
+   
+    question = get_object_or_404(Question, pk=question_id)
+    
+   
+    comments = Comment.objects.filter(question=question)
+
+    comments_list = []
+    for comment in comments:
+        comments_list.append({
+            'id': comment.id,
+            'user': comment.user.username,
+            'content': comment.content,
+            'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        })
+
+    # Return JSON response with the list of comments
+    return JsonResponse({'comments': comments_list})
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_comment_vote(request):
+    
+    user_id = request.data.get('user_id')
+    comment_id = request.data.get('comment_id')
+    vote_type = request.data.get('vote_type')
+
+    if not user_id or not comment_id or vote_type not in ['upvote', 'downvote']:
+        return Response({'error': 'Invalid data provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = get_object_or_404(User, pk=user_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    try:
+        comment_vote = CommentVote.objects.get(user=user, comment=comment)
+        
+        # User has already voted on this comment, check if they are changing their vote
+        if comment_vote.vote_type == vote_type:
+            return Response({'error': 'User has already voted with this type'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Update the vote_type
+        comment_vote.vote_type = vote_type
+        comment_vote.save()
+        
+        return Response({'message': 'Vote updated successfully'}, status=status.HTTP_200_OK)
+
+    except CommentVote.DoesNotExist:
+        # User hasn't voted on this comment before, create a new vote
+        serializer = CommentVoteSerializer(data={'user': user_id, 'comment': comment_id, 'vote_type': vote_type})
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET'])
+def count_comment_votes(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    upvotes_count = CommentVote.objects.filter(comment=comment, vote_type='upvote').count()
+    downvotes_count = CommentVote.objects.filter(comment=comment, vote_type='downvote').count()
+
+    total_votes = upvotes_count + downvotes_count
+
+    response_data = {
+        'upvotes': upvotes_count,
+        'downvotes': downvotes_count,
+        'total_votes': total_votes
+    }
+
+    return Response(response_data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def remove_comment_vote(request):
+    user_id = request.data.get('user_id')
+    comment_id = request.data.get('comment_id')
+
+    if not user_id or not comment_id:
+        return Response({'error': 'Invalid data provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = get_object_or_404(User, pk=user_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    try:
+        comment_vote = CommentVote.objects.get(user=user, comment=comment)
+        comment_vote.delete()  # Delete the CommentVote instance
+
+        return Response({'message': 'Vote removed successfully'}, status=status.HTTP_200_OK)
+
+    except CommentVote.DoesNotExist:
+        return Response({'error': 'Vote does not exist for this user and comment'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['POST'])
+def update_points_on_upvote(request):
+    comment_id = request.data.get('comment_id')
+    threshold_upvotes = 100  
+
+    if not comment_id:
+        return Response({'error': 'Comment ID not provided'}, status=400)
+
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.totalUpvotes >= threshold_upvotes:
+        
+        user = comment.user
+
+        
+        user_profile, created = UserProfile.objects.get_or_create(user=user)
+
+        
+        user_profile.points += 50  
+
+        
+        user_profile.save()
+
+        return Response({'message': f'Points updated for {user.username}'}, status=200)
+
+    return Response({'message': 'Comment upvotes are below the threshold'}, status=200)
+
+
+
 
 class AdminQuestionListCreateAPIView(generics.ListCreateAPIView):
     queryset = Question.objects.all()

@@ -45,13 +45,23 @@ function HistoryScreen() {
         </div>
 
         {!is_premium && (
-          <div id='subjectscreen-containerbg'>
-            <div id='subjectscreen-container'>
-              <p id='subjectscreentext'>This content is only available for premium users. Sign up for a premium account!</p>
-              <button onClick={handleSignUp} id='subjectscreenbtn'>Subscribe Now!</button>
-            </div>
+        <div id='subjectscreen-containerbg'>
+          <div id='subjectscreen-container'>
+            <p id='subjectscreentext'>This content is only available for premium users. Upgrade to Premium Now!</p>
+            <button onClick={handleSignUp} id='subjectscreenbtn'>Subscribe Now!</button>
           </div>
-        )}
+
+          <div id='subjectscreen-image'>
+          </div>
+
+          <div id='subjectscreen-image2'>
+          </div>
+
+          <div id='subjectscreen-image3'>
+          </div>
+
+        </div>
+      )}
 
         {is_premium && (
           <div>

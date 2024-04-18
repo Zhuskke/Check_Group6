@@ -33,7 +33,14 @@ urlpatterns = [
     path('package-details/<int:package_id>/', views.package_detail, name='package-detail'),
     path('admin/users/', views.AdminUserListCreateAPIView.as_view(), name='admin-user-list-create'),
     path('admin/users/<int:pk>/', views.AdminUserRetrieveUpdateDestroyAPIView.as_view(), name='admin-user-detail'),
+    
     path('comments/<int:question_id>/', views.create_comment, name='comment-create'),
+    path('question/<int:question_id>/comments/', views.get_comments_for_question, name='get_comments_for_question'),
+    path('create_comment_vote/', create_comment_vote, name='create_comment_vote'),
+    path('comments/<int:comment_id>/<str:vote_type>/', views.count_comment_votes, name='count_comment_votes'),
+    path('remove_comment_vote/', remove_comment_vote, name='remove_comment_vote'),
+    path('update_points_on_upvote/', update_points_on_upvote, name='update_points_on_upvote'),
+    
     path('admin/questions/', views.AdminQuestionListCreateAPIView.as_view(), name='admin-question-list-create'),
     path('admin/questions/<int:pk>/', views.AdminQuestionRetrieveUpdateDestroyAPIView.as_view(), name='admin-question-detail'),
     path('users/<int:user_id>/activate-subscription/', views.activate_subscription, name='activate-subscription'),

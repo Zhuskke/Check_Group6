@@ -12,6 +12,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import HeaderAdmin from "../components/HeaderAdmin";
+import '../designs/Adminpackage.css';
 
 const AdminPackagesScreen = () => {
   const dispatch = useDispatch();
@@ -87,9 +88,10 @@ const AdminPackagesScreen = () => {
   };
 
   return (
+    <>
+    <HeaderAdmin />
     <div className="admin-packages-container">
-      <HeaderAdmin />
-      <h1>Packages</h1>
+      <h1 id="adminptitle">Packages</h1>
       <div className="package-list">
         {loading ? (
           <Loader />
@@ -97,10 +99,11 @@ const AdminPackagesScreen = () => {
           <Message variant="danger">{error}</Message>
         ) : (
           <ul>
-            <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+            <Button id="adminpbtn" variant="primary" onClick={() => setShowCreateModal(true)}>
               Add Package
             </Button>
             {packages.map((pkg) => (
+              <div className="package-container">
               <li key={pkg.id} className="package-item">
                 <div className="package-info">
                   <span>Points: {pkg.points}</span> -{" "}
@@ -113,6 +116,7 @@ const AdminPackagesScreen = () => {
                   </button>
                 </div>
               </li>
+              </div>
             ))}
           </ul>
         )}
@@ -199,6 +203,7 @@ const AdminPackagesScreen = () => {
         </Modal.Footer>
       </Modal>
     </div>
+    </>
   );
 };
 

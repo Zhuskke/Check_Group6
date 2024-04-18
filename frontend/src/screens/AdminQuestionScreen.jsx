@@ -13,6 +13,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import HeaderAdmin from "../components/HeaderAdmin";
+import '../designs/Adminquestion.css';
 
 const AdminQuestionsScreen = () => {
   const dispatch = useDispatch();
@@ -90,28 +91,35 @@ const AdminQuestionsScreen = () => {
   };
 
   return (
+    <>
+    <HeaderAdmin />
     <div className="admin-questions-container">
-      <HeaderAdmin />
-      <h1>Questions</h1>
+      <h1 id="adminqtitle">Questions</h1>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-          <Button
-            variant="primary"
-            onClick={() => {
-              resetNewQuestionState();
-              setShowAddModal(true);
-            }}
-          >
-            Add Question
-          </Button>
+
+<Button
+  variant="primary"
+  onClick={() => {
+    resetNewQuestionState();
+    setShowAddModal(true);
+  }}
+  id="adminqbtn"
+>
+  Add Question
+</Button>
           <ul>
             {questions.map((question) => (
-              <li key={question.id}>
+              <div className="userq-container">
+              <li key={question.id} className="userq-item">
+                <div className="userq-info">
                 {question.content}
+                </div>
+                <div className="userq-actions">
                 <Button
                   variant="info"
                   onClick={() => {
@@ -132,6 +140,10 @@ const AdminQuestionsScreen = () => {
                 >
                   Delete
                 </Button>
+                </div>
+
+
+
                 {selectedQuestionId === question.id && (
                   <Modal
                     show={showEditModal}
@@ -242,6 +254,7 @@ const AdminQuestionsScreen = () => {
                   </Modal>
                 )}
               </li>
+            </div>
             ))}
           </ul>
           <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
@@ -321,6 +334,7 @@ const AdminQuestionsScreen = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

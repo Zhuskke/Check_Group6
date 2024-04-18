@@ -62,6 +62,7 @@ import {
 
 import {
   createCommentReducer,
+  getCommentsReducer,
 } from "./reducers/commentReducers";
 
 import {
@@ -120,6 +121,7 @@ import { updateUserPassword } from "./actions/userActions";
     commentCreate: commentCreateReducer,
     worksheetList: worksheetListReducer,
     updateUserPassword: userChangePasswordReducer,
+    getComments:getCommentsReducer
   });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -8,7 +8,7 @@ import {
   deleteQuestion,
 } from "../actions/questionActions";
 import { fetchUser } from "../actions/userActions";
-import { createComment } from "../actions/commentActions"; // Import the createComment action
+import { createComment, getCommentsForQuestion } from "../actions/commentActions"; // Import the createComment action
 import HeaderUser from "../components/HeaderUser";
 import Footer from "../components/Footer";
 import FooterProfile from "../components/FooterProfile";
@@ -22,8 +22,10 @@ const QuestionDetail = () => {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [showAnswerArea, setShowAnswerArea] = useState(false);
+  const { comments } = useSelector((state) => state.getComments);
 
   useEffect(() => {
+    dispatch(getCommentsForQuestion(id));
     dispatch(fetchQuestionDetail(id));
   }, [dispatch, id]);
 
@@ -72,7 +74,8 @@ const QuestionDetail = () => {
     const formData = new FormData();
     formData.append("question_id", question.id);
     formData.append("content", content);
-    dispatch(createComment(formData, question.id)); // Pass question.id as the second argument
+    dispatch(createComment(formData, question.id));
+    window.location.reload(); 
     setContent("");
   };
 
@@ -160,8 +163,8 @@ const QuestionDetail = () => {
               />
             </div>
           )}
-          <p><strong>Points Spent:</strong> {question.points_spent}</p>
-          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer +pointsused idk</button>
+          {/* <p><strong>Points Spent:</strong> {question.points_spent}</p> */}
+          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get + {question.points_spent} points</button>
           {showAnswerArea && (
               <form
                 className={`answer-area-form ${
@@ -180,7 +183,16 @@ const QuestionDetail = () => {
                 <button id="submitanswerbtn" type="submit"><AiOutlineSend id="submitanswericon"/></button>
               </form>
             )}
-
+            <div>
+            <h3>Comments</h3>
+            {comments.map((comment) => (
+              <div key={comment.id} className="comment">
+                <p>{comment.content}</p>
+                <p>Posted By: {comment.user}</p>
+                <p>Posted At: {new Date(comment.created_at).toLocaleString()}</p>
+              </div>
+            ))}
+          </div>
             {showDeleteButton && (
             <button id="deletebtn" onClick={() => deleteHandler(question.id)}><RiDeleteBin6Line id="deleteicon"/></button>
             )}

@@ -131,8 +131,8 @@
     font-family: "Lato", sans-serif;
     font-weight: 900;
     object-fit: cover;
-}
 
+}
 #dropdownimage:hover{
     height: 2.5rem;
     width: 2.5rem;

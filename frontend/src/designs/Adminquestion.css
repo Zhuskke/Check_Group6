@@ -1,0 +1,83 @@
+.admin-questions-container{
+    background-color: #B2D8D8;
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+    max-height: fit-content;
+}
+
+#adminqtitle{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#adminqbtn{
+    border-radius: 3rem;
+    width: 14rem;
+    padding: 0.5rem 1rem; /* Add some padding */
+    margin-left: 51.3rem;
+    background-color: black;
+    color: white;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    border: none;
+}
+
+#adminqbtn:hover{
+    background-color: white;
+    color: black;
+}
+
+.userq-container{
+    background-color: rgba(255, 255, 255, 0.527);
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    transition: 0.2 ease-in-out !important;
+}
+
+.userq-container:hover{
+    background-color: white;
+    transform: scale(1.02) !important;
+    transition: 0.2 ease-in-out !important;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+}
+
+.userq-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.userq-info {
+    flex: 1;
+    font-size: 1.3rem;
+    color: black;
+}
+
+.userq-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.userq-actions button {
+    padding: 0.5rem 1rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.userq-actions button:hover {
+    background-color: #B2D8D8;
+    color: black;
+}
