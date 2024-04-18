@@ -31,7 +31,6 @@ const SubscriptionChoiceScreen = () => {
               <li id='sublistitems'>Homework Help</li>
               <li id='sublistitems'>Worksheets</li>
               <li id='sublistitems'>Expert Answers</li>
-              <li id='sublistitems'>Access to Answers</li>
               <li id='sublistitems'>Unlimited Access</li>
               <button onClick={handleSignUp} id='subscreenbtn'>Join the Check team!</button>
 
@@ -59,7 +58,6 @@ const SubscriptionChoiceScreen = () => {
                       <li id='subitems'>Homework Help</li>
                       <li id='subitems'>Worksheets</li>
                       <li id='subitems'>Expert Answers</li>
-                      <li id='subitems'>Access to Answers</li>
                       <li id='subitems'>Unlimited Access</li>
                       <h5 id='subtext2'>- for the best study experience -</h5>
                     </div>
@@ -71,7 +69,6 @@ const SubscriptionChoiceScreen = () => {
                       <li id='subitems'>Homework Help</li>
                       <li id='subitems2'>Worksheets</li>
                       <li id='subitems2'>Expert Answers</li>
-                      <li id='subitems2'>Access to Answers</li>
                       <li id='subitems2'>Unlimited Access</li>
                     </div>
                   </div>

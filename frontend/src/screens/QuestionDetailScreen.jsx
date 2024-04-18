@@ -184,7 +184,7 @@ const QuestionDetail = () => {
               </form>
             )}
             <div>
-            <h3>Comments</h3>
+            <h3 id="questiondetailcomment">Comments:</h3>
             {comments.map((comment) => (
               <div key={comment.id} className="comment">
                 <p>{comment.content}</p>

@@ -12,6 +12,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import HeaderAdmin from '../components/HeaderAdmin';
+import '../designs/Adminworksheet.css';
 
 const AdminWorksheetsScreen = () => {
   const dispatch = useDispatch();
@@ -100,9 +101,10 @@ const AdminWorksheetsScreen = () => {
   };
 
   return (
+    <>
+    <HeaderAdmin />
     <div className="admin-worksheets-container">
-      <HeaderAdmin />
-      <h1>Worksheets</h1>
+      <h1 id='adminwtitle'>Worksheets</h1>
       <div className="worksheet-list">
         {loading ? (
           <Loader />
@@ -110,15 +112,16 @@ const AdminWorksheetsScreen = () => {
           <Message variant="danger">{error}</Message>
         ) : (
           <ul>
-      <Button variant="primary" onClick={() => {
+      <Button id='adminwbtn' variant="primary" onClick={() => {
         resetNewWorksheetsState();
         setShowCreateModal(true);
       }}>
         Add Worksheet
       </Button>
 
-            {worksheets.map((worksheet) => (
-              <li key={worksheet.id} className="worksheet-item">
+      {worksheets.map((worksheet) => (
+            <div key={worksheet.id} className="worksheet-item-container">
+              <div className="worksheet-item">
                 <div className="worksheet-info">
                   <span>Name: {worksheet.name}</span> -{' '}
                   <span>Category: {worksheet.category}</span>
@@ -135,11 +138,12 @@ const AdminWorksheetsScreen = () => {
                   <button onClick={() => handleEditWorksheet(worksheet)}>Edit</button>
                   <button onClick={() => handleDeleteWorksheet(worksheet.id)}>Delete</button>
                 </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+              </div>
+            </div>
+          ))}
+        </ul>
+      )}
+    </div>
 
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
@@ -260,6 +264,7 @@ const AdminWorksheetsScreen = () => {
         </Modal.Footer>
       </Modal>
     </div>
+    </>
   );
 };
 

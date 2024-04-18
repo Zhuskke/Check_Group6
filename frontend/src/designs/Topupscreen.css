@@ -64,7 +64,7 @@
     height: 11rem;
 }
 
-#topupimg{
+/* #topupimg{
     background-image: url(https://images.vexels.com/media/users/3/289096/isolated/preview/58ef6141f73a0cc959038cbe876864ef-cat-circus-character.png);
     background-repeat: no-repeat;
     position: absolute;
@@ -80,9 +80,9 @@
     background-repeat: no-repeat;
     position: absolute;
     top: 36rem;
-    left: 90rem;
+    left: 95rem;
     width: 20rem;
     height: 20rem;
     background-size: contain;
     transform: scaleX(-1);
-}
+} */

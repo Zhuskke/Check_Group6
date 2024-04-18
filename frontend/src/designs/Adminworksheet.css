@@ -1,0 +1,110 @@
+.admin-worksheets-container{
+    background-color: #B2D8D8;
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+    max-height: fit-content;
+}
+
+#adminwtitle{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#adminwbtn{
+    border-radius: 3rem;
+    width: 15rem;
+    padding: 0.5rem 1rem; /* Add some padding */
+    margin-left: 49rem;
+    background-color: black;
+    color: white;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    border: none;
+}
+
+#adminwbtn:hover{
+    background-color: white;
+    color: black;
+}
+
+/* .worksheet-container {
+    background-color: rgba(255, 255, 255, 0.527);
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    transition: 0.2 ease-in-out !important;
+}
+
+.worksheet-container:hover {
+    background-color: white;
+    transform: scale(1.02) !important;
+    transition: 0.2 ease-in-out !important;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+} */
+
+/* .worksheet-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+} */
+
+.worksheet-item-container {
+    background-color: rgba(255, 255, 255, 0.527);
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    transition: 0.2 ease-in-out !important;
+}
+
+.worksheet-item-container:hover{
+    background-color: white;
+    transform: scale(1.02) !important;
+    transition: 0.2 ease-in-out !important;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+}
+
+.worksheet-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 8px; /* Add border radius for rounded corners */
+
+}
+
+.worksheet-info {
+    flex: 1;
+    font-size: 1.3rem;
+    color: black;
+}
+
+.worksheet-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.worksheet-actions button {
+    padding: 0.5rem 1rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.worksheet-actions button:hover {
+    background-color: #B2D8D8;
+    color: black;
+}

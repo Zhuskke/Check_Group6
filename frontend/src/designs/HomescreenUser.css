@@ -1,8 +1,123 @@
 #homeusersection{
+    height: fit-content;
+    background-color: #b2d8d8;
     padding-top: 5rem;
-    background-color: #B2D8D8;
 }
 
 #question-list{
-    background-color: #B2D8D8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#homeusertitle{
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+.questionlist-container{
+    max-width: 50rem;
+    height: fit-content;
+    overflow: auto;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(255, 255, 255, 0.582);
+    margin-top: 1rem;
+    margin-bottom: 0rem;
+    /* text-align: center; */
+    width: 75%;
+    border-radius: 2rem;
+    padding: 1rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.questionlist-container:hover{
+    background-color: white;
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+}
+
+.thumbnail-container{
+    border: 2px solid #b2d8d8;
+    border-radius: 2rem;
+    overflow: hidden;
+    margin: 1rem;
+}
+
+.thumbnail{
+    /* overflow: auto; */
+    width: 25rem;
+    height: 15rem;
+    position: relative;
+    /* display: inline-block; */
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.question-link{
+    text-decoration: none;
+}
+
+.question-link:hover{
+    text-decoration: underline;
+}
+
+#hsq{
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: black;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    /* background: red; */
+    max-width: 55rem;
+    max-height: 15rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#hsq::-webkit-scrollbar {
+    width: 10px;
+}
+#hsq::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#hsuserinfo{
+    margin-left: 1.5rem;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: .9rem;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+
+#loadmorebtn{
+    width: 10rem;
+    height: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    border: none;
+    border-radius: 2rem;
+    background-color: black;
+    color: white;
+}
+
+#loadmorebtn:hover{
+    background-color: white;
+    color: black;
 }
