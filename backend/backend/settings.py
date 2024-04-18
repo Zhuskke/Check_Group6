@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -153,6 +154,12 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
+AWS_GROUP_NAME = "CHECK"
+AWS_USERNAME = "JM"
+AWS_ACCESS_KEY_ID = "AKIA6GBMHAEWNNF3LD5L"
+AWS_SECRET_ACCESS_KEY = "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"
+
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Internationalization
@@ -186,3 +193,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media_root")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH=False
+
+AWS_GROUP_NAME = "Check"
+AWS_USERNAME = "JM"
+
+
+AWS_ACCESS_KEY_ID = "AKIA6GBMHAEWNNF3LD5L"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME = "check-bucket-cpe"
+
+
+AWS_S3_FILE_OVERWRITE= False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"

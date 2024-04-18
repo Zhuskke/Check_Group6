@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listWorksheets } from '../actions/adminActions';
+import { listWorksheetsUser } from '../actions/worksheetActions';
 import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
@@ -18,7 +18,7 @@ function EnglishScreen() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(listWorksheets());
+    dispatch(listWorksheetsUser());
   }, [dispatch]);
 
   const handleSignUp = () => {

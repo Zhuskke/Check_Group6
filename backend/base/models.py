@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', default='default_profile_picture.jpg', blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default_profile_picture.jpg', blank=True, null=True)
     points = models.IntegerField(default=100)
     description = models.TextField(blank=True, null=True)
     is_premium = models.BooleanField(default=False)  # New field for premium user status

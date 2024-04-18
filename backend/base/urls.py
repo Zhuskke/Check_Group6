@@ -48,4 +48,5 @@ urlpatterns = [
     path('admin/worksheets/', AdminWorksheetListCreateAPIView.as_view(), name='admin-worksheet-list-create'),
     path('admin/worksheets/<int:pk>/', AdminWorksheetRetrieveUpdateDestroyAPIView.as_view(), name='admin-worksheet-detail'),
     path('users/change-password/', views.change_password, name='change_password'),
+    path('worksheets/', UserWorksheetListAPIView.as_view(), name='worksheet-list'),
 ]
