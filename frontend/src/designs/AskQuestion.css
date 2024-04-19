@@ -90,6 +90,7 @@
     height: 100%;
     padding:1.4rem;
     color: black;
+    transition: all 0.2s ease-in-out;
 }
 
 #askquestionbtn1:hover{
@@ -97,6 +98,7 @@
     height: 100%;
     padding:1.4rem;
     color: #B2D8D8;
+    transition: all 0.2s ease-in-out;
 }
 
 #submit-btn-container{
@@ -109,6 +111,7 @@
     margin-top: -3.8rem;
     border-radius: 3rem;
     position: absolute;
+    transition: all 0.2s ease-in-out;
 }
 
 #submit-btn-container:hover{
@@ -121,6 +124,7 @@
     margin-top: -3.8rem;
     border-radius: 3rem;
     position: absolute;
+    transition: all 0.2s ease-in-out;
 }
 
 
@@ -151,6 +155,7 @@
     font-weight: 900 !important;
     margin-top: 1.5rem;
     border: none;
+    transition: all 0.2s ease-in-out;
 }
 
 #questionpoints:hover{
@@ -164,6 +169,7 @@
     font-weight: 900 !important;
     margin-top: 1.5rem;
     border: none;
+    transition: all 0.2s ease-in-out;
 }
 
 #questionpoints:focus{

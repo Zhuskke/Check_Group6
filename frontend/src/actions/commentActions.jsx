@@ -5,7 +5,13 @@ import {
   CREATE_COMMENT_FAIL,
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_SUCCESS,
-  GET_COMMENTS_FAILURE
+  GET_COMMENTS_FAILURE,
+  CREATE_COMMENT_VOTE_REQUEST,
+  CREATE_COMMENT_VOTE_SUCCESS,
+  CREATE_COMMENT_VOTE_FAIL,
+  UPDATE_POINTS_REQUEST,
+  UPDATE_POINTS_SUCCESS,
+  UPDATE_POINTS_FAILURE,
 } from '../constants/commentConstants';
 export const createComment = (formData, questionId) => async (dispatch, getState) => {
   try {
@@ -57,6 +63,50 @@ export const getCommentsForQuestion = (questionId) => {
       dispatch({
         type: GET_COMMENTS_FAILURE,
         payload: error.response ? error.response.data : 'Failed to fetch comments'
+      });
+    }
+  };
+};
+
+export const createCommentVote = (user_id, comment_id, vote_type) => async (dispatch) => {
+  try {
+    dispatch({ type: CREATE_COMMENT_VOTE_REQUEST });
+    
+
+    const { data } = await axios.post('/api/create_comment_vote/', { user_id, comment_id, vote_type });
+
+    dispatch({
+      type: CREATE_COMMENT_VOTE_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: CREATE_COMMENT_VOTE_FAIL,
+      payload: error.response && error.response.data.detail
+        ? error.response.data.detail
+        : error.message
+    });
+  }
+};
+
+export const updatePoints = (userId) => {
+  return async (dispatch) => {
+    dispatch({ type: UPDATE_POINTS_REQUEST });
+
+    try {
+      const response = await axios.get('/api/update_points_on_upvote/', { params: { user_id: userId } });
+
+      const { user_id, comments, message } = response.data;
+      const userPoints = message ? 50 : null; // If message exists, points were awarded
+
+      dispatch({
+        type: UPDATE_POINTS_SUCCESS,
+        payload: { userPoints, message, comments },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_POINTS_FAILURE,
+        payload: error.response.data.error,
       });
     }
   };

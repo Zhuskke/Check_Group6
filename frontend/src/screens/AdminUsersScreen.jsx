@@ -242,7 +242,6 @@ const AdminUsersScreen = () => {
           <Message variant="danger">{error}</Message>
         ) : (
           <ul>
-<<<<<<< Updated upstream
             <Button
               id="adduserbtn"
               variant="primary"
@@ -251,9 +250,6 @@ const AdminUsersScreen = () => {
                 setShowCreateModal(true); // Open the modal for creating a new user
               }}
             >
-=======
-            <Button id="adduserbtn" variant="primary" onClick={() => setShowCreateModal(true)}>
->>>>>>> Stashed changes
               Add User
             </Button>
 

@@ -24,11 +24,13 @@
     font-family: "Lato", sans-serif;
     font-weight: 900;
     border: none;
+    transition: all 0.2s ease-in-out;
 }
 
 #adminwbtn:hover{
     background-color: white;
     color: black;
+    transition: all 0.2s ease-in-out;
 }
 
 /* .worksheet-container {
@@ -57,25 +59,25 @@
     padding: 0.5rem 0;
 } */
 
-.worksheet-item-container {
+.worksheeta-item-container {
     background-color: rgba(255, 255, 255, 0.527);
     border-radius: 2rem;
     padding: 1rem;
     margin-top: 1rem;
     margin-right: 2rem;
-    transition: 0.2 ease-in-out !important;
+    transition: all 0.2s ease-in-out;
 }
 
-.worksheet-item-container:hover{
+.worksheeta-item-container:hover{
     background-color: white;
     transform: scale(1.02) !important;
-    transition: 0.2 ease-in-out !important;
+    transition: all 0.2s ease-in-out;
     -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
 }
 
-.worksheet-item {
+.worksheeta-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -84,7 +86,7 @@
 
 }
 
-.worksheet-info {
+.worksheeta-info {
     flex: 1;
     font-size: 1.3rem;
     color: black;
@@ -102,9 +104,11 @@
     border: none;
     border-radius: 1rem;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .worksheet-actions button:hover {
     background-color: #B2D8D8;
     color: black;
+    transition: all 0.2s ease-in-out;
 }

@@ -4,11 +4,19 @@ import {
   CREATE_COMMENT_FAIL,
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_SUCCESS,
-  GET_COMMENTS_FAILURE
+  GET_COMMENTS_FAILURE,
+  CREATE_COMMENT_VOTE_REQUEST,
+  CREATE_COMMENT_VOTE_SUCCESS,
+  CREATE_COMMENT_VOTE_FAIL,
+  UPDATE_POINTS_REQUEST,
+  UPDATE_POINTS_SUCCESS,
+  UPDATE_POINTS_FAILURE,
  } from '../constants/commentConstants';
 const initialState = {
   loading: false,
   error: null,
+  userPoints: null,
+  message: null,
   comments: []
 };
 export const createCommentReducer = (state = { loading: false, error: null, comment: null }, action) => {
@@ -45,6 +53,36 @@ export const getCommentsReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       };
+    default:
+      return state;
+  }
+};
+
+export const createCommentVoteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CREATE_COMMENT_VOTE_REQUEST:
+      return { loading: true };
+    case CREATE_COMMENT_VOTE_SUCCESS:
+      return { loading: false, success: true, commentVote: action.payload };
+    case CREATE_COMMENT_VOTE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const updatePointsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case UPDATE_POINTS_REQUEST:
+      return { ...state, loading: true, error: null };
+
+    case UPDATE_POINTS_SUCCESS:
+      const { userPoints, message, comments } = action.payload;
+      return { ...state, loading: false, userPoints, message, comments };
+
+    case UPDATE_POINTS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }

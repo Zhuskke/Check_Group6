@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import HeaderRegister from '../components/HeaderRegister';
 import HeaderUser from '../components/HeaderUser';
-import Footer from '../components/Footer';
+import FooterProfile from '../components/FooterProfile';
 import '../designs/Subscreen.css'
 
 const SubscriptionChoiceScreen = () => {
@@ -78,7 +78,7 @@ const SubscriptionChoiceScreen = () => {
           </>
         )}
       </div>
-      <Footer />
+      <FooterProfile />
     </>
   );
 };

@@ -4,7 +4,7 @@ import { listWorksheetsUser } from '../actions/worksheetActions';
 import { useNavigate } from 'react-router-dom';
 import HeaderUser from '../components/HeaderUser';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
+import FooterProfile from '../components/FooterProfile';
 import SubjectBar from '../components/SubjectBar';
 import Worksheet from '../components/Worksheet';
 import '../designs/SubjectScreen.css';
@@ -62,15 +62,22 @@ function ScienceScreen() {
       )}
 
         {is_premium && (
-          <div>
+          <div id='subjectbg'>
             <Worksheet
               subject="Science"
               worksheets={scienceWorksheets} // Pass the filtered worksheets for History category
             />
+            
+            <div id='worksheet-image'>
+          </div>
+
+          <div id='worksheet-image2'>
+          </div>
+
           </div>
         )}
       </div>
-      <Footer />
+      <FooterProfile />
     </>
   );
 }

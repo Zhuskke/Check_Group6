@@ -135,15 +135,16 @@
     margin-bottom: 1rem;
     border: none;
     background-color: #B2D8D8;
-    transition: 0.2 ease-in-out;
+    transition: all 0.2s ease-in-out;
     font-family: "Lato", sans-serif;
     font-weight: 900;
+
 }
 
 #toggleanswer:hover{
     background-color: black;
     color: white;
-    transition: 0.2 ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 #submitanswerbtn{
@@ -162,10 +163,12 @@
     width: 2rem;
     height: 2rem;
     padding: 3px;
+    transition: all 0.2s ease-in-out;
 }
 
 #submitanswericon:hover{
     color: #B2D8D8;
+    transition: all 0.2s ease-in-out;
 }
 
 #questiontext{
@@ -227,4 +230,102 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     color: black;
+}
+
+#upvote{
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#upvoteicon{
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+#upvoteicon:hover{
+    color: green;
+    transition: all 0.2s ease-in-out;
+}
+
+#downvote{
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+#downvoteicon{
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+#downvoteicon:hover{
+    color: red;
+    transition: all 0.2s ease-in-out;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem; /* Adjust spacing between comments */
+}
+
+.comment-main-content {
+    flex-grow: 1; /* Allow the comment content to grow and take available space */
+    word-break: break-all;
+    margin-right: 2rem;
+}
+
+
+.vote-counts {
+    /* display: flex;
+    align-items: center;
+    margin-left: 1rem; */
+}
+
+.comment-actions {
+    display: flex;
+    flex-direction: column; /* Align buttons and icons vertically */
+    align-items: center; /* Center align items horizontally */
+    margin-right: 1rem; /* Adjust spacing between comment content and actions */
+    margin-top: -.8rem;
+}
+
+#upvote,
+#downvote {
+    display: block; /* Display buttons as block elements */
+    width: 3rem;
+    height: 3rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    margin-bottom: -1rem; /* Add margin between buttons */
+}
+
+#upvoteicon,
+#downvoteicon {
+    display: block; /* Display icons as block elements */
+    width: 1.8rem;
+    height: 1.8rem;
+    transition: all 0.2s ease-in-out;
+    color: black;
+}
+
+#maincomment{
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    margin-bottom: -.1rem;
+    color: black;
+}
+
+#commentinfo{
+    margin-bottom: -.2rem;
+    margin-top: 5px;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
 }

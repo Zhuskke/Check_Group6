@@ -115,9 +115,11 @@
     border-radius: 2rem;
     background-color: black;
     color: white;
+    transition: all 0.2s ease-in-out;
 }
 
 #loadmorebtn:hover{
     background-color: white;
     color: black;
+    transition: all 0.2s ease-in-out;
 }

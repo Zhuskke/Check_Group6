@@ -15,20 +15,23 @@ const Worksheet = ({ subject, worksheets }) => {
     link.click();
     document.body.removeChild(link);
   };
-  
 
   return (
     <div className="worksheet-container">
+      <h1 className="worksheet-title">{subject} Worksheets</h1>
       <div className="worksheet-content">
-        <h1 className="worksheet-title">{subject} Worksheets</h1>
-        <ul className="worksheet-list">
+        <div className="worksheet-list-container">
           {worksheets.map((worksheet, index) => (
-            <li key={index} className="worksheet-item">
-              <span className="worksheet-name">{worksheet.name}</span>
-              <button className="worksheet-button" onClick={() => handleDownload(worksheet)}>Download</button>
-            </li>
+            <div key={index} className="worksheet-item-container">
+              <div className="worksheet-item">
+                <span className="worksheet-name">{worksheet.name}</span>
+                <div className="worksheet-button-container">
+                  <button className="worksheet-button" onClick={() => handleDownload(worksheet)}>Download</button>
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

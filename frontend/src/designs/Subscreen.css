@@ -1,5 +1,5 @@
 #subscreencontainer{
-    height: 59.5rem;
+    height: fit-content;
     background-color:  #B2D8D8;
 }
 
@@ -39,6 +39,7 @@
     font-size: 1.2rem;
     margin-top: 5rem;
     margin-left: 20rem;
+    transition: all 0.2s ease-in-out;
 }
 
 #subscreenbtn:hover{
@@ -54,6 +55,7 @@
     font-size: 1.2rem;
     margin-top: 5rem;
     margin-left: 20rem;
+    transition: all 0.2s ease-in-out;
 }
 
 #sublistitems{
@@ -281,4 +283,8 @@
 #subtext2 {
     font-size: 0.8em; 
     color: gray; 
+}
+
+#subjectbg{
+    background-color: #B2D8D8;
 }

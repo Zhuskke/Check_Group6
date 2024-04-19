@@ -73,7 +73,7 @@ function HomeScreen() {
 
           <div className="main-content">
               <strong><h1 className="section2title">Get Better Grades!!</h1></strong>
-              <strong><h3 className="section2title-2">Check is a website wherein you can ask about a question of your own and everyone helps in on answering them. It is a community of experts who can help with your homework. NOTE: we are changing this</h3></strong>
+              <strong><h3 className="section2title-2">Check is a website wherein you can ask about a question of your own and everyone helps in on answering them. It is a community of experts who can help with your homework.</h3></strong>
               <button onClick={handleSignUp} id='homescreenbtn'>Sign up Now!</button>
             </div>
 
@@ -81,7 +81,7 @@ function HomeScreen() {
 
           <section id='section-3'>
           <strong><h1 className="section3title">Get Instant Study Help!!</h1></strong>
-              <strong><h3 className="section3title-2">Be equiped with the right tools towards academic exellence with Check Study Pack!</h3></strong>
+              <strong><h3 className="section3title-2">Be equipped with the right tools towards academic exellence with Check Study Premium!</h3></strong>
               <button onClick={handleSignUp} id='homescreenbtn2'>Join Now!</button>
 
           <div id='section3-image'>
@@ -95,7 +95,7 @@ function HomeScreen() {
           <section id='section-4'>
 
               <strong><h1 className="section4title">Go Above and Beyond!</h1></strong>
-              <strong><h3 className="section4title-2">text about the check study pack premium yippee yatta yatta grah grah</h3></strong>
+              <strong><h3 className="section4title-2">Improve your academic performance with tools that can help you achieve your best academic self!</h3></strong>
 
               <div id='section4-container'>
                   <h3 id='listtext'>Check Study Pack Premium</h3>

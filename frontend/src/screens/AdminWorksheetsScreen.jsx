@@ -120,9 +120,9 @@ const AdminWorksheetsScreen = () => {
       </Button>
 
       {worksheets.map((worksheet) => (
-            <div key={worksheet.id} className="worksheet-item-container">
-              <div className="worksheet-item">
-                <div className="worksheet-info">
+            <div key={worksheet.id} className="worksheeta-item-container">
+              <div className="worksheeta-item">
+                <div className="worksheeta-info">
                   <span>Name: {worksheet.name}</span> -{' '}
                   <span>Category: {worksheet.category}</span>
                   {worksheet.file && (

@@ -46,9 +46,11 @@
     color: white;
     border-radius: 3rem;
     border-style: hidden;
+    transition: all 0.1s ease-in-out;
 }
 
 #guestsubmit-btn:hover{
     background-color: black;
     color: white;
+    transition: all 0.1s ease-in-out;
 }

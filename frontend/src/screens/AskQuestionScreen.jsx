@@ -70,7 +70,7 @@ const AskQuestionScreen = () => {
 
       <section id="askquestionsection1">
       <strong><h1 className="title" id="askquestionslogan">You have the questions, We have the answers!</h1></strong>
-      <strong><h3 className="title-2" id="askquestionslogan2">Hehehehe Check Hehehehe</h3></strong>
+      <strong><h3 className="title-2" id="askquestionslogan2">Welcome to Check!</h3></strong>
       </section>
 
     <section id="askquestionsection2">

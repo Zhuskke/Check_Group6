@@ -8,13 +8,14 @@ import {
   deleteQuestion,
 } from "../actions/questionActions";
 import { fetchUser } from "../actions/userActions";
-import { createComment, getCommentsForQuestion } from "../actions/commentActions"; // Import the createComment action
+import { createComment, getCommentsForQuestion, createCommentVote } from "../actions/commentActions"; 
 import HeaderUser from "../components/HeaderUser";
 import Footer from "../components/Footer";
 import FooterProfile from "../components/FooterProfile";
 import { AiOutlineSend } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import "../designs/QuestionDetail.css";
+import { BiUpvote, BiDownvote } from "react-icons/bi";
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -69,7 +70,23 @@ const QuestionDetail = () => {
     }
   };
 
-  const handleSubmitComment = (e) => {
+  const handleVote = async (commentId, voteType) => {
+    // Check if the user has already voted on this comment
+  
+      // Otherwise, dispatch the createCommentVote action with the new voteType
+      dispatch(createCommentVote(userInfo.id, commentId, voteType))
+        .then(() => {
+          // After voting, fetch updated vote counts
+          
+          window.location.reload(); // Consider refactoring this to avoid full page reload
+        })
+        .catch((error) => {
+          console.error("Error voting:", error);
+        });
+    
+  };
+
+ const handleSubmitComment = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("question_id", question.id);
@@ -106,7 +123,7 @@ const QuestionDetail = () => {
                   <img
                     src={
 
-                     profPic || "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
+                    profPic || "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"
                     }
                     alt="Profile"
                     className="questiondetail-profile-picture"
@@ -142,6 +159,7 @@ const QuestionDetail = () => {
                   <p id="created-at">
                 {new Date(question.created_at).toLocaleString()}
               </p>
+              
                 </div>
               </div>
             </Link>
@@ -163,8 +181,7 @@ const QuestionDetail = () => {
               />
             </div>
           )}
-          {/* <p><strong>Points Spent:</strong> {question.points_spent}</p> */}
-          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get + {question.points_spent} points</button>
+          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get possible 50 points</button>
           {showAnswerArea && (
               <form
                 className={`answer-area-form ${
@@ -184,15 +201,35 @@ const QuestionDetail = () => {
               </form>
             )}
             <div>
-            <h3 id="questiondetailcomment">Comments:</h3>
+            <h3 id="questiondetailcomment">Answers: </h3>
             {comments.map((comment) => (
               <div key={comment.id} className="comment">
-                <p>{comment.content}</p>
-                <p>Posted By: {comment.user}</p>
-                <p>Posted At: {new Date(comment.created_at).toLocaleString()}</p>
+
+                <div className="comment-actions">
+                  <button id="upvote" onClick={() => handleVote(comment.id, "upvote")}>
+                    <BiUpvote id="upvoteicon"/>
+                  </button>
+                  <button id="downvote" onClick={() => handleVote(comment.id, "downvote")}>
+                    <BiDownvote id="downvoteicon"/>
+                  </button>
+                </div>
+
+                <div className="comment-main-content">
+                  <p id="maincomment">{comment.content}</p>
+                  <p id="commentinfo">Answered by: {comment.user}</p>
+                  <p id="commentinfo">Total Votes: {comment.total_votes}</p>
+                  {/* <p >Posted At: {new Date(comment.created_at).toLocaleString()}</p> */}
+                </div>
+
+                {/* Display vote counts */}
+                <div className="vote-counts">
+                  {/* <p>Upvotes: {comment.upvotes}</p>
+                  <p>Downvotes: {comment.downvotes}</p> */}
+                </div>
               </div>
             ))}
           </div>
+          
             {showDeleteButton && (
             <button id="deletebtn" onClick={() => deleteHandler(question.id)}><RiDeleteBin6Line id="deleteicon"/></button>
             )}

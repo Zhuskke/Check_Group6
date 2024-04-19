@@ -1,54 +1,116 @@
 .worksheet-container {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-15.4%); 
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80rem;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.466);
+    margin-left: 18rem;
     padding: 2rem;
-    width: 30rem;
-    height: 20rem;
-    border-radius: 1rem;
-    margin-right: 5rem;
-  }
-
-.worksheet-title { /* Subject worksheet fontszszs ex. Calculus Worksheets */
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
 }
-  
+
+.worksheet-title {
+    font-family: "Russo One", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+}
 
 .worksheet-content {
-    width: 20rem;
-    margin-right: 7rem; 
+    width: 100%;
+    max-width: 800px; 
 }
 
+.worksheet-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-.worksheet-list { /*if removed the pdf list will have bullet list */
-    list-style-type: none;
-    padding: 0;
+.worksheet-item-container {
+    width: 100%;
+    max-width: 800px; 
+    margin-bottom: 15px;
+    transition: all 0.2s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.527);
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.worksheet-item-container:hover{
+    background-color: white;
+    transform: scale(1.02) !important;
+    transition: all 0.2s ease-in-out;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 22px 0px rgba(0,0,0,0.75);
 }
 
 .worksheet-item {
-    margin-bottom: 2rem; /*margin between pdfs */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    width: 100%;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: black;
 }
 
-.worksheet-name { /* name of pdf files ex. Differentiation Worksheet */
-    margin-right: 1rem; 
-    font-weight: bold;
-    color: black;
-    font-size: 1rem;
+.worksheet-name {
+    flex: 1;
+}
+
+.worksheet-button-container {
+    flex-shrink: 0; 
 }
 
 .worksheet-button {
-    background-color: #70bbbb;
-    color: black;
+    background-color: black; /* Green */
     border: none;
-    padding: 0.3rem 0.5rem; /*first rem is height, second rem is length */
-    border-radius: 2rem; 
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    transition-duration: 0.4s;
     cursor: pointer;
-    font-size: 0.8rem;
+    border-radius: 5px;
 }
 
-.worksheet-button:hover { /*color of button when u hover the cursor */
-    background-color: #4d9797;
+.worksheet-button:hover {
+    background-color: #B2D8D8;
+    color: black;
+}
+
+
+#worksheet-image{
+    background-image: url(https://images.vexels.com/media/users/3/286297/isolated/preview/e24b4a76ad6dcf7f9cb607c236e8a1bb-cute-cat-reading-with-pencil-on-its-ear.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 19rem;
+    left: 10rem;
+    width: 18rem;
+    height: 18rem;
+    background-size: contain;
+}
+
+#worksheet-image2{
+    background-image: url(https://images.vexels.com/media/users/3/287058/isolated/preview/c882c2db8bf2516220aa33c78d21e038-science-cute-cat-character.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 19rem;
+    left: 88rem;
+    width: 18rem;
+    height: 18rem;
+    background-size: contain;
 }

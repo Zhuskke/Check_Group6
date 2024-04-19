@@ -30,6 +30,7 @@ function GuestQuestionBox() {
         placeholder="What is your question?" 
         value={question}
         onChange={handleChange}
+        autoComplete='off'
       />
       {showWarning && 
         <p className="warning" style={{ position: 'absolute', top: '100%', left: 0 }}>
