@@ -103,7 +103,8 @@ function HomeScreen() {
                   <li id='listitems'>Homework Help</li>
                   <li id='listitems'>Worksheets</li>
                   <li id='listitems'>Expert Answers</li>
-                  <li id='listitems'>Unlimited Access</li>
+                  <br />
+                  <br />
                   <h5 id='listtext2'>- for the best study experience -</h5>
               </div>
 

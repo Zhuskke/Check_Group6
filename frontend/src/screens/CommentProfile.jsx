@@ -82,7 +82,7 @@ const CommentProfile = () => {
                 ))}
               </ul>
             ) : (
-              <p>No questions found.</p>
+              <p></p>
             )}
           </div>
 
@@ -99,7 +99,7 @@ const CommentProfile = () => {
                   ))}
                 </ul>
               ) : (
-                <p>No comments found.</p>
+                <p></p>
               )}
             </div>
             

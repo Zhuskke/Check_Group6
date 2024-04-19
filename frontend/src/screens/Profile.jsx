@@ -171,6 +171,15 @@ const Profile = () => {
     <>
       <HeaderProfile />
       <div id="profilesection">
+
+
+      <div id='profileimg'>
+      </div>
+
+      <div id='profileimg2'>
+      </div>
+
+
         <div className="profile-picture-container">
           <img
             src={profilePicture}
@@ -249,7 +258,7 @@ const Profile = () => {
                   ))}
                 </ul>
               ) : (
-                <p>No questions found.</p>
+                <p></p>
               )}
             </div>
 
@@ -266,7 +275,7 @@ const Profile = () => {
                   ))}
                 </ul>
               ) : (
-                <p>No comments found.</p>
+                <p></p>
               )}
             </div>
           </div>

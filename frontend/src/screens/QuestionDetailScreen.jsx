@@ -181,7 +181,7 @@ const QuestionDetail = () => {
               />
             </div>
           )}
-          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get possible 50 points</button>
+          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get + {question.points_spent} points</button>
           {showAnswerArea && (
               <form
                 className={`answer-area-form ${
@@ -203,13 +203,15 @@ const QuestionDetail = () => {
             <div>
             <h3 id="questiondetailcomment">Answers: </h3>
             {comments.map((comment) => (
+
               <div key={comment.id} className="comment">
                 
-                <div className="comment-actions">
                 <div className="vote-counts">
                   <p>{comment.upvotes}</p>
                   <p>{comment.downvotes}</p> 
                 </div>
+                
+                <div className="comment-actions">
                   <button id="upvote" onClick={() => handleVote(comment.id, "upvote")}>
                     <BiUpvote id="upvoteicon"/>
                   </button>

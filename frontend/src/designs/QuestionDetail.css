@@ -282,9 +282,8 @@
 
 
 .vote-counts {
-    /* display: flex;
-    align-items: center;
-    margin-left: 1rem; */
+    margin-top: 1rem;
+    color: black;
 }
 
 .comment-actions {
