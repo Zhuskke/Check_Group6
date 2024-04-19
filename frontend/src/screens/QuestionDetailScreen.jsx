@@ -204,8 +204,12 @@ const QuestionDetail = () => {
             <h3 id="questiondetailcomment">Answers: </h3>
             {comments.map((comment) => (
               <div key={comment.id} className="comment">
-
+                
                 <div className="comment-actions">
+                <div className="vote-counts">
+                  <p>{comment.upvotes}</p>
+                  <p>{comment.downvotes}</p> 
+                </div>
                   <button id="upvote" onClick={() => handleVote(comment.id, "upvote")}>
                     <BiUpvote id="upvoteicon"/>
                   </button>
@@ -216,16 +220,16 @@ const QuestionDetail = () => {
 
                 <div className="comment-main-content">
                   <p id="maincomment">{comment.content}</p>
-                  <p id="commentinfo">Answered by: {comment.user}</p>
+                  <p id="commentinfo">Answered by:<Link to={`/comments/${comment.user_id}`}>{comment.user}</Link></p>
                   <p id="commentinfo">Total Votes: {comment.total_votes}</p>
                   {/* <p >Posted At: {new Date(comment.created_at).toLocaleString()}</p> */}
                 </div>
 
                 {/* Display vote counts */}
-                <div className="vote-counts">
-                  {/* <p>Upvotes: {comment.upvotes}</p>
-                  <p>Downvotes: {comment.downvotes}</p> */}
-                </div>
+                {/* <div className="vote-counts">
+                  <p>{comment.upvotes}</p>
+                  <p>{comment.downvotes}</p> 
+                </div> */}
               </div>
             ))}
           </div>

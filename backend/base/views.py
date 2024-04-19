@@ -20,6 +20,7 @@ from django.conf import settings
 from django.templatetags.static import static
 from django.urls import reverse
 from django.http import JsonResponse
+from django.db import IntegrityError
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -299,38 +300,56 @@ class UserWorksheetListAPIView(generics.ListCreateAPIView):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_comment(request, question_id):
-    
+    # Retrieve the question object based on question_id
     question = get_object_or_404(Question, pk=question_id)
-    serializer = CommentSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(user=request.user, question=question)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'POST':
+        # Create a new comment using the provided data in the request
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            # Save the comment with the authenticated user and associated question
+            serializer.save(user=request.user, question=question)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        # Return a response indicating that the method is not allowed
+        return Response({"detail": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 @api_view(['GET'])
 def get_comments_for_question(request, question_id):
-   
+    # Get the question object
     question = get_object_or_404(Question, pk=question_id)
     
-   
+    # Get all comments related to the question
     comments = Comment.objects.filter(question=question)
-
+    
     comments_list = []
     for comment in comments:
-        comments_list.append({
+        # Retrieve vote counts for the current comment
+        upvotes_count = CommentVote.objects.filter(comment=comment, vote_type='upvote').count()
+        downvotes_count = CommentVote.objects.filter(comment=comment, vote_type='downvote').count()
+        total_votes = upvotes_count + downvotes_count
+        
+        # Serialize the comment data
+        comment_data = {
             'id': comment.id,
             'user': comment.user.username,
+            'user_id': comment.user.id,
             'content': comment.content,
-            'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S')
-        })
+            'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'upvotes': upvotes_count,
+            'downvotes': downvotes_count,
+            'total_votes': total_votes
+        }
+        
+        comments_list.append(comment_data)
 
     # Return JSON response with the list of comments
     return JsonResponse({'comments': comments_list})
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def create_comment_vote(request):
-    
     user_id = request.data.get('user_id')
     comment_id = request.data.get('comment_id')
     vote_type = request.data.get('vote_type')
@@ -343,92 +362,101 @@ def create_comment_vote(request):
 
     try:
         comment_vote = CommentVote.objects.get(user=user, comment=comment)
-        
-        # User has already voted on this comment, check if they are changing their vote
+
+        # User has already voted on this comment
         if comment_vote.vote_type == vote_type:
-            return Response({'error': 'User has already voted with this type'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Update the vote_type
-        comment_vote.vote_type = vote_type
-        comment_vote.save()
-        
-        return Response({'message': 'Vote updated successfully'}, status=status.HTTP_200_OK)
+            # User is trying to vote the same type twice, remove the vote
+            comment_vote.delete()
+            return Response({'message': 'Vote removed successfully'}, status=status.HTTP_200_OK)
+        else:
+            # User is changing their vote type, update the vote_type
+            comment_vote.vote_type = vote_type
+            comment_vote.save()
+            return Response({'message': 'Vote updated successfully'}, status=status.HTTP_200_OK)
 
     except CommentVote.DoesNotExist:
         # User hasn't voted on this comment before, create a new vote
-        serializer = CommentVoteSerializer(data={'user': user_id, 'comment': comment_id, 'vote_type': vote_type})
-        
-        if serializer.is_valid():
+        try:
+            serializer = CommentVoteSerializer(data={'user': user_id, 'comment': comment_id, 'vote_type': vote_type})
+            serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+        except IntegrityError:
+            return Response({'error': 'Integrity error occurred while creating the vote'}, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['GET'])
-def count_comment_votes(request, comment_id):
-    comment = get_object_or_404(Comment, pk=comment_id)
+def update_points_on_upvote(request):
+    user_id = request.query_params.get('user_id')
 
-    upvotes_count = CommentVote.objects.filter(comment=comment, vote_type='upvote').count()
-    downvotes_count = CommentVote.objects.filter(comment=comment, vote_type='downvote').count()
-
-    total_votes = upvotes_count + downvotes_count
-
-    response_data = {
-        'upvotes': upvotes_count,
-        'downvotes': downvotes_count,
-        'total_votes': total_votes
-    }
-
-    return Response(response_data, status=status.HTTP_200_OK)
-
-@api_view(['POST'])
-def remove_comment_vote(request):
-    user_id = request.data.get('user_id')
-    comment_id = request.data.get('comment_id')
-
-    if not user_id or not comment_id:
-        return Response({'error': 'Invalid data provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-    user = get_object_or_404(User, pk=user_id)
-    comment = get_object_or_404(Comment, pk=comment_id)
+    if not user_id:
+        return JsonResponse({'error': 'User ID not provided'}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
-        comment_vote = CommentVote.objects.get(user=user, comment=comment)
-        comment_vote.delete()  # Delete the CommentVote instance
+        # Retrieve the user object
+        user = get_object_or_404(User, pk=user_id)
 
-        return Response({'message': 'Vote removed successfully'}, status=status.HTTP_200_OK)
+        # Retrieve all comments by the user
+        user_comments = Comment.objects.filter(user=user)
 
-    except CommentVote.DoesNotExist:
-        return Response({'error': 'Vote does not exist for this user and comment'}, status=status.HTTP_404_NOT_FOUND)
-    
-@api_view(['POST'])
-def update_points_on_upvote(request):
-    comment_id = request.data.get('comment_id')
-    threshold_upvotes = 100  
+        # List to hold updated comments data
+        updated_comments_data = []
+        congratulatory_messages = []  # Initialize list to hold congratulatory messages
 
-    if not comment_id:
-        return Response({'error': 'Comment ID not provided'}, status=400)
+        # Loop through user's comments to gather data and update points
+        for comment in user_comments:
+            # Calculate total upvotes for the comment
+            upvotes_count = comment.commentvote_set.filter(vote_type='upvote').count()
+            downvotes_count = comment.commentvote_set.filter(vote_type='downvote').count()
+            total_votes = upvotes_count + downvotes_count  # Calculate net votes
 
-    comment = get_object_or_404(Comment, pk=comment_id)
+            # Check if the comment has reached the upvote threshold and points haven't been awarded yet
+            if total_votes >= 1 and not comment.points_awarded:
+                # Retrieve the points_spent from the last question asked by the user
+                last_question = user.question_set.last()  # Assuming user has asked questions
+                if last_question:
+                    points_spent = last_question.points_spent
 
-    if comment.totalUpvotes >= threshold_upvotes:
-        
-        user = comment.user
+                    # Award points back to the user's profile
+                    user_profile, created = UserProfile.objects.get_or_create(user=user)
+                    user_profile.points += points_spent
+                    user_profile.save()
 
-        
-        user_profile, created = UserProfile.objects.get_or_create(user=user)
+                    # Update comment's points_awarded flag
+                    comment.points_awarded = True
+                    comment.save()
 
-        
-        user_profile.points += 50  
+                    # Include a congratulatory message
+                    congratulatory_messages.append(
+                        f'Congratulations! You earned {points_spent} points for reaching the upvote threshold.'
+                    )
 
-        
-        user_profile.save()
+            # Include comment data in the response
+            comment_data = {
+                'id': comment.id,
+                'content': comment.content,
+                'upvotes': upvotes_count,
+                'downvotes': downvotes_count,
+                'total_votes': total_votes,
+                'points_awarded': comment.points_awarded
+            }
+            updated_comments_data.append(comment_data)
 
-        return Response({'message': f'Points updated for {user.username}'}, status=200)
+        # Prepare the response data including user ID, updated comments, and congratulatory messages
+        response_data = {
+            'user_id': user_id,
+            'comments': updated_comments_data,
+        }
 
-    return Response({'message': 'Comment upvotes are below the threshold'}, status=200)
+        if congratulatory_messages:
+            response_data['congratulatory_messages'] = congratulatory_messages
 
+        return JsonResponse(response_data, status=status.HTTP_200_OK)
 
+    except User.DoesNotExist:
+        return JsonResponse({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class AdminQuestionListCreateAPIView(generics.ListCreateAPIView):

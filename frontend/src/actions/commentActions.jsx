@@ -12,6 +12,9 @@ import {
   UPDATE_POINTS_REQUEST,
   UPDATE_POINTS_SUCCESS,
   UPDATE_POINTS_FAILURE,
+  FETCH_COMMENT_DETAILS_REQUEST,
+  FETCH_COMMENT_DETAILS_SUCCESS,
+  FETCH_COMMENT_DETAILS_FAILURE
 } from '../constants/commentConstants';
 export const createComment = (formData, questionId) => async (dispatch, getState) => {
   try {
@@ -31,7 +34,7 @@ export const createComment = (formData, questionId) => async (dispatch, getState
         }
       : {};
     
-    const { data } = await axios.post(`/api/comments/${questionId}/`, formData, config); 
+    const { data } = await axios.post(`/api/create_comments/${questionId}/`, formData, config); 
     
     dispatch({
       type: CREATE_COMMENT_SUCCESS,
@@ -68,23 +71,47 @@ export const getCommentsForQuestion = (questionId) => {
   };
 };
 
-export const createCommentVote = (user_id, comment_id, vote_type) => async (dispatch) => {
+export const createCommentVote = (user_id, comment_id, vote_type) => async (dispatch, getState) => {
   try {
+    console.log("About to dispatch CREATE_COMMENT_VOTE_REQUEST");
     dispatch({ type: CREATE_COMMENT_VOTE_REQUEST });
-    
 
-    const { data } = await axios.post('/api/create_comment_vote/', { user_id, comment_id, vote_type });
+    // Access userInfo from Redux state using getState
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
+    // Extract token from userInfo
+    const token = userInfo ? userInfo.token : null;
+
+    // Set headers with Authorization token if available
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    console.log("Dispatching API request to create_comment_vote");
+
+    // Make API request with authorization token in headers
+    const { data } = await axios.post(
+      '/api/create_comment_vote/',
+      { user_id, comment_id, vote_type },
+      config
+    );
+
+    // Dispatch success action with data received from API
     dispatch({
       type: CREATE_COMMENT_VOTE_SUCCESS,
-      payload: data
+      payload: data,
     });
   } catch (error) {
+    // Dispatch failure action with error message
     dispatch({
       type: CREATE_COMMENT_VOTE_FAIL,
       payload: error.response && error.response.data.detail
         ? error.response.data.detail
-        : error.message
+        : error.message,
     });
   }
 };
@@ -107,6 +134,25 @@ export const updatePoints = (userId) => {
       dispatch({
         type: UPDATE_POINTS_FAILURE,
         payload: error.response.data.error,
+      });
+    }
+  };
+};
+
+export const fetchCommentProfile = (userId) => {
+  return async (dispatch) => {
+    dispatch({ type: FETCH_COMMENT_DETAILS_REQUEST });
+
+    try {
+      const response = await axios.get(`/api/comments/${userId}/`);
+      dispatch({
+        type: FETCH_COMMENT_DETAILS_SUCCESS,
+        payload: response.data
+      });
+    } catch (error) {
+      dispatch({
+        type: FETCH_COMMENT_DETAILS_FAILURE,
+        payload: error.response ? error.response.data : 'Error occurred'
       });
     }
   };

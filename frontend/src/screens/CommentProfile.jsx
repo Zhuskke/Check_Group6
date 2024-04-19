@@ -12,7 +12,7 @@ import "../designs/Profile.css";
 import { updatePoints } from "../actions/commentActions";
 
 
-const VisitProfile = () => {
+const CommentProfile = () => {
   const defaultProfilePicture =
     "https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg";
   const localStorageKey = "userProfilePicture";
@@ -111,4 +111,4 @@ const VisitProfile = () => {
   );
 }  
 
-export default VisitProfile;
+export default CommentProfile;

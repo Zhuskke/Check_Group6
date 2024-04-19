@@ -42,8 +42,16 @@ class Comment(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    totalUpvotes = models.IntegerField(default=0) 
-    totalDownvotes = models.IntegerField(default=0)
+    points_awarded = models.BooleanField(default=False)
+    
+    # Define a method to calculate total upvotes (replace this with actual logic)
+    def total_upvotes(self):
+        # Example: Calculate total upvotes based on related Vote model
+        return self.votes.filter(vote_type='upvote').count()
+
+    @property
+    def has_reached_upvote_threshold(self):
+        return self.total_upvotes() >= 1 # Adjust threshold as needed
     
 class CommentVote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

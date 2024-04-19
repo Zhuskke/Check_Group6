@@ -11,6 +11,9 @@ import {
   UPDATE_POINTS_REQUEST,
   UPDATE_POINTS_SUCCESS,
   UPDATE_POINTS_FAILURE,
+  FETCH_COMMENT_DETAILS_REQUEST,
+  FETCH_COMMENT_DETAILS_SUCCESS,
+  FETCH_COMMENT_DETAILS_FAILURE
  } from '../constants/commentConstants';
 const initialState = {
   loading: false,
@@ -82,6 +85,35 @@ export const updatePointsReducer = (state = initialState, action) => {
 
     case UPDATE_POINTS_FAILURE:
       return { ...state, loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const commentProfileReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_COMMENT_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null
+      };
+
+    case FETCH_COMMENT_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        commentDetails: action.payload,
+        error: null
+      };
+
+    case FETCH_COMMENT_DETAILS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
 
     default:
       return state;

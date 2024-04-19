@@ -62,7 +62,10 @@ import {
 
 import {
   createCommentReducer,
+  createCommentVoteReducer,
   getCommentsReducer,
+  commentProfileReducer,
+  updatePointsReducer,
 } from "./reducers/commentReducers";
 
 import {
@@ -121,7 +124,11 @@ import { updateUserPassword } from "./actions/userActions";
     commentCreate: commentCreateReducer,
     worksheetList: worksheetListReducer,
     updateUserPassword: userChangePasswordReducer,
-    getComments:getCommentsReducer
+    getComments:getCommentsReducer,
+    createCommentVote: createCommentVoteReducer,
+    updatePoints: updatePointsReducer,
+    commentProfile:commentProfileReducer,
+    createComment:createCommentReducer,
   });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

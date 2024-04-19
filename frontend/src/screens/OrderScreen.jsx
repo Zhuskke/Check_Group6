@@ -71,65 +71,75 @@ const OrderScreen = () => {
   const onApproveHandler = async (data, actions) => {
     console.log('Payment approved:', data);
     try {
-      await dispatch(activatePremium(userInfo._id)); // Activate premium for the current user
-      // Perform any other necessary actions here
-      // For example, you might want to show a success message or update the UI
+      await dispatch(activatePremium(userInfo._id));
+  
+      // Capture the payment to confirm the transaction and decrease PayPal sandbox balance
+      return actions.order.capture().then(async function (details) {
+        console.log('Payment captured:', details);
+         // Navigate to home page after successful subscription activation
+        navigate("/home");
+        window.location.reload();
+      });
     } catch (error) {
       console.error('Error activating premium:', error);
-      // Handle error if subscription activation fails
     }
   };
-
-  return (
+  
+ return (
     <>
-        <HeaderUser />
-      <div className="order-screen">
+      <HeaderUser />
+      <div className="order-screen" style={{ paddingBottom: '0' }}>
         {loading ? (
           <p>Loading...</p>
         ) : (
           <>
-              <Link to="/subscription">
+            <Link to="/subscription">
               <button id='gobackbtn'><BiArrowBack id='btnicon'/></button>
-              </Link>
-            <div>
-              <p id='orderscreentitle'>Greetings, {userInfo.name}! Here is your subscription plan:</p>
-              <div id='ordercontainer'>
-                <h2 id="ordertext">Check Premium</h2>
-                <div>
-                  {premiumDetails ? (
-                    <>
-                      <p id='ordertext2'>{premiumDetails.price} USD/mo.</p>
-                      <h4 id='ordertext2'>Your plan includes:</h4>
-                      <p id='ordertext2'>{premiumDetails.description}</p>
-                    </>
-                  ) : (
-                    <p id='ordertext2'>No premium details available</p>
-                  )}
-                </div>
-              <PayPalScriptProvider options={{ 
-                "client-id": 
-                "AcwQ7SsQNu37f_CvQCZTXj8CzrVdKSy-yEmXvGTWKKON9nGOWh8MPZTiGEyDAWDeOKQiJAGKEqrSrv80",
-                currency: "USD",
-              }}>
-                <div id="paypalbtnorder">
-                <PayPalButtons
-              style={{layout: "horizontal" }}
-              createOrder={createOrderHandler}
-              onApprove={onApproveHandler}
-              onSuccess={successPaymentHandler}
-              />
-              </div>
-              </PayPalScriptProvider>
-              </div>
+            </Link>
+            <div style={{ marginBottom: '0' }}>
+              {userInfo.is_premium ? (
+                <p id='orderscreentitle' style={{ marginBottom: '0' }}>Greetings, {userInfo.name}! You are already subscribed to the Premium plan.</p>
+              ) : (
+                <>
+                  <p id='orderscreentitle' style={{ marginBottom: '0' }}>Greetings, {userInfo.name}! Here is your subscription plan:</p>
+                  <div id='ordercontainer'>
+                    <h2 id="ordertext">Check Premium</h2>
+                    <div>
+                      {premiumDetails ? (
+                        <>
+                          <p id='ordertext2'>{premiumDetails.price} USD/mo.</p>
+                          <h4 id='ordertext2'>Your plan includes:</h4>
+                          <p id='ordertext2'>{premiumDetails.description}</p>
+                        </>
+                      ) : (
+                        <p id='ordertext2'>No premium details available</p>
+                      )}
+                    </div>
+                    <PayPalScriptProvider options={{ 
+                      "client-id": "AcwQ7SsQNu37f_CvQCZTXj8CzrVdKSy-yEmXvGTWKKON9nGOWh8MPZTiGEyDAWDeOKQiJAGKEqrSrv80",
+                      currency: "USD",
+                    }}>
+                      <div id="paypalbtnorder" style={{ marginBottom: '0' }}>
+                        <PayPalButtons
+                          style={{ layout: "horizontal", marginBottom: '0' }}
+                          createOrder={createOrderHandler}
+                          onApprove={onApproveHandler}
+                          onSuccess={successPaymentHandler}
+                        />
+                      </div>
+                    </PayPalScriptProvider>
+                  </div>
+                </>
+              )}
             </div>
           </>
         )}
 
-          <div id='orderimg'>
-          </div>
+        <div id='paymentimg'>
+        </div>
 
-          <div id='orderimg2'>
-          </div>
+        <div id='paymentimg2'>
+        </div>
       </div>
       <FooterProfile />
     </>
