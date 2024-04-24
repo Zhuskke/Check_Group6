@@ -35,6 +35,13 @@ const OrderScreen = () => {
     fetchPremiumDetails();
   }, [dispatch, userInfo]);
 
+  useEffect(() => {
+    // Check if user becomes premium and navigate to home
+    if (userInfo && userInfo.is_premium) {
+      navigate('/home');
+    }
+  }, [userInfo, navigate]);
+
   if (!userInfo) {
     // Redirect if user is not logged in
     navigate('/login');
@@ -72,14 +79,10 @@ const OrderScreen = () => {
     console.log('Payment approved:', data);
     try {
       await dispatch(activatePremium(userInfo._id));
-  
-      // Capture the payment to confirm the transaction and decrease PayPal sandbox balance
-      return actions.order.capture().then(async function (details) {
-        console.log('Payment captured:', details);
-         // Navigate to home page after successful subscription activation
-        navigate("/home");
-        window.location.reload();
-      });
+      const updatedUserInfo = { ...userInfo, is_premium: true };
+      dispatch({ type: 'USER_LOGIN_SUCCESS', payload: updatedUserInfo });
+      const details = await actions.order.capture();
+      console.log('Payment captured:', details);
     } catch (error) {
       console.error('Error activating premium:', error);
     }

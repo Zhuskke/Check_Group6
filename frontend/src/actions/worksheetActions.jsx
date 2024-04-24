@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {
-WORKSHEET_LIST_REQUEST,
-WORKSHEET_LIST_SUCCESS,
-WORKSHEET_LIST_FAIL,
+  WORKSHEET_LIST_REQUEST,
+  WORKSHEET_LIST_SUCCESS,
+  WORKSHEET_LIST_FAIL,
 } from '../constants/adminConstants';
 
 export const listWorksheetsUser = () => async (dispatch, getState) => {
@@ -14,10 +14,12 @@ export const listWorksheetsUser = () => async (dispatch, getState) => {
     } = getState();
 
     const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo && userInfo.token}`,
-      },
+      headers: {},
     };
+
+    if (userInfo && userInfo.token) {
+      config.headers.Authorization = `Bearer ${userInfo.token}`;
+    }
 
     const { data } = await axios.get('/api/worksheets/', config);
 

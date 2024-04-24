@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTopUpPackages } from "../actions/pointsActions";
 import HeaderUser from "../components/HeaderUser";
 import '../designs/Topupscreen.css'
 import Footer from "../components/Footer";
 import { FaCoins } from "react-icons/fa6";
-import FooterProfile from "../components/FooterProfile";
 
 const TopUpScreen = () => {
+  const navigate = useNavigate();
   const [selectedPackage, setSelectedPackage] = useState(null);
   const dispatch = useDispatch();
   const { packages } = useSelector((state) => state.topUpPackages);
@@ -20,7 +21,7 @@ const TopUpScreen = () => {
   const handlePackageClick = (packageId) => {
     setSelectedPackage(packageId);
     // Redirect to payment screen with packageId as a query parameter
-    window.location.href = `/payment?packageId=${packageId}`;
+    navigate(`/payment?packageId=${packageId}`);
   };
 
   return (
@@ -46,7 +47,7 @@ const TopUpScreen = () => {
           
         </div>
       </div>
-      <FooterProfile />
+      <Footer />
     </>
   );
 };

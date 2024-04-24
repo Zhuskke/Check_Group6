@@ -14,6 +14,7 @@ const AskQuestionScreen = () => {
   const [content, setContent] = useState('');
   const [pointsSpent, setPointsSpent] = useState(10);
   const [attachment, setAttachment] = useState(null); // State for attachment
+  const [successMessage, setSuccessMessage] = useState('');
 
   const location = useLocation(); // Initialize useLocation hook
   const question = location.state ? location.state.question : ''; // Extract question from location state
@@ -43,6 +44,9 @@ const AskQuestionScreen = () => {
     // Reset form fields
     setContent("");
     setAttachment(null);
+
+    navigate("/home");
+  
   };
   
 
@@ -60,10 +64,9 @@ const AskQuestionScreen = () => {
 
   useEffect(() => {
     if (success) {
-      navigate("/home");
-      window.location.reload();
+      setSuccessMessage("Question posted successfully!");
     }
-  }, [success, navigate]);
+  }, [success]);
 
   return (
     <><HeaderQuestion />
@@ -75,7 +78,7 @@ const AskQuestionScreen = () => {
 
     <section id="askquestionsection2">
       {error && <p>Error: {error}</p>}
-      {success && <p>Question posted successfully!</p>}
+      {success && <p></p>}
       <div id="askquestion">
         <form className="question-container" onSubmit={handleSubmit}>
           {/* Display the received question in the textarea */}

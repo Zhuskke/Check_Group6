@@ -17,6 +17,18 @@ function Header({ scrollToSpecificHeight }) {
     navigate('/');
   };
 
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
+  const handleJoinNow = () => {
+    navigate('/subscription');
+  };
+
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
   const handleSearch = (event) => {
     event.preventDefault();
     navigate(`/search?q=${searchTerm}`);
@@ -57,11 +69,11 @@ function Header({ scrollToSpecificHeight }) {
             <Nav.Link></Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="login" role='button' id='headerbutton'>Login </Nav.Link>
+            <Nav.Link onClick={handleLogin} role='button' id='headerbutton'>Login </Nav.Link>
             <div className='headerline'></div>
-            <Nav.Link href="register" role='button' id='headerbutton'>Register</Nav.Link>
+            <Nav.Link onClick={handleRegister} role='button' id='headerbutton'>Register</Nav.Link>
             <div className='headerline'></div>
-            <Nav.Link href="subscription" role='button' id='headerbuttonq'>Join Now!</Nav.Link>
+            <Nav.Link onClick={handleJoinNow} role='button' id='headerbuttonq'>Join Now!</Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>

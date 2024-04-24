@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = 'django-insecure-s7r9=z@e(40$z1=m7i--e7#s0sh080w_2*6a2_rwn6!mrv7dw!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,6 +89,10 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -173,7 +178,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [BASE_DIR / "static_my_project", ]
+STATICFILES_DIRS = [
+    BASE_DIR / "static_my_project", 
+    BASE_DIR / "templates" / "build"
+    ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 
@@ -188,12 +196,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH=False
 
-# CORS_REPLACE_HTTPS_REFERER      = True
-# HOST_SCHEME                     = "https://"
-# SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT             = True
-# SESSION_COOKIE_SECURE           = True
-# CSRF_COOKIE_SECURE              = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
-# SECURE_HSTS_SECONDS             = 1000000
-# SECURE_FRAME_DENY               = True
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "https://check-a39577297070.herokuapp.com/"
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+from backend.aws.conf import *
+
+AWS_GROUP_NAME = "CHECK"
+AWS_USERNAME = "JM"
+AWS_ACCESS_KEY_ID = "AKIA6GBMHAEWNNF3LD5L"
+AWS_SECRET_ACCESS_KEY = "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"
+
+AWS_STORAGE_BUCKET_NAME = "check-bucket-cpe"
+
+
+AWS_S3_FILE_OVERWRITE= False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+
+
+CORS_ALLOW_ALL_ORIGINS = True

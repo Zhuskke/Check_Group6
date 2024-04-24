@@ -43,7 +43,6 @@ const PaymentScreen = () => {
   useEffect(() => {
     if (success) {
       navigate("/home");
-      window.location.reload();
       dispatch({ type: PURCHASE_POINTS_RESET });;
     }
   }, [success, navigate]);

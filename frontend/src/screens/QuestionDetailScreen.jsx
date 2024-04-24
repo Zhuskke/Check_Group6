@@ -71,30 +71,32 @@ const QuestionDetail = () => {
   };
 
   const handleVote = async (commentId, voteType) => {
-    // Check if the user has already voted on this comment
-  
-      // Otherwise, dispatch the createCommentVote action with the new voteType
-      dispatch(createCommentVote(userInfo.id, commentId, voteType))
-        .then(() => {
-          // After voting, fetch updated vote counts
-          
-          window.location.reload(); // Consider refactoring this to avoid full page reload
-        })
-        .catch((error) => {
-          console.error("Error voting:", error);
-        });
-    
+    try {
+      // Dispatch the createCommentVote action with the new voteType
+      await dispatch(createCommentVote(userInfo.id, commentId, voteType));
+      // Dispatch the getCommentsForQuestion action to update comments
+      dispatch(getCommentsForQuestion(id));
+    } catch (error) {
+      console.error("Error voting:", error);
+    }
   };
-
- const handleSubmitComment = (e) => {
+  
+  const handleSubmitComment = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("question_id", question.id);
     formData.append("content", content);
-    dispatch(createComment(formData, question.id));
-    window.location.reload(); 
-    setContent("");
+    try {
+      // Dispatch the createComment action
+      await dispatch(createComment(formData, question.id));
+      // Dispatch the getCommentsForQuestion action to update comments
+      dispatch(getCommentsForQuestion(question.id));
+      setContent("");
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+    }
   };
+  
 
   if (questionLoading || userLoading) {
     return <Loader />;
@@ -181,7 +183,7 @@ const QuestionDetail = () => {
               />
             </div>
           )}
-          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get + {question.points_spent} points</button>
+          <button id="toggleanswer" onClick={toggleAnswerArea}>Add answer to get points</button>
           {showAnswerArea && (
               <form
                 className={`answer-area-form ${

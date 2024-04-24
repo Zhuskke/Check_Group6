@@ -1,7 +1,9 @@
 import React from 'react';
 import '../designs/Worksheet.css';
+import { useSelector } from 'react-redux';
 
 const Worksheet = ({ subject, worksheets }) => {
+  const { userInfo } = useSelector((state) => state.userLogin);
   const handleDownload = (worksheet) => {
     if (!worksheet || !worksheet.name || !worksheet.file) {
       console.error("Invalid worksheet object:", worksheet);
@@ -18,20 +20,16 @@ const Worksheet = ({ subject, worksheets }) => {
 
   return (
     <div className="worksheet-container">
-      <h1 className="worksheet-title">{subject} Worksheets</h1>
       <div className="worksheet-content">
-        <div className="worksheet-list-container">
+        <h1 className="worksheet-title">{subject} Worksheets</h1>
+        <ul className="worksheet-list">
           {worksheets.map((worksheet, index) => (
-            <div key={index} className="worksheet-item-container">
-              <div className="worksheet-item">
-                <span className="worksheet-name">{worksheet.name}</span>
-                <div className="worksheet-button-container">
-                  <button className="worksheet-button" onClick={() => handleDownload(worksheet)}>Download</button>
-                </div>
-              </div>
-            </div>
+            <li key={index} className="worksheet-item">
+              <span className="worksheet-name">{worksheet.name}</span>
+              <button className="worksheet-button" onClick={() => handleDownload(worksheet)}>Download</button>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );
